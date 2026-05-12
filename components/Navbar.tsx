@@ -19,7 +19,7 @@ const navItems: NavItem[] = [
   {
     label: "Tentang",
     children: [
-      { label: "Kelurahan Kabola", href: "/#tentang" },
+      { label: "Kelurahan Kabola", href: "/kelurahan-kabola" },
       { label: "Desa Pante Deere", href: "/pante-deere" },
     ],
   },

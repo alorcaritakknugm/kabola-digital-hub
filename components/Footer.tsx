@@ -11,7 +11,7 @@ const exploreLinks = [
 
 const aboutLinks = [
   { label: "Tentang Kecamatan Kabola", href: "/#tentang" },
-  { label: "Kelurahan Kabola", href: "/#tentang" },
+  { label: "Kelurahan Kabola", href: "/kelurahan-kabola" },
   { label: "Desa Pante Deere", href: "/pante-deere" },
   { label: "Hubungi Kami", href: "/#kontak" },
 ];
