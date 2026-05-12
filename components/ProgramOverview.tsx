@@ -35,13 +35,13 @@ const programs = [
     icon: QrCode,
     title: "Papan Info & QR Code",
     desc: "Papan akrilik tahan cuaca terintegrasi QR Code yang mengarah langsung ke halaman wisata Kabola Digital Hub.",
-    href: "/pante-deere/papan-info",
+    href: "/wisata",
   },
   {
     icon: ShoppingBag,
     title: "Katalog Visual UMKM",
     desc: "Dokumentasi produk lokal UMKM Kabola dalam katalog PDF yang didistribusikan via WhatsApp dan cetak fisik.",
-    href: "/pante-deere/umkm",
+    href: "/umkm",
   },
 ];
 

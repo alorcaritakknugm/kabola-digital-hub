@@ -6,7 +6,7 @@ const exploreLinks = [
   { label: "Wisata Kabola", href: "/wisata" },
   { label: "Cerita & Budaya", href: "/storynomics" },
   { label: "Peta Wilayah", href: "/peta" },
-  { label: "Produk Lokal UMKM", href: "/pante-deere/umkm" },
+  { label: "Produk Lokal UMKM", href: "/umkm" },
 ];
 
 const aboutLinks = [

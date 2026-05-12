@@ -15,6 +15,7 @@ import {
   Camera,
   Leaf,
   PhoneCall,
+  QrCode,
 } from "lucide-react";
 
 type PackageType = "alam" | "budaya" | "kuliner" | "petualangan";
@@ -330,6 +331,30 @@ export default function Tourism() {
             </svg>
             Hubungi Pokdarwis
           </a>
+        </motion.div>
+
+        {/* Papan Informasi & QR Code Integration */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-kabola-teal/20 flex items-center justify-center">
+                <QrCode className="w-4 h-4 text-kabola-teal" />
+              </div>
+              <h4 className="font-title text-xl text-white">Integrasi Papan Informasi Fisik</h4>
+            </div>
+            <p className="text-white/60 text-sm max-w-3xl leading-relaxed">
+              Katalog wisata digital ini terhubung langsung dengan Papan Informasi Wisata fisik berbahan akrilik tahan cuaca yang tersebar di titik-titik strategis Kabola. Wisatawan di lapangan cukup memindai <strong>QR Code</strong> pada papan tersebut untuk langsung mengakses halaman reservasi ini tanpa perlu mengunduh aplikasi tambahan.
+            </p>
+          </div>
+          <div className="flex-shrink-0 w-24 h-24 bg-white/10 rounded-2xl border border-white/20 flex flex-col items-center justify-center shadow-inner">
+            <QrCode className="w-10 h-10 text-white/80 mb-1" />
+            <span className="text-[9px] font-bold tracking-widest text-white/60 uppercase">Scan Me</span>
+          </div>
         </motion.div>
       </div>
 

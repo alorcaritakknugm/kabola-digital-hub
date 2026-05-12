@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   { label: "Wisata", href: "/wisata" },
   { label: "Storynomics", href: "/storynomics" },
   { label: "Peta GIS", href: "/peta" },
-  { label: "UMKM", href: "/pante-deere/umkm" },
+  { label: "UMKM", href: "/umkm" },
   {
     label: "Tentang",
     children: [
@@ -65,7 +65,7 @@ export default function Navbar() {
   const isActive = (item: NavItem): boolean => {
     if (item.href === "/") return pathname === "/";
     if (item.href && !item.href.includes("#")) return pathname === item.href || pathname.startsWith(item.href + "/");
-    if (item.children) return item.children.some(c => !c.href.includes("#") && pathname.startsWith(c.href));
+    if (item.children) return item.children.some(c => !c.href.includes("#") && pathname === c.href);
     return false;
   };
 

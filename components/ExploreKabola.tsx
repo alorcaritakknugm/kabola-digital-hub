@@ -32,7 +32,7 @@ const features = [
     icon: ShoppingBag,
     title: "Produk Lokal",
     desc: "Dukung UMKM Kabola. Temukan produk-produk autentik buatan warga lokal dan bantu ekonomi komunitas berkembang.",
-    href: "/pante-deere/umkm",
+    href: "/umkm",
     cta: "Lihat Produk",
   },
 ];

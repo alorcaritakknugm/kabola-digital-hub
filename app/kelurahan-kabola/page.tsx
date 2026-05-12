@@ -3,50 +3,9 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Map, BookOpen, Compass, ArrowRight } from "lucide-react";
+import { MapPin, Mountain, Trees, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
-const programs = [
-  {
-    icon: Map,
-    title: "Peta Interaktif GIS",
-    tag: "Pemetaan Digital",
-    desc: "Peta digital wilayah Kabola — administrasi, sebaran komoditas, dan fasilitas kesehatan dalam satu platform interaktif.",
-    features: [
-      "Batas Administrasi Kelurahan",
-      "Sebaran Komoditas (Kemiri, dll)",
-      "Lokasi Fasilitas Umum & Kesehatan",
-      "Peta digital interaktif via web",
-    ],
-    href: "/peta",
-  },
-  {
-    icon: BookOpen,
-    title: "Storynomics Digital",
-    tag: "Pelestarian Budaya",
-    desc: "Digitalisasi budaya, gastronomi, dan etnofarmakologi Kabola untuk melestarikan warisan lokal di era digital.",
-    features: [
-      "Dokumentasi Gastronomi Lokal",
-      "Katalog Tanaman Obat (Etnofarmakologi)",
-      "Cerita Rakyat (Folklore) Kabola",
-      "Akses mudah untuk edukasi",
-    ],
-    href: "/storynomics",
-  },
-  {
-    icon: Compass,
-    title: "Wisata & Reservasi",
-    tag: "Pariwisata Terintegrasi",
-    desc: "Katalog paket wisata tematik Kabola dengan sistem reservasi langsung ke Pokdarwis via WhatsApp.",
-    features: [
-      "Katalog Destinasi Wisata",
-      "Paket Tour Tematik",
-      "Integrasi Reservasi WhatsApp",
-      "Informasi fasilitas & aksesibilitas",
-    ],
-    href: "/wisata",
-  },
-];
+import Image from "next/image";
 
 export default function KelurahanKabola() {
   return (
@@ -59,13 +18,13 @@ export default function KelurahanKabola() {
         <div className="container mx-auto px-4 md:px-8 max-w-3xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block bg-white/10 text-white/60 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-white/10">
-              Kec. Kabola · Kelurahan Kabola
+              Kecamatan Kabola
             </span>
             <h1 className="font-title text-4xl md:text-5xl text-white mb-4">
               Kelurahan <span className="text-kabola-teal-light">Kabola</span>
             </h1>
             <p className="text-white/55 max-w-lg mx-auto text-sm leading-relaxed">
-              Tiga program kerja KKN-PPM UGM 2026 yang membangun ekosistem wisata, pemetaan digital, dan pelestarian budaya di Kelurahan Kabola.
+              Pusat administrasi dengan bentang alam menawan, kekayaan budaya yang otentik, dan semangat masyarakat yang terus bergerak maju.
             </p>
           </motion.div>
         </div>
@@ -76,43 +35,66 @@ export default function KelurahanKabola() {
         </div>
       </section>
 
-      {/* Programs */}
+      {/* Profile Content */}
       <section className="py-16 md:py-20 dot-pattern">
-        <div className="container mx-auto px-4 md:px-8 max-w-4xl space-y-5">
-          {programs.map((prog, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl border border-kabola-teal/10 shadow-[0_2px_16px_rgba(25,141,141,0.05)] p-6 md:p-8"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-kabola-teal/10 flex items-center justify-center">
-                  <prog.icon className="w-5 h-5 text-kabola-teal" />
-                </div>
-                <span className="text-[10px] font-bold tracking-widest uppercase text-kabola-teal/55 bg-kabola-teal/8 px-2.5 py-1 rounded-full">
-                  {prog.tag}
-                </span>
+        <div className="container mx-auto px-4 md:px-8 max-w-4xl space-y-12">
+          
+          {/* Main Description */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="bg-white rounded-3xl p-8 md:p-12 border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)]"
+          >
+            <h2 className="font-title text-2xl md:text-3xl text-forest mb-6">Sekilas Tentang Kelurahan Kabola</h2>
+            <div className="space-y-4 text-earth/70 leading-relaxed text-sm md:text-base">
+              <p>
+                Kelurahan Kabola adalah pusat administrasi dari Kecamatan Kabola, Kabupaten Alor. Terletak di dataran yang lebih tinggi, kelurahan ini menyuguhkan panorama perbukitan hijau yang berpadu dengan udara sejuk, memberikan pengalaman tersendiri bagi siapa saja yang berkunjung.
+              </p>
+              <p>
+                Masyarakat Kelurahan Kabola sangat erat memegang tradisi leluhur. Mulai dari gastronomi tradisional hingga pengetahuan tentang tanaman obat (etnofarmakologi), kearifan lokal masih menjadi bagian tak terpisahkan dari denyut nadi kehidupan sehari-hari warga.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-100">
+              <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-forest/5">
+                <Mountain className="w-6 h-6 text-forest mb-2" />
+                <span className="font-medium text-forest text-sm">Topografi Berbukit</span>
+                <span className="text-xs text-earth/60 mt-1">Panorama alam hijau</span>
               </div>
-              <h3 className="font-title text-xl md:text-2xl text-forest mb-3">{prog.title}</h3>
-              <p className="text-earth/60 text-sm leading-relaxed mb-5">{prog.desc}</p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-5">
-                {prog.features.map((f, fi) => (
-                  <li key={fi} className="flex items-start gap-2 text-xs text-earth/55">
-                    <div className="w-1.5 h-1.5 rounded-full bg-kabola-teal mt-1.5 flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              
-              <div className="pt-4 border-t border-slate-100">
-                <Link href={prog.href} className="inline-flex items-center gap-1.5 text-sm text-kabola-teal hover:text-kabola-teal-dark transition-colors font-medium">
-                  Lihat Detail <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+              <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-kabola-teal/5">
+                <Trees className="w-6 h-6 text-kabola-teal mb-2" />
+                <span className="font-medium text-forest text-sm">Kekayaan Alam</span>
+                <span className="text-xs text-earth/60 mt-1">Potensi agrikultur</span>
               </div>
-            </motion.div>
-          ))}
+              <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-ocean-blue/5">
+                <MapPin className="w-6 h-6 text-ocean-blue mb-2" />
+                <span className="font-medium text-forest text-sm">Pusat Administrasi</span>
+                <span className="text-xs text-earth/60 mt-1">Jantung Kecamatan Kabola</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Potensi Kelurahan */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <div className="bg-white rounded-3xl p-8 border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+              <h3 className="font-title text-xl text-forest mb-4">Pariwisata Terintegrasi</h3>
+              <p className="text-earth/65 text-sm leading-relaxed">
+                Kelurahan Kabola menjadi pintu gerbang bagi wisatawan yang ingin menjelajahi wisata alam dan budaya Alor. Dengan terbentuknya rute-rute tematik, pengunjung diajak menikmati pesona alam sekaligus interaksi langsung dengan budaya masyarakat lokal.
+              </p>
+            </div>
+            <div className="bg-white rounded-3xl p-8 border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+              <h3 className="font-title text-xl text-forest mb-4">Budaya & Tradisi</h3>
+              <p className="text-earth/65 text-sm leading-relaxed">
+                Kekayaan <i>storynomics</i> berupa makanan khas, dongeng rakyat, hingga pemanfaatan tanaman lokal terus dilestarikan. Hal ini bukan saja menjadi kebanggaan warga, tetapi juga nilai tambah (added value) bagi identitas Kabola di kancah yang lebih luas.
+              </p>
+            </div>
+          </motion.div>
 
           <div className="text-center pt-8">
             <Link href="/" className="inline-flex items-center gap-2 text-sm text-kabola-teal hover:text-kabola-teal-dark transition-colors font-medium">
