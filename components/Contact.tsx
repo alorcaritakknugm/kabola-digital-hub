@@ -46,7 +46,7 @@ export default function Contact() {
               {
                 icon: MapPin,
                 label: "Lokasi",
-                value: "Kelurahan Kabola, Kecamatan Kabola, Kabupaten Alor, NTT",
+                value: "Kecamatan Kabola, Kabupaten Alor, NTT",
                 href: "https://maps.google.com/?q=Kabola,Alor",
               },
               {
