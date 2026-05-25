@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
 import { Map, BookOpen, Compass, ShoppingBag, ArrowRight } from "lucide-react";
+import { SlideUp } from "@/components/ui/animations/SlideUp";
 
 const features = [
   {
@@ -38,9 +34,6 @@ const features = [
 ];
 
 export default function ExploreKabola() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section className="relative section-padding bg-surface-teal overflow-hidden">
       {/* Subtle topo background */}
@@ -55,11 +48,10 @@ export default function ExploreKabola() {
       <div className="container mx-auto px-4 md:px-8 max-w-6xl relative">
 
         {/* Header */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+        <SlideUp
+          inView
+          yOffset={24}
+          duration={0.6}
           className="text-center mb-14"
         >
           <span className="inline-block bg-kabola-teal/10 text-kabola-teal text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
@@ -72,16 +64,17 @@ export default function ExploreKabola() {
             Kabola Digital Hub menghadirkan informasi, cerita, dan layanan Kecamatan Kabola
             dalam satu platform — mudah diakses, lengkap, dan selalu diperbarui.
           </p>
-        </motion.div>
+        </SlideUp>
 
         {/* Feature cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {features.map((item, i) => (
-            <motion.div
+            <SlideUp
               key={i}
-              initial={{ opacity: 0, y: 28 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: i * 0.1 }}
+              inView
+              yOffset={28}
+              duration={0.55}
+              delay={i * 0.1}
             >
               <Link
                 href={item.href}
@@ -103,7 +96,7 @@ export default function ExploreKabola() {
                   </span>
                 </div>
               </Link>
-            </motion.div>
+            </SlideUp>
           ))}
         </div>
       </div>

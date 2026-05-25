@@ -1,24 +1,17 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import { MapPin, Mail, Phone, ExternalLink, Globe } from "lucide-react";
+import { SlideUp } from "@/components/ui/animations/SlideUp";
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 
 export default function Contact() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section id="kontak" className="relative section-padding overflow-hidden bg-cream dot-pattern">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
         
         {/* Section header */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <SlideUp
+          inView
+          yOffset={30}
+          duration={0.7}
           className="text-center mb-14"
         >
           <span className="inline-block bg-kabola-teal/10 text-kabola-teal text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
@@ -31,15 +24,15 @@ export default function Contact() {
             Punya pertanyaan, ingin berkolaborasi, atau sekedar ingin tahu lebih tentang
             program KKN di Kabola? Kami senang mendengar dari Anda.
           </p>
-        </motion.div>
+        </SlideUp>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           
           {/* Contact info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
+          <FadeIn
+            inView
+            duration={0.7}
+            delay={0.2}
             className="space-y-5"
           >
             {[
@@ -68,35 +61,39 @@ export default function Contact() {
                 href: "https://alorcarita.vercel.app",
               },
             ].map((item, i) => (
-              <motion.a
+              <SlideUp
                 key={i}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                className="flex items-start gap-4 p-4 rounded-xl bg-white border border-kabola-teal/10 shadow-[0_2px_12px_rgba(26,122,94,0.05)] hover:shadow-[0_6px_24px_rgba(26,122,94,0.1)] hover:border-kabola-teal/25 transition-all duration-300 group"
+                inView
+                duration={0.5}
+                delay={0.3 + i * 0.1}
+                yOffset={20}
               >
-                <div className="w-10 h-10 rounded-lg bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-kabola-teal/20 transition-colors">
-                  <item.icon className="w-5 h-5 text-kabola-teal" />
-                </div>
-                <div>
-                  <p className="text-xs text-earth/50 font-medium uppercase tracking-wider mb-0.5">{item.label}</p>
-                  <p className="text-earth/80 text-sm font-medium group-hover:text-kabola-teal transition-colors">
-                    {item.value}
-                  </p>
-                </div>
-                <ExternalLink className="w-4 h-4 text-earth/30 group-hover:text-kabola-teal transition-colors ml-auto flex-shrink-0 mt-1" />
-              </motion.a>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 p-4 rounded-xl bg-white border border-kabola-teal/10 shadow-[0_2px_12px_rgba(26,122,94,0.05)] hover:shadow-[0_6px_24px_rgba(26,122,94,0.1)] hover:border-kabola-teal/25 transition-all duration-300 group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-kabola-teal/20 transition-colors">
+                    <item.icon className="w-5 h-5 text-kabola-teal" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-earth/50 font-medium uppercase tracking-wider mb-0.5">{item.label}</p>
+                    <p className="text-earth/80 text-sm font-medium group-hover:text-kabola-teal transition-colors">
+                      {item.value}
+                    </p>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-earth/30 group-hover:text-kabola-teal transition-colors ml-auto flex-shrink-0 mt-1" />
+                </a>
+              </SlideUp>
             ))}
-          </motion.div>
+          </FadeIn>
 
           {/* Map embed placeholder + KKN info */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
+          <FadeIn
+            inView
+            duration={0.7}
+            delay={0.3}
             className="space-y-4"
           >
             {/* Map placeholder */}
@@ -154,7 +151,7 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
       </div>
 

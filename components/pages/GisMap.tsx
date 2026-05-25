@@ -1,9 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import { Map, Layers, Activity, ZoomIn } from "lucide-react";
+import { SlideUp } from "@/components/ui/animations/SlideUp";
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 
 const mapLayers = [
   { id: "admin", label: "Administrasi Wilayah", color: "bg-kabola-teal", active: true },
@@ -21,19 +18,15 @@ const mapPoints = [
 ];
 
 export default function GisMap() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-cream">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
         
         {/* Section header */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <SlideUp
+          inView
+          yOffset={30}
+          duration={0.7}
           className="text-center mb-12"
         >
           <span className="inline-block bg-kabola-teal/10 text-kabola-teal text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
@@ -46,13 +39,14 @@ export default function GisMap() {
             Sistem informasi geografis (GIS) interaktif yang menampilkan administrasi wilayah, 
             sebaran komoditas, dan fasilitas kesehatan di Kecamatan Kabola.
           </p>
-        </motion.div>
+        </SlideUp>
 
         {/* GIS Interface */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
+        <SlideUp
+          inView
+          yOffset={40}
+          duration={0.8}
+          delay={0.2}
           className="relative rounded-3xl overflow-hidden border border-kabola-teal/20 shadow-[0_20px_80px_rgba(26,122,94,0.12)] bg-white"
         >
           {/* Map toolbar */}
@@ -140,13 +134,13 @@ export default function GisMap() {
 
               {/* Map points */}
               {mapPoints.map((point, i) => (
-                <motion.div
+                <FadeIn
                   key={i}
+                  inView
+                  duration={0.4}
+                  delay={0.5 + i * 0.15}
                   className="absolute group"
                   style={{ left: point.x, top: point.y }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={inView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.5 + i * 0.15 }}
                 >
                   <div className="relative -translate-x-1/2 -translate-y-1/2">
                     {/* Pulse */}
@@ -158,7 +152,7 @@ export default function GisMap() {
                       <span className="text-xs font-semibold text-forest">{point.label}</span>
                     </div>
                   </div>
-                </motion.div>
+                </FadeIn>
               ))}
 
               {/* Zoom controls */}
@@ -197,7 +191,7 @@ export default function GisMap() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </SlideUp>
       </div>
 
     </section>

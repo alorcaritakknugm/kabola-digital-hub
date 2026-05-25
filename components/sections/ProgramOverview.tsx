@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
 import { Map, BookOpen, Compass, Home, QrCode, ShoppingBag, ArrowRight } from "lucide-react";
+import { SlideUp } from "@/components/ui/animations/SlideUp";
 
 const programs = [
   {
@@ -46,19 +42,15 @@ const programs = [
 ];
 
 export default function ProgramOverview() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section className="relative section-padding bg-sand dot-pattern overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
 
         {/* Header */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+        <SlideUp
+          inView
+          yOffset={24}
+          duration={0.6}
           className="text-center mb-14"
         >
           <span className="inline-block bg-kabola-teal/10 text-kabola-teal text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
@@ -71,16 +63,17 @@ export default function ProgramOverview() {
             Kabola Digital Hub mengintegrasikan enam program kerja KKN-PPM UGM 2026
             yang tersebar di Kelurahan Kabola dan Desa Pante Deere, Kecamatan Kabola — sebagai satu ekosistem informasi digital.
           </p>
-        </motion.div>
+        </SlideUp>
 
         {/* Cards grid — flat, no grouping */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {programs.map((item, i) => (
-            <motion.div
+            <SlideUp
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              inView
+              yOffset={24}
+              duration={0.5}
+              delay={i * 0.08}
             >
               <Link
                 href={item.href}
@@ -100,7 +93,7 @@ export default function ProgramOverview() {
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </Link>
-            </motion.div>
+            </SlideUp>
           ))}
         </div>
       </div>

@@ -1,9 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
 import { Map, Heart, Globe, Database, ChevronRight, ExternalLink } from "lucide-react";
+import { SlideUp } from "@/components/ui/animations/SlideUp";
 
 const services = [
   {
@@ -75,8 +75,6 @@ const services = [
 ];
 
 export default function Services() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -96,11 +94,10 @@ export default function Services() {
       <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
         
         {/* Section header */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+        <SlideUp
+          inView
+          yOffset={30}
+          duration={0.7}
           className="text-center mb-14"
         >
           <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
@@ -113,13 +110,14 @@ export default function Services() {
             Tiga program kerja utama yang diintegrasikan ke dalam platform Kabola Digital Hub
             untuk mendukung pembangunan Kecamatan Kabola secara holistik.
           </p>
-        </motion.div>
+        </SlideUp>
 
         {/* Tab navigation */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <SlideUp
+          inView
+          yOffset={20}
+          duration={0.6}
+          delay={0.2}
           className="flex justify-center gap-2 mb-10"
         >
           {services.map((s, i) => (
@@ -135,82 +133,88 @@ export default function Services() {
               {s.shortTitle}
             </button>
           ))}
-        </motion.div>
+        </SlideUp>
 
         {/* Service cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {services.map((service, i) => (
-            <motion.div
+            <SlideUp
               key={service.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
-              onClick={() => setActiveTab(i)}
-              className={`relative rounded-2xl border cursor-pointer transition-all duration-500 overflow-hidden group ${
-                activeTab === i
-                  ? "border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.08)] scale-[1.02]"
-                  : "border-white/10 hover:border-white/20"
-              }`}
+              inView
+              yOffset={40}
+              duration={0.6}
+              delay={0.2 + i * 0.15}
             >
-              {/* Card gradient background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50`} />
-              
-              <div className="relative p-6 md:p-7">
-                {/* Tag */}
-                <div className="flex items-center justify-between mb-5">
-                  <span className={`text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full ${
-                    activeTab === i ? service.tagColor : "bg-white/10 text-white/50"
-                  } transition-colors duration-300`}>
-                    {service.tag}
-                  </span>
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 ${
-                    activeTab === i ? service.bgIcon : "bg-white/5"
-                  }`}>
-                    <service.icon className={`w-5 h-5 transition-colors duration-300 ${
-                      activeTab === i ? service.accentColor : "text-white/40"
-                    }`} />
+              <div
+                onClick={() => setActiveTab(i)}
+                className={`relative h-full rounded-2xl border cursor-pointer transition-all duration-500 overflow-hidden group ${
+                  activeTab === i
+                    ? "border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.08)] scale-[1.02]"
+                    : "border-white/10 hover:border-white/20"
+                }`}
+              >
+                {/* Card gradient background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50`} />
+                
+                <div className="relative p-6 md:p-7 flex flex-col h-full">
+                  {/* Tag */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span className={`text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full ${
+                      activeTab === i ? service.tagColor : "bg-white/10 text-white/50"
+                    } transition-colors duration-300`}>
+                      {service.tag}
+                    </span>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 ${
+                      activeTab === i ? service.bgIcon : "bg-white/5"
+                    }`}>
+                      <service.icon className={`w-5 h-5 transition-colors duration-300 ${
+                        activeTab === i ? service.accentColor : "text-white/40"
+                      }`} />
+                    </div>
+                  </div>
+
+                  <h3 className="font-title text-xl text-white mb-3 leading-snug">{service.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed mb-5">{service.description}</p>
+
+                  {/* Features (show when active) */}
+                  <motion.div
+                    initial={false}
+                    animate={{ height: activeTab === i ? "auto" : 0, opacity: activeTab === i ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden mb-auto"
+                  >
+                    <ul className="space-y-2 mb-5">
+                      {service.features.map((f, fi) => (
+                        <li key={fi} className="flex items-start gap-2 text-xs text-white/70">
+                          <ChevronRight className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${service.accentColor}`} />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+
+                  {/* CTA */}
+                  <div className="mt-5 pt-4 border-t border-white/10">
+                    <a
+                      href={service.href}
+                      className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-all duration-300 group/link ${
+                        activeTab === i ? service.accentColor : "text-white/40 hover:text-white/60"
+                      }`}
+                      onClick={(e) => {
+                        if (service.href === "#" || service.href === "#storynomics" || service.href === "#wisata") {
+                          if (service.href === "#") {
+                            e.preventDefault();
+                          }
+                        }
+                      }}
+                    >
+                      {service.status}
+                      <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
+                    </a>
                   </div>
                 </div>
-
-                <h3 className="font-title text-xl text-white mb-3 leading-snug">{service.title}</h3>
-                <p className="text-white/60 text-sm leading-relaxed mb-5">{service.description}</p>
-
-                {/* Features (show when active) */}
-                <motion.div
-                  initial={false}
-                  animate={{ height: activeTab === i ? "auto" : 0, opacity: activeTab === i ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <ul className="space-y-2 mb-5">
-                    {service.features.map((f, fi) => (
-                      <li key={fi} className="flex items-start gap-2 text-xs text-white/70">
-                        <ChevronRight className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${service.accentColor}`} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-
-                {/* CTA */}
-                <a
-                  href={service.href}
-                  className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-all duration-300 group/link ${
-                    activeTab === i ? service.accentColor : "text-white/40 hover:text-white/60"
-                  }`}
-                  onClick={(e) => {
-                    if (service.href === "#" || service.href === "#storynomics" || service.href === "#wisata") {
-                      if (service.href === "#") {
-                        e.preventDefault();
-                      }
-                    }
-                  }}
-                >
-                  {service.status}
-                  <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
-                </a>
               </div>
-            </motion.div>
+            </SlideUp>
           ))}
         </div>
       </div>

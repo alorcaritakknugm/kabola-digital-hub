@@ -1,10 +1,7 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import { Mountain, Waves, Users, Globe, Leaf, BookOpen } from "lucide-react";
 import Image from "next/image";
+import { SlideUp } from "@/components/ui/animations/SlideUp";
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 
 const stats = [
   { value: "±4", label: "Desa / Kelurahan", icon: Globe },
@@ -34,12 +31,11 @@ const highlights = [
   },
 ];
 
-function StatCard({ stat, index, inView }: { stat: typeof stats[0]; index: number; inView: boolean }) {
+function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+    <SlideUp
+      inView
+      delay={0.4 + index * 0.1}
       className="flex flex-col items-center text-center p-5 rounded-2xl bg-white border border-kabola-teal/10 shadow-[0_2px_16px_rgba(25,141,141,0.06)] hover:shadow-[0_6px_24px_rgba(25,141,141,0.1)] transition-shadow group"
     >
       <div className="w-10 h-10 rounded-xl bg-kabola-teal/10 flex items-center justify-center mb-3 group-hover:bg-kabola-teal/20 transition-colors">
@@ -47,26 +43,17 @@ function StatCard({ stat, index, inView }: { stat: typeof stats[0]; index: numbe
       </div>
       <span className="font-title text-2xl text-kabola-teal font-bold">{stat.value}</span>
       <span className="text-earth/55 text-xs mt-1">{stat.label}</span>
-    </motion.div>
+    </SlideUp>
   );
 }
 
 export default function About() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
     <section id="tentang" className="relative section-padding overflow-hidden bg-cream dot-pattern">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
 
         {/* Section header */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
+        <SlideUp inView yOffset={30} duration={0.7} className="text-center mb-16">
           <span className="inline-block bg-kabola-teal/10 text-kabola-teal text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
             Tentang Kabola
           </span>
@@ -77,17 +64,12 @@ export default function About() {
             Kecamatan Kabola terletak di Kabupaten Alor, Nusa Tenggara Timur —
             wilayah yang kaya akan keindahan alam, keragaman budaya, dan potensi ekonomi lokal yang terus berkembang.
           </p>
-        </motion.div>
+        </SlideUp>
 
         {/* Main content: image + text */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
+          <FadeIn inView duration={0.8} delay={0.2} className="relative">
             <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-[0_20px_60px_rgba(10,61,98,0.15)]">
               <Image
                 src="/images/view-4.jpg"
@@ -106,15 +88,10 @@ export default function About() {
             </div>
             <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-kabola-teal/10 border border-kabola-teal/20 -z-10" />
             <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-kabola-teal/8 border border-kabola-teal/15 -z-10" />
-          </motion.div>
+          </FadeIn>
 
           {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-6"
-          >
+          <SlideUp inView duration={0.8} delay={0.3} className="space-y-6">
             <div>
               <h3 className="font-title text-2xl text-forest mb-3">
                 Sepotong Surga di Timur Indonesia
@@ -139,20 +116,21 @@ export default function About() {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-3 pt-2">
               {stats.map((stat, i) => (
-                <StatCard key={i} stat={stat} index={i} inView={inView} />
+                <StatCard key={i} stat={stat} index={i} />
               ))}
             </div>
-          </motion.div>
+          </SlideUp>
         </div>
 
         {/* Highlight cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {highlights.map((item, i) => (
-            <motion.div
+            <SlideUp
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 + i * 0.15 }}
+              inView
+              yOffset={30}
+              duration={0.6}
+              delay={0.5 + i * 0.15}
               className={`p-6 rounded-2xl bg-gradient-to-br ${item.color} border border-white/70 hover:border-kabola-teal/20 transition-all duration-300 group hover:shadow-lg`}
             >
               <div className="w-11 h-11 rounded-xl bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -160,7 +138,7 @@ export default function About() {
               </div>
               <h4 className="font-title text-lg text-forest mb-2">{item.title}</h4>
               <p className="text-earth/60 text-sm leading-relaxed">{item.desc}</p>
-            </motion.div>
+            </SlideUp>
           ))}
         </div>
       </div>
