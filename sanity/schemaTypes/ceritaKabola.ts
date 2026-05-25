@@ -1,20 +1,20 @@
 export default {
-  name: 'storynomics',
-  title: 'Storynomics Digital',
+  name: 'ceritaKabola',
+  title: 'Kabola dalam Cerita',
   type: 'document',
   fields: [
     {
       name: 'judul',
-      title: 'Judul Storynomics',
+      title: 'Judul Cerita',
       type: 'string',
       validation: (Rule: any) => Rule.required(),
-      description: 'Misal: Jagung Bose, Tenun Ikat Alor, dll.',
+      description: 'Misal: Hutan Mangrove & Nelayan Kabola, Tenun Ikat Alor, dll.',
     },
     {
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
-      description: 'Misal: Makanan Pokok Tradisional',
+      description: 'Misal: Ekologi Pesisir',
     },
     {
       name: 'kategori',
@@ -23,8 +23,9 @@ export default {
       options: {
         list: [
           { title: 'Gastronomi', value: 'gastronomi' },
-          { title: 'Etnofarmakologi', value: 'etnofarmakologi' },
-          { title: 'Budaya', value: 'budaya' },
+          { title: 'Eko-Naratif', value: 'eko-naratif' },
+          { title: 'Tradisi & Budaya', value: 'tradisi-budaya' },
+          { title: 'Lensa Kabola', value: 'lensa-kabola' },
         ],
       },
       validation: (Rule: any) => Rule.required(),

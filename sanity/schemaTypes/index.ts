@@ -2,8 +2,8 @@ import { type SchemaTypeDefinition } from 'sanity'
 import umkm from './umkm'
 import wisata from './wisata'
 import profilDesa from './profilDesa'
-import storynomics from './storynomics'
+import ceritaKabola from './ceritaKabola'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [umkm, wisata, profilDesa, storynomics],
+  types: [umkm, wisata, profilDesa, ceritaKabola],
 }
