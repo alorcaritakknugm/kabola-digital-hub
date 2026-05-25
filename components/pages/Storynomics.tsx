@@ -27,13 +27,13 @@ const categories = [
     id: "budaya",
     icon: Music,
     label: "Budaya",
-    color: "text-forest",
-    bg: "bg-forest/10",
-    activeBg: "bg-forest",
+    color: "text-kabola-teal",
+    bg: "bg-kabola-teal/10",
+    activeBg: "bg-kabola-teal",
   },
 ];
 
-const stories = {
+const fallbackStories = {
   gastronomi: [
     {
       title: "Jagung Bose",
@@ -98,16 +98,26 @@ const stories = {
   ],
 };
 
-export default function Storynomics() {
+export default function Storynomics({ storynomicsList = [] }: { storynomicsList?: any[] }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [activeCategory, setActiveCategory] = useState<keyof typeof stories>("gastronomi");
+  const [activeCategory, setActiveCategory] = useState<keyof typeof fallbackStories>("gastronomi");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const activeStories = stories[activeCategory];
+  // Filter items from CMS based on the active category
+  const activeCmsItems = storynomicsList.filter((item) => item.kategori === activeCategory).map(item => ({
+    title: item.judul,
+    subtitle: item.subtitle,
+    desc: item.deskripsi,
+    image: item.imageUrl || "/images/culture-1.jpg",
+    tag: item.tag || "Storynomics",
+  }));
+
+  // Use CMS items if available, otherwise use fallback data
+  const activeStories = activeCmsItems.length > 0 ? activeCmsItems : fallbackStories[activeCategory];
 
   return (
-    <section id="storynomics" className="relative section-padding overflow-hidden bg-cream-dark">
+    <section id="storynomics" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-cream-dark">
       {/* Decorative background */}
       <div className="absolute inset-0 batik-pattern opacity-50" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-kabola-teal/5 rounded-full blur-3xl pointer-events-none" />
@@ -144,7 +154,7 @@ export default function Storynomics() {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(cat.id as keyof typeof stories)}
+              onClick={() => setActiveCategory(cat.id as keyof typeof fallbackStories)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === cat.id
                   ? `${cat.activeBg} text-white shadow-lg`
@@ -230,12 +240,6 @@ export default function Storynomics() {
         </motion.div>
       </div>
 
-      {/* Bottom wave */}
-      <div className="wave-bottom pointer-events-none">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20">
-          <path d="M0,50 C200,10 500,70 800,30 C1000,10 1200,60 1440,40 L1440,80 L0,80 Z" fill="#0D3B2E" />
-        </svg>
-      </div>
     </section>
   );
 }

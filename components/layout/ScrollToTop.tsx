@@ -21,13 +21,7 @@ export default function ScrollToTop() {
   }, []);
 
   const scrollToTop = () => {
-    // @ts-ignore
-    if (window.lenis) {
-      // @ts-ignore
-      window.lenis.scrollTo(0);
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

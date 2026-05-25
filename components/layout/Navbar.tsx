@@ -55,8 +55,7 @@ export default function Navbar() {
     const id = href.split("#")[1];
     const el = document.getElementById(id);
     if (el) {
-      // @ts-ignore
-      window.lenis ? window.lenis.scrollTo(el) : el.scrollIntoView({ behavior: "smooth" });
+      el.scrollIntoView({ behavior: "smooth" });
     }
     setMobileOpen(false);
     setOpenDropdown(null);

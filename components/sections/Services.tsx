@@ -200,10 +200,8 @@ export default function Services() {
                   }`}
                   onClick={(e) => {
                     if (service.href === "#" || service.href === "#storynomics" || service.href === "#wisata") {
-                      e.preventDefault();
-                      if (service.href !== "#") {
-                        // @ts-ignore
-                        if (window.lenis) window.lenis.scrollTo(service.href);
+                      if (service.href === "#") {
+                        e.preventDefault();
                       }
                     }
                   }}

@@ -157,11 +157,6 @@ export default function Hero() {
         >
           <a
             href="#layanan"
-            onClick={(e) => {
-              e.preventDefault();
-              // @ts-ignore
-              if (window.lenis) window.lenis.scrollTo("#layanan");
-            }}
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-kabola-teal text-white hover:bg-kabola-teal-dark transition-all duration-300 text-sm font-semibold tracking-wide group hover:shadow-xl hover:shadow-kabola-teal/30 active:scale-95"
           >
             Jelajahi Layanan
@@ -169,11 +164,6 @@ export default function Hero() {
           </a>
           <a
             href="#wisata"
-            onClick={(e) => {
-              e.preventDefault();
-              // @ts-ignore
-              if (window.lenis) window.lenis.scrollTo("#wisata");
-            }}
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 text-sm font-medium tracking-wide active:scale-95"
           >
             Katalog Wisata
@@ -194,7 +184,6 @@ export default function Hero() {
               fill="#FFFAF6"
             />
           </svg>
-          <div className="absolute inset-0 z-20 opacity-[0.25] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
         </div>
       </div>
     </section>

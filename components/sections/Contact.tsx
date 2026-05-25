@@ -158,12 +158,6 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Bottom wave to Footer */}
-      <div className="wave-bottom pointer-events-none">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20">
-          <path d="M0,40 C300,80 600,10 900,50 C1100,75 1300,30 1440,45 L1440,80 L0,80 Z" fill="#0A3D62" />
-        </svg>
-      </div>
     </section>
   );
 }

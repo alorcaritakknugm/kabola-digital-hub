@@ -25,7 +25,7 @@ export default function GisMap() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="relative section-padding overflow-hidden bg-cream">
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-cream">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
         
         {/* Section header */}
@@ -200,12 +200,6 @@ export default function GisMap() {
         </motion.div>
       </div>
 
-      {/* Bottom wave */}
-      <div className="wave-bottom pointer-events-none">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20">
-          <path d="M0,30 C400,80 800,5 1200,50 C1300,68 1380,45 1440,35 L1440,80 L0,80 Z" fill="#0D3B2E" />
-        </svg>
-      </div>
     </section>
   );
 }

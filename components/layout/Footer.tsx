@@ -18,7 +18,14 @@ const aboutLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-forest text-white pt-14 pb-8 relative overflow-hidden">
+    <footer className="bg-forest text-white pt-14 pb-8 relative">
+      {/* Top wave to blend with previous section */}
+      <div className="absolute bottom-full left-0 right-0 w-full pointer-events-none -mb-[1px]">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20 block">
+          <path d="M0,40 C300,80 600,10 900,50 C1100,75 1300,30 1440,45 L1440,80 L0,80 Z" fill="#0A3D62" />
+        </svg>
+      </div>
+      
       {/* Background texture */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,

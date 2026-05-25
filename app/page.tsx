@@ -1,9 +1,9 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import ExploreKabola from "@/components/ExploreKabola";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+import ExploreKabola from "@/components/sections/ExploreKabola";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
