@@ -25,7 +25,7 @@ export default async function UmkmPage() {
             <span className="inline-block bg-white/10 text-white/60 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
               Kecamatan Kabola · Ekonomi Lokal
             </span>
-            <h1 className="font-title text-4xl md:text-5xl text-white mb-4">Katalog Visual UMKM</h1>
+            <h1 className="font-title text-4xl md:text-5xl text-white mb-4">Katalog Visual <span className="text-kabola-teal-light">UMKM</span></h1>
             <p className="text-white/60 max-w-lg mx-auto text-sm leading-relaxed">
               Dokumentasi produk lokal UMKM Kabola. Dukung ekonomi lokal dengan membeli langsung dari para perajin dan pembuatnya.
             </p>
