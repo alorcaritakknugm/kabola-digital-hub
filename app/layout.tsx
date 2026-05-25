@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import SmoothScroll from "@/components/SmoothScroll";
-import ScrollToTop from "@/components/ScrollToTop";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const foremost = localFont({
   src: [
@@ -53,9 +52,7 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${foremost.variable} ${satoshi.variable}`}>
       <body className="font-body antialiased text-ocean-blue selection:bg-ocean-blue/20 bg-cream">
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+        {children}
         <ScrollToTop />
       </body>
     </html>
