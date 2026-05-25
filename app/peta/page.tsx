@@ -1,6 +1,6 @@
-import Navbar from "@/components/Navbar";
-import GisMap from "@/components/GisMap";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import GisMap from "@/components/pages/GisMap";
+import Footer from "@/components/layout/Footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PetaPage() {
   return (
-    <main className="min-h-screen bg-sand pt-28">
+    <main className="min-h-screen bg-sand">
       <Navbar />
       <GisMap />
       <Footer />
