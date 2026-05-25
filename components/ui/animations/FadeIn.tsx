@@ -10,6 +10,7 @@ interface FadeInProps {
   className?: string;
   inView?: boolean;
   once?: boolean;
+  style?: React.CSSProperties;
 }
 
 export function FadeIn({ 
@@ -18,7 +19,8 @@ export function FadeIn({
   duration = 0.6, 
   className = "",
   inView = false,
-  once = true
+  once = true,
+  style
 }: FadeInProps) {
   
   if (inView) {
@@ -29,6 +31,7 @@ export function FadeIn({
         viewport={{ once, margin: "-50px" }}
         transition={{ duration, delay }}
         className={className}
+        style={style}
       >
         {children}
       </motion.div>
@@ -41,6 +44,7 @@ export function FadeIn({
       animate={{ opacity: 1 }}
       transition={{ duration, delay }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>

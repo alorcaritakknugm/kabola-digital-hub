@@ -11,6 +11,7 @@ interface SlideUpProps {
   className?: string;
   inView?: boolean; // If true, animates only when in view (useful for scroll)
   once?: boolean;
+  style?: React.CSSProperties;
 }
 
 export function SlideUp({ 
@@ -20,7 +21,8 @@ export function SlideUp({
   yOffset = 20, 
   className = "",
   inView = false,
-  once = true
+  once = true,
+  style
 }: SlideUpProps) {
   
   if (inView) {
@@ -31,6 +33,7 @@ export function SlideUp({
         viewport={{ once, margin: "-50px" }}
         transition={{ duration, delay }}
         className={className}
+        style={style}
       >
         {children}
       </motion.div>
@@ -43,6 +46,7 @@ export function SlideUp({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration, delay }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>
