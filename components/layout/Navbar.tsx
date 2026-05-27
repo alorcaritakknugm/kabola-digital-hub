@@ -13,9 +13,9 @@ type NavItem = { label: string; href?: string; children?: Child[] };
 const navItems: NavItem[] = [
   { label: "Beranda", href: "/" },
   { label: "Wisata", href: "/wisata" },
-  { label: "Storynomics", href: "/storynomics" },
-  { label: "Peta GIS", href: "/peta" },
   { label: "UMKM", href: "/umkm" },
+  { label: "Cerita Kabola", href: "/cerita-kabola" },
+  { label: "Peta GIS", href: "/peta" },
   {
     label: "Tentang",
     children: [

@@ -26,14 +26,14 @@ const services = [
     accentColor: "text-kabola-teal",
     bgIcon: "bg-kabola-teal/10",
     status: "Segera Hadir",
-    href: "#",
+    href: "/peta",
   },
   {
-    id: "storynomics",
+    id: "cerita-kabola",
     icon: Heart,
-    title: "Storynomics Digital",
-    shortTitle: "Storynomics",
-    tag: "Storynomics",
+    title: "Kabola dalam Cerita",
+    shortTitle: "Cerita Kabola",
+    tag: "Cerita Kabola",
     tagColor: "bg-kabola-teal/10 text-kabola-teal",
     description:
       "Digitalisasi kekayaan budaya Kabola — dari gastronomi lokal hingga etnofarmakologi — disajikan dalam tampilan interaktif yang menceritakan nilai-nilai tradisi autentik.",
@@ -48,7 +48,7 @@ const services = [
     accentColor: "text-kabola-teal",
     bgIcon: "bg-kabola-teal/10",
     status: "Segera Hadir",
-    href: "#storynomics",
+    href: "/cerita-kabola",
   },
   {
     id: "wisata",
@@ -70,7 +70,7 @@ const services = [
     accentColor: "text-forest",
     bgIcon: "bg-forest/10",
     status: "Lihat Sekarang",
-    href: "#wisata",
+    href: "/wisata",
   },
 ];
 
@@ -201,10 +201,8 @@ export default function Services() {
                         activeTab === i ? service.accentColor : "text-white/40 hover:text-white/60"
                       }`}
                       onClick={(e) => {
-                        if (service.href === "#" || service.href === "#storynomics" || service.href === "#wisata") {
-                          if (service.href === "#") {
-                            e.preventDefault();
-                          }
+                        if (service.href === "#") {
+                          e.preventDefault();
                         }
                       }}
                     >
@@ -212,7 +210,6 @@ export default function Services() {
                       <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
                     </a>
                   </div>
-                </div>
               </div>
             </SlideUp>
           ))}

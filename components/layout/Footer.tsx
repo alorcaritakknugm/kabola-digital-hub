@@ -4,7 +4,7 @@ import { Mail, MapPin, ExternalLink } from "lucide-react";
 
 const exploreLinks = [
   { label: "Wisata Kabola", href: "/wisata" },
-  { label: "Cerita & Budaya", href: "/storynomics" },
+  { label: "Cerita & Budaya", href: "/cerita-kabola" },
   { label: "Peta Wilayah", href: "/peta" },
   { label: "Produk Lokal UMKM", href: "/umkm" },
 ];

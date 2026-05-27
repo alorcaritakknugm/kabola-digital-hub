@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   title: "Kabola Digital Hub",
   description:
     "Pusat layanan informasi digital Kelurahan Kabola, Kecamatan Kabola, Kabupaten Alor, Nusa Tenggara Timur. Program kerja KKN-PPM UGM 2026.",
-  keywords: ["Kabola", "Alor", "KKN UGM", "Digital Hub", "Wisata Alor", "Storynomics"],
+  keywords: ["Kabola", "Alor", "KKN UGM", "Digital Hub", "Wisata Alor", "Cerita Kabola"],
   openGraph: {
     title: "Kabola Digital Hub",
     description: "Pusat layanan informasi digital Kelurahan Kabola",

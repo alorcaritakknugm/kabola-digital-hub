@@ -39,8 +39,8 @@ export const profilDesaQuery = groq`*[_type == "profilDesa" && tipe == $tipe][0]
   }
 }`;
 
-// Query untuk mengambil semua data Storynomics
-export const storynomicsQuery = groq`*[_type == "storynomics"] | order(_createdAt desc) {
+// Query untuk mengambil semua data Kabola dalam Cerita
+export const ceritaKabolaQuery = groq`*[_type == "ceritaKabola"] | order(_createdAt desc) {
   _id,
   judul,
   subtitle,

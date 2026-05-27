@@ -13,8 +13,8 @@ export default function KelurahanKabola() {
       deskripsiPotensi: "Kelurahan Kabola menjadi pintu gerbang bagi wisatawan yang ingin menjelajahi wisata alam dan budaya Alor. Dengan terbentuknya rute-rute tematik, pengunjung diajak menikmati pesona alam sekaligus interaksi langsung dengan budaya masyarakat lokal."
     },
     {
-      judulPotensi: "Budaya & Tradisi (Storynomics)",
-      deskripsiPotensi: "Kekayaan storynomics berupa makanan khas, dongeng rakyat, hingga pemanfaatan tanaman lokal terus dilestarikan. Hal ini bukan saja menjadi kebanggaan warga, tetapi juga nilai tambah bagi identitas Kabola di kancah yang lebih luas."
+      judulPotensi: "Budaya & Tradisi (Cerita Kabola)",
+      deskripsiPotensi: "Kekayaan cerita budaya berupa makanan khas, dongeng rakyat, hingga pemanfaatan tanaman lokal terus dilestarikan. Hal ini bukan saja menjadi kebanggaan warga, tetapi juga nilai tambah bagi identitas Kabola di kancah yang lebih luas."
     }
   ];
 

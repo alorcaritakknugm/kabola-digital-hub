@@ -11,9 +11,9 @@ const programs = [
   },
   {
     icon: BookOpen,
-    title: "Storynomics Digital",
-    desc: "Digitalisasi budaya, gastronomi, dan etnofarmakologi Kabola untuk melestarikan warisan lokal di era digital.",
-    href: "/storynomics",
+    title: "Kabola dalam Cerita",
+    desc: "Dokumentasi budaya, tradisi lisan, dan kehidupan sehari-hari warga Kabola dalam narasi dan visual.",
+    href: "/cerita-kabola",
   },
   {
     icon: Compass,

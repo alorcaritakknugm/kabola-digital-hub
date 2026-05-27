@@ -41,7 +41,7 @@ export default {
     },
     {
       name: 'potensi',
-      title: 'Daftar Potensi / Storynomics',
+      title: 'Daftar Potensi / Cerita Kabola',
       type: 'array',
       of: [
         {

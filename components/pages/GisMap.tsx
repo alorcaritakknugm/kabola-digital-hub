@@ -5,13 +5,11 @@ import { FadeIn } from "@/components/ui/animations/FadeIn";
 const mapLayers = [
   { id: "admin", label: "Administrasi Wilayah", color: "bg-kabola-teal", active: true },
   { id: "komoditas", label: "Tematik Komoditas", color: "bg-kabola-teal", active: false },
-  { id: "kesehatan", label: "Fasilitas Kesehatan", color: "bg-rose-500", active: false },
   { id: "wisata", label: "Destinasi Wisata", color: "bg-blue-500", active: false },
 ];
 
 const mapPoints = [
   { x: "42%", y: "38%", label: "Kantor Kelurahan", type: "admin" },
-  { x: "55%", y: "50%", label: "Puskesmas Kabola", type: "kesehatan" },
   { x: "30%", y: "60%", label: "Pasar Tradisional", type: "komoditas" },
   { x: "65%", y: "30%", label: "Bukit Panorama", type: "wisata" },
   { x: "25%", y: "45%", label: "Balai Adat", type: "admin" },
@@ -37,7 +35,7 @@ export default function GisMap() {
           </h2>
           <p className="text-earth/60 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
             Sistem informasi geografis (GIS) interaktif yang menampilkan administrasi wilayah, 
-            sebaran komoditas, dan fasilitas kesehatan di Kecamatan Kabola.
+            sebaran komoditas, dan destinasi wisata di Kecamatan Kabola.
           </p>
         </SlideUp>
 
