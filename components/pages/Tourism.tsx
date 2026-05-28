@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
 import {
   MapPin,
@@ -26,6 +29,13 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
+  const getWisataFallback = (slug: string) => {
+    if (slug === 'konservasi-dugong-pantai-mali') return '/images/dugong.jpg';
+    if (slug === 'pantai-deere') return '/images/view-2.jpg';
+    if (slug === 'desa-tradisional-kabola') return '/images/view-1.jpg';
+    return '/images/view-4.jpg';
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -55,8 +65,8 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
           </SlideUp>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16"><path d="M0,40 C400,80 900,10 1440,45 L1440,80 L0,80 Z" fill="#F7F3EB" /></svg>
+        <div className="wave-bottom pointer-events-none">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20"><path d="M0,40 C400,80 900,10 1440,45 L1440,80 L0,80 Z" fill="#F7F3EB" /></svg>
         </div>
       </section>
 
@@ -67,27 +77,24 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
           {/* Package cards */}
           {wisataList.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {wisataList.map((pkg, i) => (
+              {wisataList.map((pkg, i) => {
+                const slug = pkg.slug?.current || pkg.slug || pkg._id;
+                return (
                 <SlideUp
                   key={pkg._id}
                   delay={i * 0.1}
                   inView={true}
                   className="group relative rounded-3xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-500"
                 >
-                  {/* Image */}
-                  <div className="relative h-52 overflow-hidden bg-slate-100">
-                    {pkg.imageUrl ? (
+                  <Link href={`/wisata/${slug}`} className="block h-full w-full">
+                    {/* Image */}
+                    <div className="relative h-52 overflow-hidden bg-slate-100">
                       <Image
-                         src={pkg.imageUrl}
+                         src={pkg.imageUrl || getWisataFallback(slug)}
                          alt={pkg.nama}
                          fill
                          className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">
-                         Belum ada foto
-                      </div>
-                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
 
                     {/* Badges */}
@@ -129,20 +136,22 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
                       <span className="text-forest font-semibold text-sm">
                         {pkg.hargaTiket || "Hubungi Pokdarwis"}
                       </span>
-                      <a
-                        href={`https://wa.me/6283117149096?text=Halo, saya tertarik berkunjung ke wisata "${pkg.nama}" yang ada di Kabola Digital Hub.`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(`https://wa.me/6283117149096?text=Halo, saya tertarik berkunjung ke wisata "${pkg.nama}" yang ada di Kabola Digital Hub.`, '_blank', 'noopener,noreferrer');
+                        }}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kabola-teal text-white text-xs font-semibold hover:bg-kabola-teal-dark transition-all duration-300 group/btn hover:-translate-y-0.5 shadow-md shadow-kabola-teal/20"
                       >
                         <PhoneCall className="w-3.5 h-3.5" />
                         Reservasi WA
                         <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
-                      </a>
+                      </button>
                     </div>
                   </div>
+                  </Link>
                 </SlideUp>
-              ))}
+              )})}
             </div>
           ) : (
             <SlideUp delay={0.2} inView={true} className="bg-white border border-kabola-teal/10 rounded-3xl p-8 text-center max-w-3xl mx-auto mb-12 shadow-sm">
