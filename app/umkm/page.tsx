@@ -12,6 +12,17 @@ export const revalidate = 0;
 export default async function UmkmPage() {
   const umkmList = await client.fetch(umkmQuery);
 
+  const getUmkmFallback = (slug: string, kategori: string) => {
+    if (slug === 'tenun-ikat-alor-bunda') return '/images/culture-2.jpg';
+    if (slug === 'kerajinan-anyaman-lontar') return '/images/culture-3.jpg';
+    if (slug === 'kopi-alor-kalabahi') return '/images/culture-1.jpg';
+    if (slug === 'kacang-kenari-kupas') return '/images/view-5.jpg';
+    if (slug === 'ikan-kering-kayu-alor') return '/images/culture-4.jpg';
+    if (kategori === 'kriya') return '/images/culture-2.jpg';
+    if (kategori === 'kuliner') return '/images/culture-1.jpg';
+    return '/images/culture-1.jpg';
+  };
+
   return (
     <main className="min-h-screen bg-sand">
       <Navbar />
@@ -40,44 +51,44 @@ export default async function UmkmPage() {
         <div className="container mx-auto px-4 max-w-6xl">
           {umkmList.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {umkmList.map((umkm: any, index: number) => (
-                <SlideUp key={umkm._id} delay={index * 0.1} inView={true} className="bg-white rounded-3xl overflow-hidden border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] group">
-                  <div className="relative h-56 w-full overflow-hidden bg-slate-100">
-                    {umkm.imageUrl ? (
-                      <Image src={umkm.imageUrl} alt={umkm.nama} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                    ) : (
-                      <div className="flex items-center justify-center h-full text-slate-400">Belum ada foto</div>
-                    )}
-                    {umkm.kategori && (
-                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">
-                        {umkm.kategori}
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-title text-xl text-forest mb-2">{umkm.nama}</h3>
-                    {umkm.pemilik && <p className="text-sm text-earth/60 mb-3">Oleh: {umkm.pemilik}</p>}
-                    {umkm.deskripsi && <p className="text-sm text-earth/70 line-clamp-2 mb-4 leading-relaxed">{umkm.deskripsi}</p>}
-                    
-                    <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
-                      <div className="flex items-center gap-2 text-kabola-teal font-medium text-sm">
-                        <Tag className="w-4 h-4" />
-                        {umkm.harga || "Harga bervariasi"}
-                      </div>
-                      {umkm.kontakWa && (
-                        <a 
-                          href={`https://wa.me/${umkm.kontakWa}`} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full bg-forest/5 flex items-center justify-center text-forest hover:bg-forest hover:text-white transition-colors"
-                        >
-                          <Phone className="w-4 h-4" />
-                        </a>
+              {umkmList.map((umkm: any, index: number) => {
+                const slug = umkm.slug?.current || umkm.slug || umkm._id;
+                return (
+                <SlideUp key={umkm._id} delay={index * 0.1} inView={true} className="bg-white rounded-3xl overflow-hidden border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] group hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-shadow">
+                  <Link href={`/umkm/${slug}`} className="block h-full">
+                    <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                      <Image 
+                        src={umkm.imageUrl || getUmkmFallback(slug, umkm.kategori)} 
+                        alt={umkm.nama} 
+                        fill 
+                        className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                      />
+                      {umkm.kategori && (
+                        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">
+                          {umkm.kategori}
+                        </div>
                       )}
                     </div>
-                  </div>
+                    <div className="p-6">
+                      <h3 className="font-title text-xl text-forest mb-2 group-hover:text-kabola-teal transition-colors">{umkm.nama}</h3>
+                      {umkm.pemilik && <p className="text-sm text-earth/60 mb-3">Oleh: {umkm.pemilik}</p>}
+                      {umkm.deskripsi && <p className="text-sm text-earth/70 line-clamp-2 mb-4 leading-relaxed">{umkm.deskripsi}</p>}
+                      
+                      <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
+                        <div className="flex items-center gap-2 text-kabola-teal font-medium text-sm">
+                          <Tag className="w-4 h-4" />
+                          {umkm.harga || "Harga bervariasi"}
+                        </div>
+                        <div 
+                          className="w-10 h-10 rounded-full bg-forest/5 flex items-center justify-center text-forest group-hover:bg-forest group-hover:text-white transition-colors"
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
                 </SlideUp>
-              ))}
+              )})}
             </div>
           ) : (
             <SlideUp delay={0.2} inView={true} className="bg-white rounded-2xl border border-kabola-teal/12 p-8 text-center max-w-3xl mx-auto">
