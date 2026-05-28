@@ -16,7 +16,7 @@ const tabs = [
 ];
 
 /* ─── Fallback content ───────────────────────────────────────── */
-const fallbackContent: Record<string, { title: string; subtitle: string; desc: string; image: string; tag: string }[]> = {
+const fallbackContent: Record<string, { title: string; subtitle: string; desc: string; image: string; tag: string; slug?: string; _id?: string }[]> = {
   gastronomi: [
     {
       title: "Jagung Bose",
