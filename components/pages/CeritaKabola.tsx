@@ -2,9 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Utensils, TreePine, Theater, Camera, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 /* ─── Tabs (4 bersih) ────────────────────────────────────────── */
 const tabs = [
@@ -124,15 +125,47 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
   const [activeTab, setActiveTab] = useState("gastronomi");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+      if (tab && tabs.some(t => t.id === tab)) {
+        setActiveTab(tab);
+      }
+    }
+  }, []);
+
+  const getFallbackImage = (slug: string, kategori: string) => {
+    if (slug === 'jagung-bose') return '/images/culture-1.jpg';
+    if (slug === 'sei-ikan-sei-daging') return '/images/culture-2.jpg';
+    if (slug === 'tuak-sopi') return '/images/culture-3.jpg';
+    if (slug === 'hutan-mangrove-nelayan-kabola') return '/images/view-3.jpg';
+    if (slug === 'perubahan-musim-pertanian-lokal') return '/images/view-5.jpg';
+    if (slug === 'tenun-ikat-alor') return '/images/dugong.jpg';
+    if (slug === 'tarian-upacara-adat') return '/images/view-1.jpg';
+    if (slug === 'tradisi-lisan-kabola') return '/images/view-5.jpg';
+    if (slug === 'moko-motif-tradisional') return '/images/culture-2.jpg';
+    if (slug === 'bahasa-sastra-lisan') return '/images/culture-3.jpg';
+    if (slug === 'wajah-wajah-kabola') return '/images/view-1.jpg';
+    if (slug === 'alam-yang-hidup') return '/images/view-3.jpg';
+    if (slug === 'tangan-yang-berkarya') return '/images/culture-3.jpg';
+    
+    if (kategori === 'lensa-kabola') return '/images/view-3.jpg';
+    if (kategori === 'eko-naratif') return '/images/view-1.jpg';
+    return '/images/culture-1.jpg';
+  };
+
   const activeTab_ = tabs.find((t) => t.id === activeTab)!;
 
   const cmsItems = ceritaKabolaList
     .filter((item) => item.kategori === activeTab)
     .map((item) => ({
+      _id: item._id,
       title: item.judul,
+      slug: item.slug?.current || item.slug,
       subtitle: item.subtitle,
       desc: item.deskripsi,
-      image: item.imageUrl || "/images/culture-1.jpg",
+      image: item.imageUrl || getFallbackImage(item.slug?.current || item.slug, item.kategori),
       tag: item.tag || activeTab_.label,
     }));
   const activeStories = cmsItems.length > 0 ? cmsItems : fallbackContent[activeTab] ?? [];
@@ -212,7 +245,8 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                 onHoverEnd={() => setHoveredCard(null)}
                 className="group relative rounded-2xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_20px_rgba(201,136,42,0.06)] hover:shadow-[0_12px_40px_rgba(201,136,42,0.15)] transition-all duration-500 cursor-pointer"
               >
-                <div className="relative h-48 overflow-hidden">
+                <Link href={`/cerita-kabola/${story.slug || story._id}?from=${activeTab}`} className="block h-full w-full">
+                  <div className="relative h-48 overflow-hidden">
                   <Image
                     src={story.image}
                     alt={story.title}
@@ -242,12 +276,13 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                   </div>
                 </div>
 
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"
-                  initial={{ x: "-100%" }}
-                  animate={hoveredCard === i ? { x: "100%" } : { x: "-100%" }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"
+                    initial={{ x: "-100%" }}
+                    animate={hoveredCard === i ? { x: "100%" } : { x: "-100%" }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                  />
+                </Link>
               </motion.div>
             ))}
           </motion.div>
