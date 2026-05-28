@@ -210,6 +210,7 @@ export default function Services() {
                       <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
                     </a>
                   </div>
+                </div>
               </div>
             </SlideUp>
           ))}
