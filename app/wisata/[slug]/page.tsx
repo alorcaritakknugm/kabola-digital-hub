@@ -135,12 +135,12 @@ export default async function WisataDetail({ params }: { params: Promise<{ slug:
                 </div>
 
                 <a
-                  href={`https://wa.me/6283117149096?text=Halo, saya tertarik berkunjung ke wisata "${wisata.nama}" yang ada di Kabola Digital Hub.`}
+                  href={`https://wa.me/${wisata.kontakWa || "6283117149096"}?text=Halo, saya tertarik berkunjung ke wisata "${wisata.nama}" yang ada di Kabola Digital Hub.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-forest text-white py-3.5 rounded-full font-semibold hover:bg-ocean-blue-light transition-all shadow-md shadow-forest/20 hover:-translate-y-0.5"
+                  className="w-full flex items-center justify-center gap-2 bg-forest text-white text-sm py-3 px-5 rounded-full font-semibold whitespace-nowrap hover:bg-ocean-blue-light transition-all shadow-md shadow-forest/20 hover:-translate-y-0.5"
                 >
-                  <PhoneCall className="w-4 h-4" /> Reservasi via WhatsApp
+                  <PhoneCall className="w-4 h-4 flex-shrink-0" /> Reservasi via WhatsApp
                 </a>
               </div>
             </div>

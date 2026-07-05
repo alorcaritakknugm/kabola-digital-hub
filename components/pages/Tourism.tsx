@@ -6,7 +6,6 @@ import { SlideUp } from "@/components/ui/animations/SlideUp";
 import {
   MapPin,
   Clock,
-  Star,
   Users,
   ArrowRight,
   PhoneCall,
@@ -14,19 +13,6 @@ import {
   Map,
 } from "lucide-react";
 
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star
-          key={i}
-          className={`w-3 h-3 ${i <= Math.floor(rating) ? "text-kabola-teal fill-kabola-teal" : "text-earth/20"}`}
-        />
-      ))}
-      <span className="text-xs text-earth/60 ml-1">{rating}</span>
-    </div>
-  );
-}
 
 export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
   const getWisataFallback = (slug: string) => {
@@ -97,16 +83,12 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
                       />
                     <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
 
-                    {/* Badges */}
+                    {/* Badge durasi */}
                     <div className="absolute top-4 left-4 flex gap-2">
                       <span className="bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 uppercase tracking-wider">
                         <Clock className="w-3 h-3 text-kabola-teal" />
-                        Setengah Hari
+                        {pkg.durasiWisata || "Setengah Hari"}
                       </span>
-                    </div>
-
-                    <div className="absolute bottom-4 left-4">
-                      <StarRating rating={5.0} />
                     </div>
                   </div>
 
@@ -139,7 +121,8 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          window.open(`https://wa.me/6283117149096?text=Halo, saya tertarik berkunjung ke wisata "${pkg.nama}" yang ada di Kabola Digital Hub.`, '_blank', 'noopener,noreferrer');
+                          const waNumber = pkg.kontakWa || "6283117149096";
+                          window.open(`https://wa.me/${waNumber}?text=Halo, saya tertarik berkunjung ke wisata "${pkg.nama}" yang ada di Kabola Digital Hub.`, '_blank', 'noopener,noreferrer');
                         }}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kabola-teal text-white text-xs font-semibold hover:bg-kabola-teal-dark transition-all duration-300 group/btn hover:-translate-y-0.5 shadow-md shadow-kabola-teal/20"
                       >
