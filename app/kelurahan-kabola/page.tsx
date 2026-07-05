@@ -3,20 +3,45 @@ import Footer from "@/components/layout/Footer";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
 import { MapPin, Mountain, Trees, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { client } from "@/sanity/lib/client";
+import { profilDesaQuery } from "@/sanity/lib/queries";
+import type { Metadata } from "next";
 
-export default function KelurahanKabola() {
-  const judul = "Kelurahan Kabola";
-  const konten = "Pusat administrasi dari Kecamatan Kabola, Kabupaten Alor. Terletak di dataran yang lebih tinggi, kelurahan ini menyuguhkan panorama perbukitan hijau yang berpadu dengan udara sejuk, memberikan pengalaman tersendiri bagi siapa saja yang berkunjung.\n\nMasyarakat Kelurahan Kabola sangat erat memegang tradisi leluhur. Mulai dari gastronomi tradisional hingga pengetahuan tentang tanaman obat (etnofarmakologi), kearifan lokal masih menjadi bagian tak terpisahkan dari denyut nadi kehidupan sehari-hari warga.";
-  const potensiList = [
-    {
-      judulPotensi: "Pariwisata Terintegrasi",
-      deskripsiPotensi: "Kelurahan Kabola menjadi pintu gerbang bagi wisatawan yang ingin menjelajahi wisata alam dan budaya Alor. Dengan terbentuknya rute-rute tematik, pengunjung diajak menikmati pesona alam sekaligus interaksi langsung dengan budaya masyarakat lokal."
-    },
-    {
-      judulPotensi: "Budaya & Tradisi (Cerita Kabola)",
-      deskripsiPotensi: "Kekayaan cerita budaya berupa makanan khas, dongeng rakyat, hingga pemanfaatan tanaman lokal terus dilestarikan. Hal ini bukan saja menjadi kebanggaan warga, tetapi juga nilai tambah bagi identitas Kabola di kancah yang lebih luas."
-    }
-  ];
+export const metadata: Metadata = {
+  title: "Kelurahan Kabola | Kabola Digital Hub",
+  description: "Profil dan potensi Kelurahan Kabola, pusat administrasi Kecamatan Kabola, Kabupaten Alor.",
+};
+
+export const revalidate = 60;
+
+// Fallback statis jika data Sanity belum diisi
+const FALLBACK_JUDUL = "Kelurahan Kabola";
+const FALLBACK_KONTEN =
+  "Pusat administrasi dari Kecamatan Kabola, Kabupaten Alor. Terletak di dataran yang lebih tinggi, kelurahan ini menyuguhkan panorama perbukitan hijau yang berpadu dengan udara sejuk, memberikan pengalaman tersendiri bagi siapa saja yang berkunjung.\n\nMasyarakat Kelurahan Kabola sangat erat memegang tradisi leluhur. Mulai dari gastronomi tradisional hingga pengetahuan tentang tanaman obat (etnofarmakologi), kearifan lokal masih menjadi bagian tak terpisahkan dari denyut nadi kehidupan sehari-hari warga.";
+const FALLBACK_POTENSI = [
+  {
+    judulPotensi: "Pariwisata Terintegrasi",
+    deskripsiPotensi:
+      "Kelurahan Kabola menjadi pintu gerbang bagi wisatawan yang ingin menjelajahi wisata alam dan budaya Alor. Dengan terbentuknya rute-rute tematik, pengunjung diajak menikmati pesona alam sekaligus interaksi langsung dengan budaya masyarakat lokal.",
+  },
+  {
+    judulPotensi: "Budaya & Tradisi",
+    deskripsiPotensi:
+      "Kekayaan cerita budaya berupa makanan khas, dongeng rakyat, hingga pemanfaatan tanaman lokal terus dilestarikan. Hal ini bukan saja menjadi kebanggaan warga, tetapi juga nilai tambah bagi identitas Kabola di kancah yang lebih luas.",
+  },
+];
+
+export default async function KelurahanKabola() {
+  // Fetch dari Sanity; jika gagal/kosong, gunakan fallback
+  let data: any = null;
+  try {
+    data = await client.fetch(profilDesaQuery, { tipe: "kabola" });
+  } catch (_) { }
+
+  const judul = data?.judul || FALLBACK_JUDUL;
+  const konten = data?.konten || FALLBACK_KONTEN;
+  const potensiList =
+    data?.potensi && data.potensi.length > 0 ? data.potensi : FALLBACK_POTENSI;
 
   return (
     <main className="min-h-screen bg-sand">
@@ -48,9 +73,9 @@ export default function KelurahanKabola() {
       {/* Profile Content */}
       <section className="py-16 md:py-20 dot-pattern">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl space-y-12">
-          
+
           {/* Main Description */}
-          <SlideUp 
+          <SlideUp
             delay={0.1}
             inView={true}
             className="bg-white rounded-3xl p-8 md:p-12 border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)]"
@@ -59,7 +84,7 @@ export default function KelurahanKabola() {
             <div className="space-y-4 text-earth/70 leading-relaxed text-sm md:text-base whitespace-pre-wrap">
               {konten}
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-100">
               <div className="flex flex-col items-center text-center p-4 rounded-2xl bg-forest/5">
                 <Mountain className="w-6 h-6 text-forest mb-2" />
@@ -81,7 +106,7 @@ export default function KelurahanKabola() {
 
           {/* Potensi Kelurahan */}
           {potensiList && potensiList.length > 0 && (
-            <SlideUp 
+            <SlideUp
               delay={0.2}
               inView={true}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
