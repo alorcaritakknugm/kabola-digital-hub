@@ -30,6 +30,9 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
 
   const displayImage = umkm.imageUrl || getUmkmFallback(resolvedParams.slug, umkm.kategori);
 
+  const backHref = umkm.jenis === 'nttMart' ? '/umkm/ntt-mart' : '/umkm';
+  const backLabel = umkm.jenis === 'nttMart' ? 'Kembali ke Katalog NTT Mart' : 'Kembali ke Katalog UMKM';
+
   return (
     <main className="min-h-screen bg-sand">
       <Navbar />
@@ -37,8 +40,8 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
       <section className="pt-32 pb-16 md:pt-40 md:pb-24 dot-pattern">
         <div className="container mx-auto px-4 max-w-4xl">
           
-          <Link href="/umkm" className="inline-flex items-center gap-2 text-earth/60 hover:text-kabola-teal mb-8 text-sm font-medium transition-colors">
-            <ArrowLeft className="w-4 h-4" /> Kembali ke Katalog UMKM
+          <Link href={backHref} className="inline-flex items-center gap-2 text-earth/60 hover:text-kabola-teal mb-8 text-sm font-medium transition-colors">
+            <ArrowLeft className="w-4 h-4" /> {backLabel}
           </Link>
 
           <div className="bg-white rounded-3xl overflow-hidden border border-kabola-teal/10 shadow-xl shadow-kabola-teal/5">

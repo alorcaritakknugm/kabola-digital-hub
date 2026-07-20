@@ -1,16 +1,16 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
-import { ShoppingBag, ArrowRight, Phone, Tag } from "lucide-react";
+import { Store, ArrowRight, Tag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
-import { umkmLokalQuery } from "@/sanity/lib/queries";
+import { nttMartQuery } from "@/sanity/lib/queries";
 
 export const revalidate = 0;
 
-export default async function UmkmPage() {
-  const umkmList = await client.fetch(umkmLokalQuery);
+export default async function NttMartPage() {
+  const umkmList = await client.fetch(nttMartQuery);
 
   const getUmkmFallback = (slug: string, kategori: string) => {
     if (slug === 'tenun-ikat-alor-bunda') return '/images/culture-2.jpg';
@@ -31,14 +31,14 @@ export default async function UmkmPage() {
         <div className="container mx-auto px-4 max-w-3xl text-center relative z-10">
           <SlideUp delay={0}>
             <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="w-8 h-8 text-kabola-teal-light" />
+              <Store className="w-8 h-8 text-kabola-teal-light" />
             </div>
             <span className="inline-block bg-white/10 text-white/60 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
-              Kecamatan Kabola · Ekonomi Lokal
+              Kecamatan Kabola · NTT Mart
             </span>
-            <h1 className="font-title text-4xl md:text-5xl text-white mb-4">Katalog Visual <span className="text-kabola-teal-light">UMKM Lokal</span></h1>
+            <h1 className="font-title text-4xl md:text-5xl text-white mb-4">Katalog Visual <span className="text-kabola-teal-light">NTT Mart</span></h1>
             <p className="text-white/60 max-w-lg mx-auto text-sm leading-relaxed">
-              Dokumentasi produk lokal UMKM Kabola. Dukung ekonomi lokal dengan membeli langsung dari para perajin dan pembuatnya.
+              Produk-produk pilihan khas Nusa Tenggara Timur (NTT) yang tersedia di NTT Mart Kabola. Dukung produk daerah kami.
             </p>
           </SlideUp>
         </div>
@@ -94,10 +94,10 @@ export default async function UmkmPage() {
             <SlideUp delay={0.2} inView={true} className="bg-white rounded-2xl border border-kabola-teal/12 p-8 text-center max-w-3xl mx-auto">
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-kabola-teal animate-pulse" />
-                Segera Hadir — Foto & Desain Menyusul
+                Segera Hadir — Produk NTT Mart
               </span>
               <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
-                Katalog produk UMKM akan diisi setelah sesi dokumentasi lapangan saat KKN berlangsung.
+                Katalog produk NTT Mart akan segera diisi dengan dokumentasi produk pilihan.
               </p>
             </SlideUp>
           )}
@@ -113,4 +113,3 @@ export default async function UmkmPage() {
     </main>
   );
 }
-

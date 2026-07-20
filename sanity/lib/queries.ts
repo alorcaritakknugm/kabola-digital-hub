@@ -10,7 +10,36 @@ export const umkmQuery = groq`*[_type == "umkm"] | order(_createdAt desc) {
   harga,
   "imageUrl": foto.asset->url,
   kontakWa,
-  kategori
+  kategori,
+  jenis
+}`;
+
+// Query untuk mengambil semua UMKM Lokal (jenis == 'lokal' atau belum diset)
+export const umkmLokalQuery = groq`*[_type == "umkm" && (jenis == "lokal" || !defined(jenis))] | order(_createdAt desc) {
+  _id,
+  nama,
+  "slug": slug.current,
+  pemilik,
+  deskripsi,
+  harga,
+  "imageUrl": foto.asset->url,
+  kontakWa,
+  kategori,
+  jenis
+}`;
+
+// Query untuk mengambil semua NTT Mart
+export const nttMartQuery = groq`*[_type == "umkm" && jenis == "nttMart"] | order(_createdAt desc) {
+  _id,
+  nama,
+  "slug": slug.current,
+  pemilik,
+  deskripsi,
+  harga,
+  "imageUrl": foto.asset->url,
+  kontakWa,
+  kategori,
+  jenis
 }`;
 
 // Query untuk mengambil satu UMKM berdasarkan slug
@@ -23,7 +52,8 @@ export const umkmBySlugQuery = groq`*[_type == "umkm" && slug.current == $slug][
   harga,
   "imageUrl": foto.asset->url,
   kontakWa,
-  kategori
+  kategori,
+  jenis
 }`;
 
 // Query untuk mengambil semua Tempat Wisata

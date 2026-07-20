@@ -44,6 +44,20 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: 'jenis',
+      title: 'Jenis UMKM / Unit Toko',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'UMKM Lokal', value: 'lokal' },
+          { title: 'NTT Mart', value: 'nttMart' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'lokal',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: 'deskripsi',
       title: 'Deskripsi Produk',
       type: 'text',

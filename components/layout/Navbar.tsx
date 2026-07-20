@@ -13,7 +13,13 @@ type NavItem = { label: string; href?: string; children?: Child[] };
 const navItems: NavItem[] = [
   { label: "Beranda", href: "/" },
   { label: "Wisata", href: "/wisata" },
-  { label: "UMKM", href: "/umkm" },
+  {
+    label: "UMKM",
+    children: [
+      { label: "UMKM Lokal", href: "/umkm" },
+      { label: "NTT Mart", href: "/umkm/ntt-mart" },
+    ],
+  },
   { label: "Cerita Kabola", href: "/cerita-kabola" },
   { label: "Peta GIS", href: "/peta" },
   {
@@ -64,7 +70,15 @@ export default function Navbar() {
   const isActive = (item: NavItem): boolean => {
     if (item.href === "/") return pathname === "/";
     if (item.href && !item.href.includes("#")) return pathname === item.href || pathname.startsWith(item.href + "/");
-    if (item.children) return item.children.some(c => !c.href.includes("#") && pathname === c.href);
+    if (item.children) {
+      return item.children.some(c => {
+        if (c.href.includes("#")) return false;
+        if (c.href === "/umkm") {
+          return pathname === "/umkm" || (pathname.startsWith("/umkm/") && pathname !== "/umkm/ntt-mart");
+        }
+        return pathname === c.href || pathname.startsWith(c.href + "/");
+      });
+    }
     return false;
   };
 
