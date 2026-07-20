@@ -8,9 +8,20 @@ import { profilDesaQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Desa Pante Deere | Kabola Digital Hub",
+  title: "Desa Pante Deere | Desa Pesisir Eksotis Alor NTT · KKN-PPM UGM 2026",
   description:
-    "Profil dan potensi Desa Pante Deere, desa pesisir yang indah di Kecamatan Kabola, Kabupaten Alor.",
+    "Profil lengkap Desa Pante Deere — desa pesisir yang indah di Kecamatan Kabola, Kabupaten Alor, NTT. Potensi wisata bahari, budaya pesisir, dan kehidupan nelayan. Program KKN-PPM UGM 2026.",
+  keywords: [
+    "Desa Pante Deere", "Pante Deere Alor", "desa pesisir NTT",
+    "wisata bahari Alor", "nelayan Kabola", "KKN UGM Pante Deere",
+    "pantai Alor NTT",
+  ],
+  alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/pante-deere" },
+  openGraph: {
+    title: "Desa Pante Deere | Desa Pesisir Eksotis Alor NTT",
+    description: "Profil Desa Pante Deere — desa pesisir indah di Kecamatan Kabola, Alor NTT.",
+    url: "https://kaboladigitalhub.alorcarita.com/pante-deere",
+  },
 };
 
 export const revalidate = 60;

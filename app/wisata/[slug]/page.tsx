@@ -6,8 +6,29 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { client } from "@/sanity/lib/client";
 import { wisataBySlugQuery } from "@/sanity/lib/queries";
+import type { Metadata } from "next";
 
 export const revalidate = 0;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const wisata = await client.fetch(wisataBySlugQuery, { slug });
+  if (!wisata) return { title: "Wisata | Kabola Digital Hub" };
+  return {
+    title: `${wisata.nama} | Wisata Alor NTT · Kabola Digital Hub`,
+    description: wisata.deskripsi
+      ? `${wisata.deskripsi.slice(0, 155)}...`
+      : `Temukan destinasi wisata ${wisata.nama} di Kecamatan Kabola, Alor NTT. Program KKN-PPM UGM 2026.`,
+    keywords: [wisata.nama, "wisata Alor", "destinasi Kabola", "KKN UGM Alor", "Alor NTT"],
+    alternates: { canonical: `https://kaboladigitalhub.alorcarita.com/wisata/${slug}` },
+    openGraph: {
+      title: `${wisata.nama} | Wisata Alor NTT`,
+      description: wisata.deskripsi ? wisata.deskripsi.slice(0, 155) : `Destinasi wisata ${wisata.nama}, Kabola Alor NTT.`,
+      url: `https://kaboladigitalhub.alorcarita.com/wisata/${slug}`,
+      images: wisata.imageUrl ? [{ url: wisata.imageUrl, alt: wisata.nama }] : [],
+    },
+  };
+}
 
 export default async function WisataDetail({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;

@@ -6,8 +6,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { nttMartQuery } from "@/sanity/lib/queries";
+import type { Metadata } from "next";
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: "NTT Mart Kabola | Produk Pilihan NTT · Kabola Digital Hub",
+  description:
+    "Katalog produk NTT Mart di Kecamatan Kabola, Alor NTT. Temukan produk-produk pilihan khas Nusa Tenggara Timur yang tersedia di NTT Mart Kabola, program KKN-PPM UGM 2026.",
+  keywords: [
+    "NTT Mart", "NTT Mart Kabola", "produk NTT", "belanja NTT",
+    "toko lokal Alor", "KKN UGM NTT Mart",
+  ],
+  alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/umkm/ntt-mart" },
+  openGraph: {
+    title: "NTT Mart Kabola | Produk Pilihan NTT",
+    description: "Produk pilihan khas NTT tersedia di NTT Mart Kabola, Alor.",
+    url: "https://kaboladigitalhub.alorcarita.com/umkm/ntt-mart",
+  },
+};
 
 export default async function NttMartPage() {
   const umkmList = await client.fetch(nttMartQuery);

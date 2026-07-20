@@ -6,8 +6,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { umkmLokalQuery } from "@/sanity/lib/queries";
+import type { Metadata } from "next";
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: "Katalog UMKM Lokal | Produk Khas Alor · KKN-PPM UGM 2026",
+  description:
+    "Katalog visual UMKM lokal Kecamatan Kabola, Alor NTT. Produk kerajinan, kuliner, dan karya warga asli Kabola hasil program KKN-PPM UGM 2026. Beli langsung dari perajin dan pendukung UMKM Alor.",
+  keywords: [
+    "UMKM Alor", "produk lokal Alor", "kerajinan NTT", "kuliner Alor",
+    "UMKM Kabola", "KKN UGM UMKM", "beli produk Alor",
+  ],
+  alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/umkm" },
+  openGraph: {
+    title: "Katalog UMKM Lokal Kabola, Alor | Kabola Digital Hub",
+    description: "Produk kerajinan, kuliner, dan karya warga asli Kabola, Alor NTT.",
+    url: "https://kaboladigitalhub.alorcarita.com/umkm",
+  },
+};
 
 export default async function UmkmPage() {
   const umkmList = await client.fetch(umkmLokalQuery);

@@ -8,8 +8,19 @@ import { profilDesaQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kelurahan Kabola | Kabola Digital Hub",
-  description: "Profil dan potensi Kelurahan Kabola, pusat administrasi Kecamatan Kabola, Kabupaten Alor.",
+  title: "Kelurahan Kabola | Profil & Potensi Desa Alor NTT · KKN-PPM UGM 2026",
+  description:
+    "Profil lengkap Kelurahan Kabola — pusat administrasi Kecamatan Kabola, Kabupaten Alor, NTT. Potensi pariwisata, budaya, dan agrikultur. Program KKN-PPM UGM 2026.",
+  keywords: [
+    "Kelurahan Kabola", "profil desa Kabola", "Kecamatan Kabola Alor",
+    "potensi desa NTT", "administrasi Kabola", "KKN UGM Kelurahan Kabola",
+  ],
+  alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/kelurahan-kabola" },
+  openGraph: {
+    title: "Kelurahan Kabola | Profil & Potensi Desa Alor NTT",
+    description: "Profil Kelurahan Kabola — pusat administrasi Kecamatan Kabola, Alor NTT.",
+    url: "https://kaboladigitalhub.alorcarita.com/kelurahan-kabola",
+  },
 };
 
 export const revalidate = 60;

@@ -7,8 +7,21 @@ import { client } from "@/sanity/lib/client";
 import { ceritaKabolaQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "Kabola dalam Cerita | Kabola Digital Hub",
-  description: "Dokumentasi budaya, tradisi lisan, literasi seni, dan kehidupan warga Kabola dalam narasi, foto, dan artikel kearifan lokal.",
+  title: "Cerita Kabola | Budaya, Tradisi & Kearifan Lokal Alor NTT",
+  description:
+    "Dokumentasi budaya dan tradisi lisan Kecamatan Kabola, Alor NTT — gastronomi otentik, tanaman obat etnofarmakologi, tenun ikat, seni budaya, dan cerita rakyat. Program KKN-PPM UGM 2026 Alor Carita.",
+  keywords: [
+    "budaya Alor NTT", "tradisi Kabola", "cerita rakyat Alor", "tenun ikat Alor",
+    "gastronomi NTT", "etnofarmakologi Alor", "kearifan lokal Alor",
+    "KKN UGM budaya Alor", "Alor Carita budaya",
+  ],
+  alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/cerita-kabola" },
+  openGraph: {
+    title: "Cerita Kabola | Budaya & Kearifan Lokal Alor NTT",
+    description:
+      "Jelajahi kekayaan budaya, gastronomi, dan tradisi lisan Kabola, Alor NTT — program KKN-PPM UGM 2026.",
+    url: "https://kaboladigitalhub.alorcarita.com/cerita-kabola",
+  },
 };
 
 export const revalidate = 0;

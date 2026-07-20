@@ -1,13 +1,37 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { ArrowLeft, Tag, Calendar } from "lucide-react";
+import { ArrowLeft, Tag } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { client } from "@/sanity/lib/client";
 import { ceritaKabolaBySlugQuery } from "@/sanity/lib/queries";
+import type { Metadata } from "next";
 
 export const revalidate = 0;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug });
+  if (!cerita) return { title: "Cerita Kabola | Kabola Digital Hub" };
+  return {
+    title: `${cerita.judul} | Cerita Kabola · Alor NTT`,
+    description: cerita.subtitle
+      ? `${cerita.subtitle} — Kabola Digital Hub, program KKN-PPM UGM 2026 Alor.`
+      : cerita.deskripsi
+        ? `${cerita.deskripsi.slice(0, 150)}...`
+        : `${cerita.judul} — Cerita budaya dan tradisi Kabola, Alor NTT.`,
+    keywords: [cerita.judul, "cerita Kabola", "budaya Alor", "KKN UGM Alor", cerita.tag || "", cerita.kategori || ""].filter(Boolean),
+    alternates: { canonical: `https://kaboladigitalhub.alorcarita.com/cerita-kabola/${slug}` },
+    openGraph: {
+      title: `${cerita.judul} | Cerita Kabola · Alor NTT`,
+      description: cerita.subtitle || (cerita.deskripsi ? cerita.deskripsi.slice(0, 150) : ""),
+      url: `https://kaboladigitalhub.alorcarita.com/cerita-kabola/${slug}`,
+      type: "article",
+      images: cerita.imageUrl ? [{ url: cerita.imageUrl, alt: cerita.judul }] : [],
+    },
+  };
+}
 
 export default async function CeritaKabolaDetail({ 
   params,
@@ -99,11 +123,7 @@ export default async function CeritaKabolaDetail({
             </div>
             
             {/* Share / Footer Article */}
-            <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3 text-sm text-earth/60">
-                <Calendar className="w-4 h-4 text-kabola-teal" />
-                Tersedia di Kabola Digital Hub
-              </div>
+            <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-end gap-4">
               <div className="flex items-center gap-3">
                 <span className="text-sm font-medium text-earth/60">Kategori:</span>
                 <span className="px-3 py-1 bg-slate-100 text-forest text-xs font-bold uppercase rounded-md">

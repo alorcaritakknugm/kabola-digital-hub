@@ -6,8 +6,32 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { client } from "@/sanity/lib/client";
 import { umkmBySlugQuery } from "@/sanity/lib/queries";
+import type { Metadata } from "next";
 
 export const revalidate = 0;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const umkm = await client.fetch(umkmBySlugQuery, { slug });
+  if (!umkm) return { title: "UMKM | Kabola Digital Hub" };
+  const isNttMart = umkm.jenis === "nttMart";
+  const sectionLabel = isNttMart ? "NTT Mart" : "UMKM Lokal";
+  const canonicalBase = isNttMart ? "/umkm/ntt-mart" : "/umkm";
+  return {
+    title: `${umkm.nama} | ${sectionLabel} Kabola · Alor NTT`,
+    description: umkm.deskripsi
+      ? `${umkm.deskripsi.slice(0, 155)}...`
+      : `${umkm.nama} — produk ${sectionLabel} dari Kecamatan Kabola, Alor NTT. ${umkm.harga ? `Harga: ${umkm.harga}.` : ""} Program KKN-PPM UGM 2026.`,
+    keywords: [umkm.nama, sectionLabel, "UMKM Alor", "produk lokal NTT", "KKN UGM Alor", umkm.kategori || ""].filter(Boolean),
+    alternates: { canonical: `https://kaboladigitalhub.alorcarita.com/umkm/${slug}` },
+    openGraph: {
+      title: `${umkm.nama} | ${sectionLabel} Kabola`,
+      description: umkm.deskripsi ? umkm.deskripsi.slice(0, 155) : `Produk ${sectionLabel} dari Kabola, Alor NTT.`,
+      url: `https://kaboladigitalhub.alorcarita.com/umkm/${slug}`,
+      images: umkm.imageUrl ? [{ url: umkm.imageUrl, alt: umkm.nama }] : [],
+    },
+  };
+}
 
 export default async function UmkmDetail({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
