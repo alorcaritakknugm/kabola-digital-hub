@@ -1,8 +1,10 @@
 "use client";
+import { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   MapPin,
   Clock,
@@ -11,10 +13,22 @@ import {
   PhoneCall,
   QrCode,
   Map,
+  Search,
 } from "lucide-react";
 
 
 export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const filteredList = wisataList.filter(pkg => {
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return (
+      pkg.nama?.toLowerCase().includes(q) || 
+      pkg.deskripsi?.toLowerCase().includes(q) || 
+      (pkg.fasilitas && pkg.fasilitas.some((f: string) => f.toLowerCase().includes(q)))
+    );
+  });
   const getWisataFallback = (slug: string) => {
     if (slug === 'konservasi-dugong-pantai-mali') return '/images/dugong.jpg';
     if (slug === 'pantai-deere') return '/images/view-2.jpg';
@@ -60,93 +74,131 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
       <section id="wisata" className="py-16 md:py-24 dot-pattern relative">
         <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
           
-          {/* Package cards */}
-          {wisataList.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {wisataList.map((pkg, i) => {
-                const slug = pkg.slug?.current || pkg.slug || pkg._id;
-                return (
-                <SlideUp
-                  key={pkg._id}
-                  delay={i * 0.1}
-                  inView={true}
-                  className="group relative rounded-3xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-500"
-                >
-                  <Link href={`/wisata/${slug}`} className="block h-full w-full">
-                    {/* Image */}
-                    <div className="relative h-52 overflow-hidden bg-slate-100">
-                      <Image
-                         src={pkg.imageUrl || getWisataFallback(slug)}
-                         alt={pkg.nama}
-                         fill
-                         className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
-
-                    {/* Badge durasi */}
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 uppercase tracking-wider">
-                        <Clock className="w-3 h-3 text-kabola-teal" />
-                        {pkg.durasiWisata || "Setengah Hari"}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <h4 className="font-title text-xl text-forest mb-2">{pkg.nama}</h4>
-                    {pkg.deskripsi && (
-                      <p className="text-earth/60 text-sm mb-5 line-clamp-2 leading-relaxed">
-                        {pkg.deskripsi}
-                      </p>
-                    )}
-
-                    {/* Highlights */}
-                    {pkg.fasilitas && pkg.fasilitas.length > 0 && (
-                      <ul className="grid grid-cols-2 gap-3 mb-6">
-                        {pkg.fasilitas.slice(0, 4).map((h: string, hi: number) => (
-                          <li key={hi} className="flex items-start gap-1.5 text-xs text-earth/70 font-medium">
-                            <MapPin className="w-3.5 h-3.5 text-kabola-teal flex-shrink-0" />
-                            <span className="line-clamp-1">{h}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
-                    {/* CTA */}
-                    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                      <span className="text-forest font-semibold text-sm">
-                        {pkg.hargaTiket || "Hubungi Pokdarwis"}
-                      </span>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const waNumber = pkg.kontakWa || "6283117149096";
-                          window.open(`https://wa.me/${waNumber}?text=Halo, saya tertarik berkunjung ke wisata "${pkg.nama}" yang ada di Kabola Digital Hub.`, '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kabola-teal text-white text-xs font-semibold hover:bg-kabola-teal-dark transition-all duration-300 group/btn hover:-translate-y-0.5 shadow-md shadow-kabola-teal/20"
-                      >
-                        <PhoneCall className="w-3.5 h-3.5" />
-                        Reservasi WA
-                        <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
-                      </button>
-                    </div>
-                  </div>
-                  </Link>
-                </SlideUp>
-              )})}
+          {/* Search Bar */}
+          <div className="relative w-full max-w-xl mx-auto mb-12">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-kabola-teal/50" />
             </div>
-          ) : (
-            <SlideUp delay={0.2} inView={true} className="bg-white border border-kabola-teal/10 rounded-3xl p-8 text-center max-w-3xl mx-auto mb-12 shadow-sm">
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-kabola-teal animate-pulse" />
-                Katalog Segera Diperbarui
-              </span>
-              <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
-                Data pariwisata sedang disusun melalui sistem Sanity CMS.
-              </p>
-            </SlideUp>
-          )}
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="block w-full pl-12 pr-4 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none"
+              placeholder="Cari wisata, lokasi, atau fasilitas..."
+            />
+          </div>
+
+          {/* Package cards */}
+          <AnimatePresence mode="popLayout">
+            {filteredList.length > 0 ? (
+              <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                {filteredList.map((pkg, i) => {
+                  const slug = pkg.slug?.current || pkg.slug || pkg._id;
+                  return (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                    key={pkg._id}
+                    className="group relative rounded-3xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-500"
+                  >
+                    <Link href={`/wisata/${slug}`} className="block h-full w-full">
+                      {/* Image */}
+                      <div className="relative h-52 overflow-hidden bg-slate-100">
+                        <Image
+                           src={pkg.imageUrl || getWisataFallback(slug)}
+                           alt={pkg.nama}
+                           fill
+                           className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
+
+                      {/* Badge durasi */}
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        <span className="bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 uppercase tracking-wider">
+                          <Clock className="w-3 h-3 text-kabola-teal" />
+                          {pkg.durasiWisata || "Setengah Hari"}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      <h4 className="font-title text-xl text-forest mb-2">{pkg.nama}</h4>
+                      {pkg.deskripsi && (
+                        <p className="text-earth/60 text-sm mb-5 line-clamp-2 leading-relaxed">
+                          {pkg.deskripsi}
+                        </p>
+                      )}
+
+                      {/* Highlights */}
+                      {pkg.fasilitas && pkg.fasilitas.length > 0 && (
+                        <ul className="grid grid-cols-2 gap-3 mb-6">
+                          {pkg.fasilitas.slice(0, 4).map((h: string, hi: number) => (
+                            <li key={hi} className="flex items-start gap-1.5 text-xs text-earth/70 font-medium">
+                              <MapPin className="w-3.5 h-3.5 text-kabola-teal flex-shrink-0" />
+                              <span className="line-clamp-1">{h}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {/* CTA */}
+                      <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span className="text-forest font-semibold text-sm">
+                          {pkg.hargaTiket || "Hubungi Pokdarwis"}
+                        </span>
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const waNumber = pkg.kontakWa || "6283117149096";
+                            window.open(`https://wa.me/${waNumber}?text=Halo, saya tertarik berkunjung ke wisata "${pkg.nama}" yang ada di Kabola Digital Hub.`, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kabola-teal text-white text-xs font-semibold hover:bg-kabola-teal-dark transition-all duration-300 group/btn hover:-translate-y-0.5 shadow-md shadow-kabola-teal/20"
+                        >
+                          <PhoneCall className="w-3.5 h-3.5" />
+                          Reservasi WA
+                          <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
+                        </button>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+                )})}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="bg-white rounded-2xl border border-kabola-teal/12 p-8 text-center max-w-3xl mx-auto mb-12"
+              >
+                {searchQuery ? (
+                  <>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-4">
+                      Pencarian Tidak Ditemukan
+                    </span>
+                    <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
+                      Maaf, tidak ada paket wisata yang sesuai dengan kata kunci "{searchQuery}".
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-6">
+                      <span className="w-1.5 h-1.5 rounded-full bg-kabola-teal animate-pulse" />
+                      Belum Ada Paket Wisata
+                    </span>
+                    <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
+                      Katalog paket wisata sedang dalam penyusunan oleh Pokdarwis Kabola.
+                    </p>
+                  </>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Pokdarwis info */}
           <SlideUp

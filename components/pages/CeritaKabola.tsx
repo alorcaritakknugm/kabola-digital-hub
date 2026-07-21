@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { Utensils, TreePine, Theater, Camera, ArrowRight } from "lucide-react";
+import { Utensils, TreePine, Theater, Camera, ArrowRight, Search } from "lucide-react";
 import Link from "next/link";
 
 /* ─── Tabs (4 bersih) ────────────────────────────────────────── */
@@ -124,6 +124,7 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [activeTab, setActiveTab] = useState("gastronomi");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -168,7 +169,16 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
       image: item.imageUrl || getFallbackImage(item.slug?.current || item.slug, item.kategori),
       tag: item.tag || activeTab_.label,
     }));
-  const activeStories = cmsItems.length > 0 ? cmsItems : fallbackContent[activeTab] ?? [];
+  
+  const activeStories = (cmsItems.length > 0 ? cmsItems : fallbackContent[activeTab] ?? []).filter((item: any) => {
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return (
+      item.title?.toLowerCase().includes(q) ||
+      item.subtitle?.toLowerCase().includes(q) ||
+      item.desc?.toLowerCase().includes(q)
+    );
+  });
 
   return (
     <section id="cerita-kabola" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-cream-dark">
@@ -225,67 +235,120 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
           })}
         </motion.div>
 
+        {/* Search Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="relative w-full max-w-xl mx-auto mb-10"
+        >
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <Search className="h-5 w-5 text-kabola-teal/50" />
+          </div>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="block w-full pl-12 pr-4 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none"
+            placeholder="Cari cerita, judul, atau deskripsi..."
+          />
+        </motion.div>
+
         {/* Story cards */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-          >
-            {activeStories.map((story, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
-                onHoverStart={() => setHoveredCard(i)}
-                onHoverEnd={() => setHoveredCard(null)}
-                className="group relative rounded-2xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_20px_rgba(201,136,42,0.06)] hover:shadow-[0_12px_40px_rgba(201,136,42,0.15)] transition-all duration-500 cursor-pointer"
-              >
-                <Link href={`/cerita-kabola/${story.slug || story._id}?from=${activeTab}`} className="block h-full w-full">
-                  <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={story.image}
-                    alt={story.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-forest/60 via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <span
-                      className="text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
-                      style={{ backgroundColor: activeTab_.color }}
-                    >
-                      {story.tag}
-                    </span>
+        <AnimatePresence mode="popLayout">
+          {activeStories.length > 0 ? (
+            <motion.div
+              layout
+              key={activeTab}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+            >
+              {activeStories.map((story, i) => (
+                <motion.div
+                  layout
+                  key={story._id || story.slug || i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.25 }}
+                  onHoverStart={() => setHoveredCard(i)}
+                  onHoverEnd={() => setHoveredCard(null)}
+                  className="group relative rounded-2xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_20px_rgba(201,136,42,0.06)] hover:shadow-[0_12px_40px_rgba(201,136,42,0.15)] transition-all duration-500 cursor-pointer"
+                >
+                  <Link href={`/cerita-kabola/${story.slug || story._id}?from=${activeTab}`} className="block h-full w-full">
+                    <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={story.image}
+                      alt={story.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest/60 via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3">
+                      <span
+                        className="text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
+                        style={{ backgroundColor: activeTab_.color }}
+                      >
+                        {story.tag}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="p-5">
-                  <p className="text-kabola-teal text-xs font-semibold uppercase tracking-wider mb-1">
-                    {story.subtitle}
+                  <div className="p-5">
+                    <p className="text-kabola-teal text-xs font-semibold uppercase tracking-wider mb-1">
+                      {story.subtitle}
+                    </p>
+                    <h4 className="font-title text-lg text-forest mb-2">{story.title}</h4>
+                    <p className="text-earth/60 text-sm leading-relaxed line-clamp-3">{story.desc}</p>
+                    <div className="mt-4 flex items-center gap-1 text-kabola-teal text-xs font-semibold group/btn">
+                      <span>Baca Selengkapnya</span>
+                      <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"
+                      initial={{ x: "-100%" }}
+                      animate={hoveredCard === i ? { x: "100%" } : { x: "-100%" }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                    />
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="empty-state"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="bg-white rounded-2xl border border-kabola-teal/12 p-8 text-center max-w-3xl mx-auto"
+            >
+              {searchQuery ? (
+                <>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-4">
+                    Pencarian Tidak Ditemukan
+                  </span>
+                  <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
+                    Maaf, tidak ada cerita atau artikel yang sesuai dengan kata kunci "{searchQuery}" pada kategori ini.
                   </p>
-                  <h4 className="font-title text-lg text-forest mb-2">{story.title}</h4>
-                  <p className="text-earth/60 text-sm leading-relaxed line-clamp-3">{story.desc}</p>
-                  <div className="mt-4 flex items-center gap-1 text-kabola-teal text-xs font-semibold group/btn">
-                    <span>Baca Selengkapnya</span>
-                    <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"
-                    initial={{ x: "-100%" }}
-                    animate={hoveredCard === i ? { x: "100%" } : { x: "-100%" }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
+                </>
+              ) : (
+                <>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-kabola-teal animate-pulse" />
+                    Belum Ada Cerita
+                  </span>
+                  <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
+                    Konten cerita pada kategori ini sedang dalam tahap dokumentasi lapangan.
+                  </p>
+                </>
+              )}
+            </motion.div>
+          )}
         </AnimatePresence>
 
         {/* Coming soon notice */}
