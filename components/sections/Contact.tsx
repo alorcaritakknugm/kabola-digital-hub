@@ -72,7 +72,7 @@ export default function Contact() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 rounded-xl bg-white border border-kabola-teal/10 shadow-[0_2px_12px_rgba(26,122,94,0.05)] hover:shadow-[0_6px_24px_rgba(26,122,94,0.1)] hover:border-kabola-teal/25 transition-all duration-300 group"
+                  className="flex items-start gap-4 p-4 rounded-xl bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-kabola-teal/25 transition-all duration-300 group"
                 >
                   <div className="w-10 h-10 rounded-lg bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-kabola-teal/20 transition-colors">
                     <item.icon className="w-5 h-5 text-kabola-teal" />
@@ -118,7 +118,7 @@ export default function Contact() {
             </div>
 
             {/* KKN info card */}
-            <div className="rounded-xl bg-white border border-kabola-teal/10 shadow-sm p-5">
+            <div className="rounded-xl bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] p-5">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-kabola-teal/10 flex items-center justify-center">
                   <Globe className="w-4 h-4 text-kabola-teal" />

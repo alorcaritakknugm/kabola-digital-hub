@@ -92,8 +92,8 @@ export default function ExploreKabola() {
                     {item.title}
                   </h4>
                   <p className="text-earth/50 text-sm leading-relaxed mb-4 flex-1">{item.desc}</p>
-                  <span className="inline-flex items-center gap-1 text-kabola-teal text-xs font-semibold opacity-0 group-hover:opacity-100 transition-all mt-auto">
-                    {item.cta} <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  <span className="inline-flex items-center gap-1.5 text-kabola-teal text-xs font-bold transition-colors mt-auto group-hover:text-ocean-blue">
+                    {item.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
               </Link>

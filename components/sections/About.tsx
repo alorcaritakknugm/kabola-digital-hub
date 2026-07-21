@@ -131,9 +131,9 @@ export default function About() {
               yOffset={30}
               duration={0.6}
               delay={0.5 + i * 0.15}
-              className={`p-6 rounded-2xl bg-gradient-to-br ${item.color} border border-white/70 hover:border-kabola-teal/20 transition-all duration-300 group hover:shadow-lg`}
+              className="p-6 rounded-2xl bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-kabola-teal/25 transition-all duration-300 group"
             >
-              <div className="w-11 h-11 rounded-xl bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-11 h-11 rounded-xl bg-kabola-teal/10 flex items-center justify-center mb-4 group-hover:bg-kabola-teal/20 group-hover:scale-110 transition-all">
                 <item.icon className="w-5 h-5 text-kabola-teal" />
               </div>
               <h4 className="font-title text-lg text-forest mb-2">{item.title}</h4>
