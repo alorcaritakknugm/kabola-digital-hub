@@ -4,6 +4,7 @@ import { groq } from "next-sanity";
 export const umkmQuery = groq`*[_type == "umkm"] | order(_createdAt desc) {
   _id,
   nama,
+  namaIkm,
   "slug": slug.current,
   pemilik,
   deskripsi,
@@ -18,6 +19,7 @@ export const umkmQuery = groq`*[_type == "umkm"] | order(_createdAt desc) {
 export const umkmLokalQuery = groq`*[_type == "umkm" && (jenis == "lokal" || !defined(jenis))] | order(_createdAt desc) {
   _id,
   nama,
+  namaIkm,
   "slug": slug.current,
   pemilik,
   deskripsi,
@@ -32,6 +34,7 @@ export const umkmLokalQuery = groq`*[_type == "umkm" && (jenis == "lokal" || !de
 export const nttMartQuery = groq`*[_type == "umkm" && jenis == "nttMart"] | order(_createdAt desc) {
   _id,
   nama,
+  namaIkm,
   "slug": slug.current,
   pemilik,
   deskripsi,
@@ -46,6 +49,7 @@ export const nttMartQuery = groq`*[_type == "umkm" && jenis == "nttMart"] | orde
 export const umkmBySlugQuery = groq`*[_type == "umkm" && slug.current == $slug][0] {
   _id,
   nama,
+  namaIkm,
   "slug": slug.current,
   pemilik,
   deskripsi,

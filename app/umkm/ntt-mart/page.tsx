@@ -87,7 +87,8 @@ export default async function NttMartPage() {
                       )}
                     </div>
                     <div className="p-6">
-                      <h3 className="font-title text-xl text-forest mb-2 group-hover:text-kabola-teal transition-colors">{umkm.nama}</h3>
+                      <h3 className="font-title text-xl text-forest mb-1 group-hover:text-kabola-teal transition-colors">{umkm.nama}</h3>
+                      {umkm.namaIkm && <p className="text-sm font-medium text-kabola-teal mb-2">{umkm.namaIkm}</p>}
                       {umkm.pemilik && <p className="text-sm text-earth/60 mb-3">Oleh: {umkm.pemilik}</p>}
                       {umkm.deskripsi && <p className="text-sm text-earth/70 line-clamp-2 mb-4 leading-relaxed">{umkm.deskripsi}</p>}
                       

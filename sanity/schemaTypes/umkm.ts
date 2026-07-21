@@ -5,10 +5,16 @@ export default {
   fields: [
     {
       name: 'nama',
-      title: 'Nama Usaha / Produk',
+      title: 'Nama Produk',
       type: 'string',
-      description: 'Contoh: Tenun Ikat Alor Bunda, Kopi Alor Kalabahi, dll.',
+      description: 'Contoh: Tenun Ikat, Kopi Robusta, dll.',
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'namaIkm',
+      title: 'Nama IKM',
+      type: 'string',
+      description: 'Nama Industri Kecil Menengah atau Unit Usaha (Contoh: Tenun Ikat Alor Bunda)',
     },
     {
       name: 'slug',
