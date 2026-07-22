@@ -22,6 +22,7 @@ const navItems: NavItem[] = [
   },
   { label: "Cerita Kabola", href: "/cerita-kabola" },
   { label: "Peta GIS", href: "/peta" },
+  { label: "Statistik", href: "/statistik" },
   {
     label: "Tentang",
     children: [
@@ -82,7 +83,7 @@ export default function Navbar() {
     return false;
   };
 
-  const linkBase = `font-medium text-[15px] tracking-wide transition-colors duration-200`;
+  const linkBase = `font-medium text-[14px] lg:text-[15px] tracking-wide transition-colors duration-200 whitespace-nowrap`;
   const linkLight = `text-slate-700 hover:text-kabola-teal`;
   const linkDark = `text-white/85 hover:text-white`;
   const linkActive = `text-kabola-teal`;
@@ -92,10 +93,10 @@ export default function Navbar() {
       className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-700 ease-in-out ${
         useLight
           ? "top-6 py-4 w-[95%] max-w-6xl bg-white/85 backdrop-blur-md border border-slate-200/60 shadow-[0_4px_24px_rgba(0,0,0,0.05)] rounded-full"
-          : "top-8 py-5 w-[80%] max-w-5xl bg-white/5 backdrop-blur-sm border border-white/10 rounded-full"
+          : "top-6 sm:top-8 py-4 sm:py-5 w-[94%] md:w-[92%] lg:w-[88%] xl:w-[82%] max-w-6xl bg-white/5 backdrop-blur-sm border border-white/10 rounded-full"
       }`}
     >
-      <div className="px-5 md:px-8 flex items-center justify-between">
+      <div className="px-4 sm:px-6 md:px-8 flex items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
@@ -110,7 +111,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+        <nav className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8">
 
           {/* Nav links */}
           {navItems.map((item) =>
@@ -148,7 +149,7 @@ export default function Navbar() {
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="block px-5 py-2.5 text-[13.5px] font-medium text-slate-600 hover:text-kabola-teal hover:bg-kabola-teal/5 transition-colors"
+                          className="block px-5 py-2.5 text-[13.5px] font-medium text-slate-600 hover:text-kabola-teal hover:bg-kabola-teal/5 transition-colors whitespace-nowrap"
                           onClick={(e) => {
                             handleHashClick(e as any, child.href);
                             setOpenDropdown(null);
@@ -179,7 +180,7 @@ export default function Navbar() {
             href="https://alorcarita.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-300 hover:-translate-y-0.5 flex-shrink-0 ${
+            className={`flex items-center gap-1.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full text-xs lg:text-sm font-semibold border transition-all duration-300 hover:-translate-y-0.5 flex-shrink-0 whitespace-nowrap ${
               useLight
                 ? "border-kabola-teal text-kabola-teal hover:bg-kabola-teal hover:text-white"
                 : "border-white/25 text-white/80 hover:bg-white/10 hover:border-white/40"
