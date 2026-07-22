@@ -9,10 +9,10 @@ import Link from "next/link";
 
 /* ─── Tabs (4 bersih) ────────────────────────────────────────── */
 const tabs = [
-  { id: "gastronomi", label: "Gastronomi", icon: Utensils, color: "#C9882A" }, // Earthy Gold (dari shadow tema)
-  { id: "eko-naratif", label: "Eko-Naratif", icon: TreePine, color: "#198D8D" }, // Kabola Teal
-  { id: "tradisi-budaya", label: "Tradisi & Budaya", icon: Theater, color: "#A33B3B" }, // Terracotta / Brick Red
-  { id: "lensa-kabola", label: "Lensa Kabola", icon: Camera, color: "#0A3D62" }, // Ocean Blue / Forest
+  { id: "gastronomi", label: "Gastronomi", icon: Utensils, color: "#198D8D" },
+  { id: "eko-naratif", label: "Eko-Naratif", icon: TreePine, color: "#126666" },
+  { id: "tradisi-budaya", label: "Tradisi & Budaya", icon: Theater, color: "#0A3D62" },
+  { id: "lensa-kabola", label: "Lensa Kabola", icon: Camera, color: "#2BB5B5" },
 ];
 
 /* ─── Fallback content ───────────────────────────────────────── */
@@ -51,7 +51,7 @@ const fallbackContent: Record<string, { title: string; subtitle: string; desc: s
     {
       title: "Perubahan Musim & Pertanian Lokal",
       subtitle: "Kearifan Agroekologi",
-      desc: "Petani di Kabola membaca tanda-tanda alam — arah angin, warna langit, dan siklus bunga — sebagai panduan bertanam yang telah teruji ratusan tahun.",
+      desc: "Petani di Kabola membaca tanda-tanda alam seperti arah angin, warna langit, dan siklus bunga sebagai panduan bertanam yang telah teruji ratusan tahun.",
       image: "/images/view-5.jpg",
       tag: "Pengetahuan Lokal",
     },
@@ -67,28 +67,28 @@ const fallbackContent: Record<string, { title: string; subtitle: string; desc: s
     {
       title: "Tarian & Upacara Adat",
       subtitle: "Ekspresi Jiwa Kabola",
-      desc: "Berbagai tarian adat dan upacara ritual menjadi ekspresi identitas budaya masyarakat Kabola — dari tari lego-lego, tari perang, hingga upacara penyambutan.",
+      desc: "Berbagai tarian adat dan upacara ritual menjadi ekspresi identitas budaya masyarakat Kabola, seperti tari lego-lego, tari perang, dan upacara penyambutan.",
       image: "/images/view-1.jpg",
       tag: "Seni Pertunjukan",
     },
     {
       title: "Tradisi Lisan Kabola",
       subtitle: "Cara Pandang & Relasi Sosial",
-      desc: "Eksplorasi tradisi lisan masyarakat Kabola — menggali cara pandang terhadap dunia, relasi sosial, serta keterhubungan antara manusia, leluhur, dan lingkungan hidup.",
+      desc: "Eksplorasi tradisi lisan masyarakat Kabola yang menggali cara pandang terhadap dunia, relasi sosial, serta keterhubungan antara manusia, leluhur, dan lingkungan hidup.",
       image: "/images/view-5.jpg",
       tag: "Tradisi Lisan",
     },
     {
       title: "Moko & Motif Tradisional",
       subtitle: "Seni Visual Kabola",
-      desc: "Eksplorasi motif-motif tradisional Alor — dari ukiran moko hingga ornamen tenun — sebagai bahasa visual yang menyimpan kosmologi dan sejarah masyarakat Kabola.",
+      desc: "Eksplorasi motif-motif tradisional Alor mulai dari ukiran moko hingga ornamen tenun sebagai bahasa visual yang menyimpan kosmologi dan sejarah masyarakat Kabola.",
       image: "/images/culture-2.jpg",
       tag: "Seni Visual",
     },
     {
       title: "Bahasa & Sastra Lisan",
       subtitle: "Tradisi Oral Nusantara",
-      desc: "Masyarakat Kabola menyimpan kekayaan tradisi lisan — dari syair, cerita rakyat, hingga peribahasa — yang menjadi cerminan nilai-nilai kearifan lokal yang mendalam.",
+      desc: "Masyarakat Kabola menyimpan kekayaan tradisi lisan seperti syair, cerita rakyat, dan peribahasa yang menjadi cerminan nilai-nilai kearifan lokal yang mendalam.",
       image: "/images/culture-3.jpg",
       tag: "Sastra Lisan",
     },
@@ -104,7 +104,7 @@ const fallbackContent: Record<string, { title: string; subtitle: string; desc: s
     {
       title: "Alam yang Hidup",
       subtitle: "Lanskap & Ekosistem",
-      desc: "Dokumentasi keindahan alam Kabola — dari pesisir berbatu hingga hutan tropis — sebagai saksi bisu kehidupan yang berjalan di dalamnya.",
+      desc: "Dokumentasi keindahan alam Kabola dari pesisir berbatu hingga hutan tropis sebagai saksi bisu kehidupan yang berjalan di dalamnya.",
       image: "/images/view-3.jpg",
       tag: "Lanskap",
     },
@@ -241,14 +241,21 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${isActive
-                      ? "text-white shadow-lg scale-105"
-                      : "bg-kabola-teal/10 text-kabola-teal hover:opacity-80"
-                    }`}
-                  style={isActive ? { backgroundColor: tab.color } : {}}
+                  className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300 ${
+                    isActive
+                      ? "text-white"
+                      : "bg-white text-earth/70 hover:bg-kabola-teal/10 hover:text-kabola-teal border border-kabola-teal/15"
+                  }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  {tab.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeCeritaTabPill"
+                      className="absolute inset-0 bg-kabola-teal rounded-full shadow-md shadow-kabola-teal/25"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <Icon className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10">{tab.label}</span>
                 </button>
               );
             })}
