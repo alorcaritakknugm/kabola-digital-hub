@@ -5,8 +5,8 @@ import { FadeIn } from "@/components/ui/animations/FadeIn";
 import { TenunAlorRibbon } from "@/components/ui/ornaments/TenunAlorOrnament";
 
 const stats = [
-  { value: "±4", label: "Desa / Kelurahan", icon: Globe },
-  { value: "±15k", label: "Penduduk", icon: Users },
+  { value: "5", label: "Desa/Kelurahan", icon: Globe },
+  { value: "8.385", label: "Jumlah Penduduk", icon: Users },
   { value: "~200m", label: "Rata-rata DPL", icon: Mountain },
   { value: "Alor", label: "Kabupaten", icon: Waves },
 ];
