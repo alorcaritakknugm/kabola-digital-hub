@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     template: "%s | Kabola Digital Hub",
   },
   description:
-    "Kabola Digital Hub — platform digital resmi program KKN-PPM UGM 2026 di Kecamatan Kabola, Kabupaten Alor, Nusa Tenggara Timur. Temukan wisata alam, produk UMKM lokal, cerita budaya, dan peta interaktif Kabola.",
+    "Kabola Digital Hub, platform digital resmi program KKN-PPM UGM 2026 di Kecamatan Kabola, Kabupaten Alor, Nusa Tenggara Timur. Temukan wisata alam, produk UMKM lokal, cerita budaya, dan peta interaktif Kabola.",
   keywords: [
     "KKN PPM UGM 2026",
     "KKN UGM Alor",
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Kabola Digital Hub — KKN-PPM UGM 2026 Alor NTT",
+        alt: "Kabola Digital Hub | KKN-PPM UGM 2026 Alor NTT",
       },
     ],
   },

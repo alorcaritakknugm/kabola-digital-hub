@@ -128,7 +128,7 @@ export default function UmkmGrid({
               <>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-kabola-teal animate-pulse" />
-                  {isNttMart ? "Segera Hadir — Produk NTT Mart" : "Segera Hadir — Foto & Desain Menyusul"}
+                  {isNttMart ? "Segera Hadir: Produk NTT Mart" : "Segera Hadir: Foto & Desain Menyusul"}
                 </span>
                 <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
                   {isNttMart 

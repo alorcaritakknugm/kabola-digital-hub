@@ -5,7 +5,8 @@ import { Mail, MapPin, ExternalLink } from "lucide-react";
 const exploreLinks = [
   { label: "Wisata Kabola", href: "/wisata" },
   { label: "Cerita & Budaya", href: "/cerita-kabola" },
-  { label: "Peta Wilayah", href: "/peta" },
+  { label: "Peta Wilayah (GIS)", href: "/peta" },
+  { label: "Statistik Digital", href: "/statistik" },
   { label: "Produk Lokal UMKM", href: "/umkm" },
 ];
 
@@ -47,8 +48,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-white/55 text-sm leading-relaxed max-w-xs mb-4">
-              Portal informasi digital Kecamatan Kabola, Kabupaten Alor —
-              wisata, budaya, peta, dan produk lokal dalam satu platform.
+              Portal informasi digital Kecamatan Kabola, Kabupaten Alor yang menghadirkan wisata, budaya, data statistik, peta GIS, dan produk lokal dalam satu platform.
             </p>
             <p className="text-white/35 text-xs flex items-center gap-1.5">
               <MapPin className="w-3 h-3 text-kabola-teal-light flex-shrink-0" />

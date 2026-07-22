@@ -14,19 +14,19 @@ const highlights = [
   {
     icon: Mountain,
     title: "Alam & Geografi",
-    desc: "Kecamatan Kabola berdiri di atas bukit-bukit hijau Pulau Alor dengan panorama laut yang menakjubkan — perpaduan pegunungan, lembah, dan pesisir yang masih alami.",
+    desc: "Kecamatan Kabola berdiri di atas bukit-bukit hijau Pulau Alor dengan panorama laut yang menakjubkan, menyajikan perpaduan pegunungan, lembah, dan pesisir yang masih alami.",
     color: "from-kabola-teal/10 to-kabola-teal/5",
   },
   {
     icon: Leaf,
     title: "Ekonomi Lokal",
-    desc: "Pertanian dan perkebunan menjadi tulang punggung ekonomi — kemiri, pinang, dan komoditas pangan lokal diproduksi oleh petani dan pelaku UMKM di seluruh kecamatan.",
+    desc: "Pertanian dan perkebunan menjadi tulang punggung ekonomi dengan hasil seperti kemiri, pinang, dan komoditas pangan lokal yang diproduksi oleh petani serta pelaku UMKM di seluruh kecamatan.",
     color: "from-kabola-teal/8 to-kabola-teal/3",
   },
   {
     icon: BookOpen,
     title: "Budaya & Tradisi",
-    desc: "Kecamatan Kabola menyimpan kekayaan budaya Alor yang autentik — tenun ikat, tradisi lisan, ritual adat, dan gastronomi unik yang telah diwariskan lintas generasi.",
+    desc: "Kecamatan Kabola menyimpan kekayaan budaya Alor yang autentik, meliputi tenun ikat, tradisi lisan, ritual adat, dan gastronomi unik yang diwariskan lintas generasi.",
     color: "from-forest/8 to-forest/3",
   },
 ];
@@ -36,13 +36,13 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
     <SlideUp
       inView
       delay={0.4 + index * 0.1}
-      className="flex flex-col items-center text-center p-5 rounded-2xl bg-white border border-kabola-teal/10 shadow-[0_2px_16px_rgba(25,141,141,0.06)] hover:shadow-[0_6px_24px_rgba(25,141,141,0.1)] transition-shadow group"
+      className="flex flex-col items-center text-center p-6 rounded-2xl bg-white border border-kabola-teal/10 shadow-[0_2px_16px_rgba(25,141,141,0.06)] hover:shadow-[0_8px_28px_rgba(25,141,141,0.12)] hover:-translate-y-1 transition-all duration-300 group"
     >
-      <div className="w-10 h-10 rounded-xl bg-kabola-teal/10 flex items-center justify-center mb-3 group-hover:bg-kabola-teal/20 transition-colors">
-        <stat.icon className="w-5 h-5 text-kabola-teal" />
+      <div className="w-12 h-12 rounded-xl bg-kabola-teal/10 flex items-center justify-center mb-3 group-hover:bg-kabola-teal/20 transition-colors">
+        <stat.icon className="w-6 h-6 text-kabola-teal" />
       </div>
-      <span className="font-title text-2xl text-kabola-teal font-bold">{stat.value}</span>
-      <span className="text-earth/55 text-xs mt-1">{stat.label}</span>
+      <span className="font-title text-3xl md:text-4xl text-kabola-teal font-bold">{stat.value}</span>
+      <span className="text-earth/60 text-xs md:text-sm font-medium mt-1">{stat.label}</span>
     </SlideUp>
   );
 }
@@ -61,8 +61,7 @@ export default function About() {
             Mengenal <span className="text-gradient-teal">Kecamatan Kabola</span>
           </h2>
           <p className="text-earth/60 max-w-2xl mx-auto text-base leading-relaxed">
-            Kecamatan Kabola terletak di Kabupaten Alor, Nusa Tenggara Timur —
-            wilayah yang kaya akan keindahan alam, keragaman budaya, dan potensi ekonomi lokal yang terus berkembang.
+            Kecamatan Kabola terletak di Kabupaten Alor, Nusa Tenggara Timur, sebuah wilayah yang kaya akan keindahan alam, keragaman budaya, dan potensi ekonomi lokal yang terus berkembang.
           </p>
         </SlideUp>
 
@@ -106,10 +105,7 @@ export default function About() {
 
             <div>
               <p className="text-earth/65 leading-relaxed text-sm md:text-base">
-                Wilayah ini dihuni oleh masyarakat yang menjaga tradisi leluhur 
-                sambil terus beradaptasi — dari petani lokal hingga pengrajin tenun ikat,
-                dari nelayan tradisional hingga pemandu wisata yang mulai mengenalkan 
-                keindahan Kabola ke dunia.
+                Wilayah ini dihuni oleh masyarakat yang menjaga tradisi leluhur sambil terus beradaptasi, mulai dari petani lokal hingga pengrajin tenun ikat, dari nelayan tradisional hingga pemandu wisata yang mulai mengenalkan keindahan Kabola ke dunia.
               </p>
             </div>
 
@@ -123,7 +119,7 @@ export default function About() {
         </div>
 
         {/* Highlight cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {highlights.map((item, i) => (
             <SlideUp
               key={i}
@@ -131,13 +127,13 @@ export default function About() {
               yOffset={30}
               duration={0.6}
               delay={0.5 + i * 0.15}
-              className="p-6 rounded-2xl bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-kabola-teal/25 transition-all duration-300 group"
+              className="p-7 md:p-8 rounded-3xl bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(25,141,141,0.05)] hover:shadow-[0_12px_36px_rgba(25,141,141,0.12)] hover:border-kabola-teal/25 hover:-translate-y-1.5 transition-all duration-300 group flex flex-col h-full"
             >
-              <div className="w-11 h-11 rounded-xl bg-kabola-teal/10 flex items-center justify-center mb-4 group-hover:bg-kabola-teal/20 group-hover:scale-110 transition-all">
-                <item.icon className="w-5 h-5 text-kabola-teal" />
+              <div className="w-14 h-14 rounded-2xl bg-kabola-teal/10 flex items-center justify-center mb-5 group-hover:bg-kabola-teal/20 group-hover:scale-105 transition-all flex-shrink-0">
+                <item.icon className="w-7 h-7 text-kabola-teal" />
               </div>
-              <h4 className="font-title text-lg text-forest mb-2">{item.title}</h4>
-              <p className="text-earth/60 text-sm leading-relaxed">{item.desc}</p>
+              <h4 className="font-title text-xl md:text-2xl text-forest mb-3">{item.title}</h4>
+              <p className="text-earth/65 text-sm md:text-[15px] leading-relaxed flex-1">{item.desc}</p>
             </SlideUp>
           ))}
         </div>

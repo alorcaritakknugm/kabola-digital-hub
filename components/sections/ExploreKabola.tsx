@@ -1,46 +1,60 @@
 import Link from "next/link";
-import { Map, BookOpen, Compass, ShoppingBag, ArrowRight } from "lucide-react";
+import { Map, BookOpen, Compass, ShoppingBag, BarChart3, Store, ArrowRight } from "lucide-react";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
 
 const features = [
   {
     icon: Compass,
     title: "Wisata Kabola",
-    desc: "Jelajahi destinasi wisata alam dan budaya Kabola — dari tepi pantai hingga perbukitan yang memukau. Reservasi langsung ke Pokdarwis.",
+    desc: "Jelajahi destinasi wisata alam dan budaya Kabola mulai dari tepi pantai hingga perbukitan yang memukau. Reservasi langsung ke Pokdarwis.",
     href: "/wisata",
     cta: "Jelajahi Wisata",
   },
   {
     icon: BookOpen,
     title: "Cerita Kabola",
-    desc: "Temukan kekayaan tradisi Kabola — gastronomi otentik, tanaman obat lokal, dan cerita rakyat yang menghidupkan warisan leluhur.",
+    desc: "Temukan kekayaan tradisi Kabola mulai dari gastronomi otentik, tanaman obat lokal, hingga cerita rakyat yang menghidupkan warisan leluhur.",
     href: "/cerita-kabola",
     cta: "Baca Cerita",
   },
   {
     icon: Map,
-    title: "Peta Wilayah",
-    desc: "Orientasi wilayah Kabola melalui peta digital interaktif — temukan lokasi, rute, dan informasi geografis dengan mudah.",
+    title: "Peta Wilayah (GIS)",
+    desc: "Orientasi wilayah Kabola melalui peta digital interaktif untuk menemukan lokasi, rute, kontur, serta informasi mitigasi bencana.",
     href: "/peta",
-    cta: "Buka Peta",
+    cta: "Buka Peta GIS",
+  },
+  {
+    icon: BarChart3,
+    title: "Statistik Digital",
+    desc: "Visualisasi data kependudukan, gender, agama, tingkat pendidikan, dan mata pencaharian warga Kabola interaktif.",
+    href: "/statistik",
+    cta: "Lihat Data Statistik",
   },
   {
     icon: ShoppingBag,
-    title: "Produk Lokal",
+    title: "Produk Lokal UMKM",
     desc: "Dukung UMKM Kabola. Temukan produk-produk autentik buatan warga lokal dan bantu ekonomi komunitas berkembang.",
     href: "/umkm",
-    cta: "Lihat Produk",
+    cta: "Lihat Produk UMKM",
+  },
+  {
+    icon: Store,
+    title: "NTT Mart",
+    desc: "Katalog produk-produk unggulan pilihan khas Nusa Tenggara Timur (NTT) buatan perajin dan UMKM lokal dari seluruh Kabupaten Alor.",
+    href: "/umkm/ntt-mart",
+    cta: "Kunjungi NTT Mart",
   },
 ];
 
 export default function ExploreKabola() {
   return (
-    <section className="relative section-padding bg-surface-teal overflow-hidden">
+    <section id="eksplorasi" className="relative section-padding bg-surface-teal overflow-hidden">
       {/* Subtle topo background */}
       <div className="absolute inset-0 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full opacity-[0.025]" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-          {[1,2,3,4,5].map(i => (
-            <ellipse key={i} cx="720" cy="400" rx={200 + i*140} ry={120 + i*80} fill="none" stroke="#198D8D" strokeWidth="1" />
+          {[1, 2, 3, 4, 5].map(i => (
+            <ellipse key={i} cx="720" cy="400" rx={200 + i * 140} ry={120 + i * 80} fill="none" stroke="#198D8D" strokeWidth="1" />
           ))}
         </svg>
       </div>
@@ -60,14 +74,13 @@ export default function ExploreKabola() {
           <h2 className="font-title text-4xl md:text-5xl text-forest mb-4">
             Satu Pintu untuk <span className="text-gradient-teal">Segalanya</span>
           </h2>
-          <p className="text-earth/55 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            Kabola Digital Hub menghadirkan informasi, cerita, dan layanan Kecamatan Kabola
-            dalam satu platform — mudah diakses, lengkap, dan selalu diperbarui.
+          <p className="text-earth/60 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+            Kabola Digital Hub menghadirkan data statistik, informasi demografi, cerita budaya, peta GIS, dan produk UMKM Kecamatan Kabola dalam satu platform.
           </p>
         </SlideUp>
 
         {/* Feature cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((item, i) => (
             <SlideUp
               key={i}
@@ -79,20 +92,20 @@ export default function ExploreKabola() {
             >
               <Link
                 href={item.href}
-                className="group flex gap-5 h-full bg-white rounded-2xl border border-kabola-teal/10 p-6 shadow-[0_2px_12px_rgba(25,141,141,0.05)] hover:shadow-[0_8px_32px_rgba(25,141,141,0.12)] hover:border-kabola-teal/25 hover:-translate-y-0.5 transition-all duration-300"
+                className="group flex gap-5 md:gap-6 h-full bg-white rounded-2xl border border-kabola-teal/10 p-6 md:p-8 shadow-[0_2px_12px_rgba(25,141,141,0.05)] hover:shadow-[0_8px_32px_rgba(25,141,141,0.12)] hover:border-kabola-teal/25 hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Icon */}
-                <div className="w-12 h-12 rounded-2xl bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-kabola-teal/20 transition-colors mt-0.5">
-                  <item.icon className="w-6 h-6 text-kabola-teal" />
+                <div className="w-14 h-14 rounded-2xl bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-kabola-teal/20 transition-colors mt-0.5 md:mt-1">
+                  <item.icon className="w-7 h-7 text-kabola-teal" />
                 </div>
 
                 {/* Content */}
                 <div className="flex flex-col flex-1 min-w-0">
-                  <h4 className="font-title text-[17px] text-earth mb-1.5 group-hover:text-kabola-teal transition-colors">
+                  <h4 className="font-title text-[18px] md:text-[20px] text-earth mb-2 group-hover:text-kabola-teal transition-colors">
                     {item.title}
                   </h4>
-                  <p className="text-earth/50 text-sm leading-relaxed mb-4 flex-1">{item.desc}</p>
-                  <span className="inline-flex items-center gap-1.5 text-kabola-teal text-xs font-bold transition-colors mt-auto group-hover:text-ocean-blue">
+                  <p className="text-earth/55 text-sm md:text-[15px] leading-relaxed mb-6 flex-1">{item.desc}</p>
+                  <span className="inline-flex items-center gap-1.5 text-kabola-teal text-[11px] md:text-xs font-bold uppercase tracking-wider transition-colors mt-auto group-hover:text-ocean-blue">
                     {item.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>

@@ -14,6 +14,7 @@ import {
   QrCode,
   Map,
   Search,
+  Compass,
 } from "lucide-react";
 
 
@@ -50,7 +51,7 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
         <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10 text-center">
           <SlideUp delay={0}>
             <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-6">
-              <Map className="w-8 h-8 text-kabola-teal-light" />
+              <Compass className="w-8 h-8 text-kabola-teal-light" />
             </div>
             <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
               Katalog Wisata Interaktif

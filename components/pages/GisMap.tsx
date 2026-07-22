@@ -504,13 +504,21 @@ export default function GisMap() {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id as any)}
-                  className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${isActive
-                      ? "bg-kabola-teal text-white shadow-md scale-105"
-                      : "bg-kabola-teal/10 text-kabola-teal hover:opacity-80"
-                    }`}
+                  className={`relative flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 ${
+                    isActive
+                      ? "text-white"
+                      : "bg-white text-earth/70 hover:bg-kabola-teal/10 hover:text-kabola-teal border border-kabola-teal/15"
+                  }`}
                 >
-                  <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  {cat.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeGisTabPill"
+                      className="absolute inset-0 bg-kabola-teal rounded-full shadow-md shadow-kabola-teal/25"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative z-10" />
+                  <span className="relative z-10">{cat.label}</span>
                 </button>
               );
             })}

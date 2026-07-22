@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${umkm.nama} | ${sectionLabel} Kabola · Alor NTT`,
     description: umkm.deskripsi
       ? `${umkm.deskripsi.slice(0, 155)}...`
-      : `${umkm.nama} — produk ${sectionLabel} dari Kecamatan Kabola, Alor NTT. ${umkm.harga ? `Harga: ${umkm.harga}.` : ""} Program KKN-PPM UGM 2026.`,
+      : `${umkm.nama}, produk ${sectionLabel} dari Kecamatan Kabola, Alor NTT. ${umkm.harga ? `Harga: ${umkm.harga}.` : ""} Program KKN-PPM UGM 2026.`,
     keywords: [umkm.nama, sectionLabel, "UMKM Alor", "produk lokal NTT", "KKN UGM Alor", umkm.kategori || ""].filter(Boolean),
     alternates: { canonical: `https://kaboladigitalhub.alorcarita.com/umkm/${slug}` },
     openGraph: {

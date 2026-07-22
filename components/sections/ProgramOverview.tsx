@@ -6,7 +6,7 @@ const programs = [
   {
     icon: Map,
     title: "Peta Interaktif GIS",
-    desc: "Peta digital wilayah Kabola — administrasi, sebaran komoditas, dan fasilitas kesehatan dalam satu platform interaktif.",
+    desc: "Peta digital wilayah Kabola yang mencakup administrasi, sebaran komoditas, dan fasilitas kesehatan dalam satu platform interaktif.",
     href: "/peta",
   },
   {
@@ -60,8 +60,7 @@ export default function ProgramOverview() {
             Enam <span className="text-gradient-teal">Program</span>
           </h2>
           <p className="text-earth/55 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            Kabola Digital Hub mengintegrasikan enam program kerja KKN-PPM UGM 2026
-            yang tersebar di Kelurahan Kabola dan Desa Pante Deere, Kecamatan Kabola — sebagai satu ekosistem informasi digital.
+            Kabola Digital Hub mengintegrasikan enam program kerja KKN-PPM UGM 2026 yang tersebar di Kelurahan Kabola dan Desa Pante Deere, Kecamatan Kabola sebagai satu ekosistem informasi digital.
           </p>
         </SlideUp>
 

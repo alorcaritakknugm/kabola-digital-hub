@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${cerita.judul} | Cerita Kabola · Alor NTT`,
     description: cerita.subtitle
-      ? `${cerita.subtitle} — Kabola Digital Hub, program KKN-PPM UGM 2026 Alor.`
+      ? `${cerita.subtitle} | Kabola Digital Hub, program KKN-PPM UGM 2026 Alor.`
       : cerita.deskripsi
         ? `${cerita.deskripsi.slice(0, 150)}...`
-        : `${cerita.judul} — Cerita budaya dan tradisi Kabola, Alor NTT.`,
+        : `${cerita.judul}, cerita budaya dan tradisi Kabola, Alor NTT.`,
     keywords: [cerita.judul, "cerita Kabola", "budaya Alor", "KKN UGM Alor", cerita.tag || "", cerita.kategori || ""].filter(Boolean),
     alternates: { canonical: `https://kaboladigitalhub.alorcarita.com/cerita-kabola/${slug}` },
     openGraph: {

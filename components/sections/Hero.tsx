@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, MapPin, Sparkles } from "lucide-react";
 import { useRef } from "react";
@@ -142,10 +143,9 @@ export default function Hero() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-          className="text-white/70 text-sm md:text-base max-w-xl leading-relaxed mb-4"
+          className="text-white/70 text-sm md:text-base max-w-xl leading-relaxed mb-6"
         >
-          Pusat layanan informasi digital yang mengintegrasikan peta wilayah, 
-          kekayaan budaya, dan katalog wisata Kabola dalam satu platform.
+          Pusat layanan informasi digital yang mengintegrasikan data statistik demografi, peta interaktif GIS, kekayaan budaya, dan katalog wisata Kabola dalam satu platform.
         </motion.p>
 
         {/* CTA buttons */}
@@ -156,18 +156,18 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center gap-3"
         >
           <a
-            href="#layanan"
+            href="#eksplorasi"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-kabola-teal text-white hover:bg-kabola-teal-dark transition-all duration-300 text-sm font-semibold tracking-wide group hover:shadow-xl hover:shadow-kabola-teal/30 active:scale-95"
           >
-            Jelajahi Layanan
+            Eksplorasi Kabola
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
-          <a
-            href="#wisata"
+          <Link
+            href="/wisata"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 text-sm font-medium tracking-wide active:scale-95"
           >
             Katalog Wisata
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
 

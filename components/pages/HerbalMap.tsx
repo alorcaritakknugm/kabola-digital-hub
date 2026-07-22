@@ -145,8 +145,7 @@ export default function HerbalMap() {
             Peta Herbal <span className="text-gradient-teal">Digital</span>
           </h2>
           <p className="text-earth/60 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-            Temukan sebaran tanaman herbal tradisional di Kabola — setiap titik menyimpan
-            kearifan lokal tentang manfaat, cara penggunaan, dan penjelasan ilmiahnya.
+            Temukan sebaran tanaman herbal tradisional di Kabola di mana setiap titik menyimpan kearifan lokal tentang manfaat, cara penggunaan, dan penjelasan ilmiahnya.
           </p>
         </motion.div>
 
