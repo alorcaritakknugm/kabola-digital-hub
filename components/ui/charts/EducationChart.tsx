@@ -45,7 +45,7 @@ export default function EducationChart() {
       const percentage = ((data.count / totalCount) * 100).toFixed(1);
       return (
         <div className="bg-white text-earth px-4 py-3 rounded-xl border border-kabola-teal/20 text-xs font-body">
-          <p className="font-title font-semibold text-forest text-sm mb-1">{data.level}</p>
+          <p className="font-body font-semibold text-forest text-sm mb-1">{data.level}</p>
           <p className="text-earth/80">
             Jumlah Penduduk: <span className="font-semibold text-forest">{data.count.toLocaleString("id-ID")} jiwa</span>
           </p>
