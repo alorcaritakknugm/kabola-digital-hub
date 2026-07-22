@@ -52,7 +52,7 @@ export default function StatistikPage() {
               <BarChart3 className="w-8 h-8 text-kabola-teal-light" />
             </div>
             <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
-              Portal Visualisasi Data & Demografi
+              Visualisasi Data & Demografi
             </span>
             <h1 className="font-title text-4xl md:text-5xl text-white mb-4">
               Statistik <span className="text-kabola-teal-light">Kabola</span>

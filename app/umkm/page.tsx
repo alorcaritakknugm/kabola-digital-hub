@@ -34,22 +34,22 @@ export default async function UmkmPage() {
       <Navbar />
       <section className="relative bg-ocean-blue pt-32 pb-28 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-        <div className="container mx-auto px-4 max-w-3xl text-center relative z-10">
+        <div className="container mx-auto px-4 md:px-8 max-w-6xl text-center relative z-10">
           <SlideUp delay={0}>
             <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-6">
               <ShoppingBag className="w-8 h-8 text-kabola-teal-light" />
             </div>
-            <span className="inline-block bg-white/10 text-white/60 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
+            <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
               Kecamatan Kabola · Ekonomi Lokal
             </span>
             <h1 className="font-title text-4xl md:text-5xl text-white mb-4">Katalog Visual <span className="text-kabola-teal-light">UMKM Lokal</span></h1>
-            <p className="text-white/60 max-w-lg mx-auto text-sm leading-relaxed">
+            <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               Dokumentasi produk lokal UMKM Kabola. Dukung ekonomi lokal dengan membeli langsung dari para perajin dan pembuatnya.
             </p>
           </SlideUp>
         </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16"><path d="M0,40 C400,80 900,10 1440,45 L1440,80 L0,80 Z" fill="#F7F3EB" /></svg>
+        <div className="wave-bottom pointer-events-none">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20"><path d="M0,40 C400,80 900,10 1440,45 L1440,80 L0,80 Z" fill="#F7F3EB" /></svg>
         </div>
       </section>
       

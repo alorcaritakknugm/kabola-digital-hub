@@ -58,9 +58,8 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
             <h2 className="font-title text-4xl md:text-5xl text-white mb-4">
               Jelajahi <span className="text-kabola-teal-light">Kabola</span>
             </h2>
-            <p className="text-white/60 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              Paket wisata yang dikurasi, terhubung langsung ke Pokdarwis Kabola.
-              Reservasi mudah melalui WhatsApp.
+            <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+              Paket wisata yang dikurasi, terhubung langsung ke Pokdarwis Kabola. Reservasi mudah melalui WhatsApp.
             </p>
           </SlideUp>
         </div>

@@ -69,25 +69,24 @@ export default async function PanteDeere() {
             backgroundSize: "28px 28px",
           }}
         />
-        <div className="container mx-auto px-4 md:px-8 max-w-3xl relative z-10 text-center">
+        <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10 text-center">
           <SlideUp delay={0}>
-            <span className="inline-block bg-white/10 text-white/60 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-white/10">
+            <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
               Kecamatan Kabola
             </span>
             <h1 className="font-title text-4xl md:text-5xl text-white mb-4">
               {judul}
             </h1>
-            <p className="text-white/55 max-w-lg mx-auto text-sm leading-relaxed">
-              Mengenal lebih dekat keindahan alam, keramahan warga, dan potensi
-              lokal yang ada di Desa Pante Deere.
+            <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+              Mengenal lebih dekat keindahan alam, keramahan warga, dan potensi lokal yang ada di Desa Pante Deere.
             </p>
           </SlideUp>
         </div>
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="wave-bottom pointer-events-none">
           <svg
             viewBox="0 0 1440 80"
             preserveAspectRatio="none"
-            className="w-full h-16"
+            className="w-full h-16 md:h-20"
           >
             <path
               d="M0,40 C400,80 900,10 1440,45 L1440,80 L0,80 Z"

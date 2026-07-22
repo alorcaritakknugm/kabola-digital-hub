@@ -61,21 +61,21 @@ export default async function KelurahanKabola() {
       {/* Hero */}
       <section className="relative bg-forest pt-32 pb-28 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-        <div className="container mx-auto px-4 md:px-8 max-w-3xl relative z-10 text-center">
+        <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10 text-center">
           <SlideUp delay={0}>
-            <span className="inline-block bg-white/10 text-white/60 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-white/10">
+            <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
               Kecamatan Kabola
             </span>
             <h1 className="font-title text-4xl md:text-5xl text-white mb-4">
               {judul}
             </h1>
-            <p className="text-white/55 max-w-lg mx-auto text-sm leading-relaxed">
+            <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               Pusat administrasi dengan bentang alam menawan, kekayaan budaya yang otentik, dan semangat masyarakat yang terus bergerak maju.
             </p>
           </SlideUp>
         </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16">
+        <div className="wave-bottom pointer-events-none">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20">
             <path d="M0,40 C400,80 900,10 1440,45 L1440,80 L0,80 Z" fill="#F7F3EB" />
           </svg>
         </div>
