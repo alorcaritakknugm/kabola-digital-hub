@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { Utensils, TreePine, Theater, Camera, ArrowRight, Search, BookOpen } from "lucide-react";
+import { Utensils, TreePine, Theater, Camera, ArrowRight, Search, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+
+const ITEMS_PER_PAGE = 6;
 
 /* ─── Tabs (4 bersih) ────────────────────────────────────────── */
 const tabs = [
@@ -121,10 +123,12 @@ const fallbackContent: Record<string, { title: string; subtitle: string; desc: s
 /* ─── Component ─────────────────────────────────────────────── */
 export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaList?: any[] }) {
   const ref = useRef(null);
+  const ceritaRef = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [activeTab, setActiveTab] = useState("gastronomi");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -132,6 +136,7 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
       const tab = params.get('tab');
       if (tab && tabs.some(t => t.id === tab)) {
         setActiveTab(tab);
+        setCurrentPage(1);
       }
     }
   }, []);
@@ -180,6 +185,19 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
     );
   });
 
+  const totalPages = Math.ceil(activeStories.length / ITEMS_PER_PAGE);
+  const paginatedStories = activeStories.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    if (ceritaRef.current) {
+      ceritaRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <>
       {/* Hero Section Header (Unified Dark Hero) */}
@@ -223,7 +241,7 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
       </section>
 
       {/* Main Content Section */}
-      <section id="cerita-kabola" className="relative py-12 md:py-20 overflow-hidden bg-sand">
+      <section id="cerita-kabola" ref={ceritaRef} className="relative py-12 md:py-20 overflow-hidden bg-sand">
         <div className="absolute inset-0 batik-pattern opacity-30 pointer-events-none" />
         <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
 
@@ -240,7 +258,10 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    setCurrentPage(1);
+                  }}
                   className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300 ${
                     isActive
                       ? "text-white"
@@ -274,7 +295,10 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
               className="block w-full pl-12 pr-4 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none"
               placeholder="Cari cerita, judul, atau deskripsi..."
             />
@@ -282,69 +306,110 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
 
           {/* Story cards */}
           <AnimatePresence mode="popLayout">
-            {activeStories.length > 0 ? (
-              <motion.div
-                layout
-                key={activeTab}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-              >
-                {activeStories.map((story, i) => (
-                  <motion.div
-                    layout
-                    key={story._id || story.slug || i}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.25 }}
-                    onHoverStart={() => setHoveredCard(i)}
-                    onHoverEnd={() => setHoveredCard(null)}
-                    className="group relative rounded-2xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_20px_rgba(201,136,42,0.06)] hover:shadow-[0_12px_40px_rgba(201,136,42,0.15)] transition-all duration-500 cursor-pointer"
-                  >
-                    <Link href={`/cerita-kabola/${story.slug || story._id}?from=${activeTab}`} className="block h-full w-full">
-                      <div className="relative h-48 overflow-hidden">
-                        <Image
-                          src={story.image}
-                          alt={story.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+            {paginatedStories.length > 0 ? (
+              <>
+                <motion.div
+                  layout
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.4 }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
+                >
+                  {paginatedStories.map((story, i) => (
+                    <motion.div
+                      layout
+                      key={story._id || story.slug || i}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.25 }}
+                      onHoverStart={() => setHoveredCard(i)}
+                      onHoverEnd={() => setHoveredCard(null)}
+                      className="group relative rounded-2xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_20px_rgba(201,136,42,0.06)] hover:shadow-[0_12px_40px_rgba(201,136,42,0.15)] transition-all duration-500 cursor-pointer"
+                    >
+                      <Link href={`/cerita-kabola/${story.slug || story._id}?from=${activeTab}`} className="block h-full w-full">
+                        <div className="relative h-48 overflow-hidden">
+                          <Image
+                            src={story.image}
+                            alt={story.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-forest/60 via-transparent to-transparent" />
+                          <div className="absolute top-3 left-3">
+                            <span
+                              className="text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
+                              style={{ backgroundColor: activeTab_.color }}
+                            >
+                              {story.tag}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="p-5">
+                          <p className="text-kabola-teal text-xs font-semibold uppercase tracking-wider mb-1">
+                            {story.subtitle}
+                          </p>
+                          <h4 className="font-title text-lg text-forest mb-2">{story.title}</h4>
+                          <p className="text-earth/60 text-sm leading-relaxed line-clamp-3">{story.desc}</p>
+                          <div className="mt-4 flex items-center gap-1 text-kabola-teal text-xs font-semibold group/btn">
+                            <span>Baca Selengkapnya</span>
+                            <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"
+                          initial={{ x: "-100%" }}
+                          animate={hoveredCard === i ? { x: "100%" } : { x: "-100%" }}
+                          transition={{ duration: 0.6, ease: "easeInOut" }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-forest/60 via-transparent to-transparent" />
-                        <div className="absolute top-3 left-3">
-                          <span
-                            className="text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
-                            style={{ backgroundColor: activeTab_.color }}
-                          >
-                            {story.tag}
-                          </span>
-                        </div>
-                      </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </motion.div>
 
-                      <div className="p-5">
-                        <p className="text-kabola-teal text-xs font-semibold uppercase tracking-wider mb-1">
-                          {story.subtitle}
-                        </p>
-                        <h4 className="font-title text-lg text-forest mb-2">{story.title}</h4>
-                        <p className="text-earth/60 text-sm leading-relaxed line-clamp-3">{story.desc}</p>
-                        <div className="mt-4 flex items-center gap-1 text-kabola-teal text-xs font-semibold group/btn">
-                          <span>Baca Selengkapnya</span>
-                          <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
-                        </div>
-                      </div>
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mb-12">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="p-2 rounded-full bg-white border border-earth/15 text-forest disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sand transition-all shadow-sm"
+                      aria-label="Halaman Sebelumnya"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
 
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"
-                        initial={{ x: "-100%" }}
-                        animate={hoveredCard === i ? { x: "100%" } : { x: "-100%" }}
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                      />
-                    </Link>
-                  </motion.div>
-                ))}
-              </motion.div>
+                    <div className="flex items-center gap-1.5">
+                      {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page)}
+                          className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${
+                            currentPage === page
+                              ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
+                              : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="p-2 rounded-full bg-white border border-earth/15 text-forest disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sand transition-all shadow-sm"
+                      aria-label="Halaman Selanjutnya"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
               <motion.div
                 key="empty-state"

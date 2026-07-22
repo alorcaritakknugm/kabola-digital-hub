@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
-import { Tag, ArrowRight, Search, ShieldCheck, CheckCircle2, Award } from "lucide-react";
+import { Tag, ArrowRight, Search, ShieldCheck, CheckCircle2, Award, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+
+const ITEMS_PER_PAGE = 6;
 
 export default function UmkmGrid({ 
   umkmList = [], 
@@ -15,6 +17,8 @@ export default function UmkmGrid({
   isNttMart?: boolean 
 }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const isCertified = (val?: string) => {
     if (!val) return false;
@@ -37,6 +41,19 @@ export default function UmkmGrid({
     );
   });
 
+  const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
+  const paginatedList = filteredList.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    if (gridRef.current) {
+      gridRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const getUmkmFallback = (slug: string, kategori: string) => {
     if (slug === 'tenun-ikat-alor-bunda') return '/images/culture-2.jpg';
     if (slug === 'kerajinan-anyaman-lontar') return '/images/culture-3.jpg';
@@ -57,7 +74,7 @@ export default function UmkmGrid({
   };
 
   return (
-    <>
+    <div ref={gridRef}>
       <div className="relative w-full max-w-xl mx-auto mb-12">
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <Search className="h-5 w-5 text-kabola-teal/50" />
@@ -65,96 +82,140 @@ export default function UmkmGrid({
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setCurrentPage(1);
+          }}
           className="block w-full pl-12 pr-4 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none text-sm md:text-base"
           placeholder={isNttMart ? "Cari produk NTT Mart, NIB, PIRT, Halal, atau nama IKM..." : "Cari produk lokal, NIB, Halal, kategori..."}
         />
       </div>
 
       <AnimatePresence mode="popLayout">
-        {filteredList.length > 0 ? (
-          <motion.div 
-            layout 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filteredList.map((umkm: any) => {
-              const slug = umkm.slug?.current || umkm.slug || umkm._id;
-              const hasNib = isCertified(umkm.nib);
-              const hasPirt = isCertified(umkm.pirt);
-              const hasHalal = isCertified(umkm.halal);
-              const hasCertifications = hasNib || hasPirt || hasHalal;
+        {paginatedList.length > 0 ? (
+          <>
+            <motion.div 
+              layout 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+            >
+              {paginatedList.map((umkm: any) => {
+                const slug = umkm.slug?.current || umkm.slug || umkm._id;
+                const hasNib = isCertified(umkm.nib);
+                const hasPirt = isCertified(umkm.pirt);
+                const hasHalal = isCertified(umkm.halal);
+                const hasCertifications = hasNib || hasPirt || hasHalal;
 
-              return (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                  key={umkm._id}
-                  className="bg-white rounded-3xl overflow-hidden border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] group hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all flex flex-col h-full"
-                >
-                  <Link href={`/umkm/${slug}`} className="flex flex-col h-full">
-                    <div className="relative h-56 w-full overflow-hidden bg-slate-100 flex-shrink-0">
-                      <Image 
-                        src={umkm.imageUrl || getUmkmFallback(slug, umkm.kategori)} 
-                        alt={umkm.nama} 
-                        fill 
-                        className="object-cover transition-transform duration-500 group-hover:scale-105" 
-                      />
-                      {/* Top Left: Category Badge */}
-                      {umkm.kategori && (
-                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-ocean-blue text-[10px] font-extrabold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-md z-10 border border-white/50">
-                          {formatKategoriLabel(umkm.kategori)}
-                        </div>
-                      )}
-                    </div>
+                return (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                    key={umkm._id}
+                    className="bg-white rounded-3xl overflow-hidden border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] group hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all flex flex-col h-full"
+                  >
+                    <Link href={`/umkm/${slug}`} className="flex flex-col h-full">
+                      <div className="relative h-56 w-full overflow-hidden bg-slate-100 flex-shrink-0">
+                        <Image 
+                          src={umkm.imageUrl || getUmkmFallback(slug, umkm.kategori)} 
+                          alt={umkm.nama} 
+                          fill 
+                          className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                        />
+                        {/* Top Left: Category Badge */}
+                        {umkm.kategori && (
+                          <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-ocean-blue text-[10px] font-extrabold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-md z-10 border border-white/50">
+                            {formatKategoriLabel(umkm.kategori)}
+                          </div>
+                        )}
+                      </div>
 
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="font-title text-xl text-forest mb-1 group-hover:text-kabola-teal transition-colors line-clamp-1">{umkm.nama}</h3>
-                      {umkm.namaIkm && <p className="text-xs font-semibold text-kabola-teal mb-2 tracking-wide uppercase">{umkm.namaIkm}</p>}
-                      {umkm.pemilik && <p className="text-xs text-earth/60 mb-3">Oleh: <span className="font-medium text-earth/80">{umkm.pemilik}</span></p>}
-                      {umkm.deskripsi && <p className="text-sm text-earth/70 line-clamp-2 mb-4 leading-relaxed">{umkm.deskripsi}</p>}
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h3 className="font-title text-xl text-forest mb-1 group-hover:text-kabola-teal transition-colors line-clamp-1">{umkm.nama}</h3>
+                        {umkm.namaIkm && <p className="text-xs font-semibold text-kabola-teal mb-2 tracking-wide uppercase">{umkm.namaIkm}</p>}
+                        {umkm.pemilik && <p className="text-xs text-earth/60 mb-3">Oleh: <span className="font-medium text-earth/80">{umkm.pemilik}</span></p>}
+                        {umkm.deskripsi && <p className="text-sm text-earth/70 line-clamp-2 mb-4 leading-relaxed">{umkm.deskripsi}</p>}
 
-                      {/* Certification Chip Labels Row matching site palette */}
-                      {hasCertifications && (
-                        <div className="flex flex-wrap items-center gap-1.5 mb-4 pt-1">
-                          {hasPirt && (
-                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-ocean-blue/10 text-ocean-blue border border-ocean-blue/20 px-2.5 py-1 rounded-full">
-                              <Award className="w-3.5 h-3.5 text-ocean-blue" />
-                              <span>P-IRT</span>
-                            </span>
-                          )}
-                          {hasHalal && (
-                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-kabola-teal/10 text-kabola-teal-dark border border-kabola-teal/20 px-2.5 py-1 rounded-full">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-kabola-teal-dark" />
-                              <span>Halal</span>
-                            </span>
-                          )}
-                          {hasNib && (
-                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-surface-teal text-kabola-teal border border-kabola-teal/25 px-2.5 py-1 rounded-full">
-                              <ShieldCheck className="w-3.5 h-3.5 text-kabola-teal" />
-                              <span>NIB</span>
-                            </span>
-                          )}
-                        </div>
-                      )}
-                      
-                      <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
-                        <div className="flex items-center gap-2 text-kabola-teal font-semibold text-sm">
-                          <Tag className="w-4 h-4" />
-                          {umkm.harga || "Harga bervariasi"}
-                        </div>
-                        <div className="w-9 h-9 rounded-full bg-forest/5 flex items-center justify-center text-forest group-hover:bg-forest group-hover:text-white transition-colors">
-                          <ArrowRight className="w-4 h-4" />
+                        {/* Certification Chip Labels Row matching site palette */}
+                        {hasCertifications && (
+                          <div className="flex flex-wrap items-center gap-1.5 mb-4 pt-1">
+                            {hasPirt && (
+                              <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-ocean-blue/10 text-ocean-blue border border-ocean-blue/20 px-2.5 py-1 rounded-full">
+                                <Award className="w-3.5 h-3.5 text-ocean-blue" />
+                                <span>P-IRT</span>
+                              </span>
+                            )}
+                            {hasHalal && (
+                              <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-kabola-teal/10 text-kabola-teal-dark border border-kabola-teal/20 px-2.5 py-1 rounded-full">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-kabola-teal-dark" />
+                                <span>Halal</span>
+                              </span>
+                            )}
+                            {hasNib && (
+                              <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-surface-teal text-kabola-teal border border-kabola-teal/25 px-2.5 py-1 rounded-full">
+                                <ShieldCheck className="w-3.5 h-3.5 text-kabola-teal" />
+                                <span>NIB</span>
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        
+                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
+                          <div className="flex items-center gap-2 text-kabola-teal font-semibold text-sm">
+                            <Tag className="w-4 h-4" />
+                            {umkm.harga || "Harga bervariasi"}
+                          </div>
+                          <div className="w-9 h-9 rounded-full bg-forest/5 flex items-center justify-center text-forest group-hover:bg-forest group-hover:text-white transition-colors">
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              )
-            })}
-          </motion.div>
+                    </Link>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mb-12">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="p-2 rounded-full bg-white border border-earth/15 text-forest disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sand transition-all shadow-sm"
+                  aria-label="Halaman Sebelumnya"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                <div className="flex items-center gap-1.5">
+                  {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => handlePageChange(page)}
+                      className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${
+                        currentPage === page
+                          ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
+                          : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="p-2 rounded-full bg-white border border-earth/15 text-forest disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sand transition-all shadow-sm"
+                  aria-label="Halaman Selanjutnya"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <motion.div
             key="empty"
@@ -188,6 +249,6 @@ export default function UmkmGrid({
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
