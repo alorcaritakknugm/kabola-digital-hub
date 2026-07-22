@@ -1,12 +1,22 @@
+import Image from "next/image";
 import { MapPin, Mail, Phone, ExternalLink, Globe } from "lucide-react";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
 import { FadeIn } from "@/components/ui/animations/FadeIn";
+import { TenunAlorRibbon } from "@/components/ui/ornaments/TenunAlorOrnament";
 
 export default function Contact() {
   return (
     <section id="kontak" className="relative section-padding overflow-hidden bg-cream dot-pattern">
-      <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-        
+      {/* Background Ornaments from project assets */}
+      <div className="absolute top-10 -left-12 w-48 h-48 md:w-72 md:h-72 opacity-[0.07] pointer-events-none z-0 animate-[spin_80s_linear_infinite]">
+        <Image src="/ornaments/ornament-cyan.svg" alt="" fill className="object-contain" />
+      </div>
+      <div className="absolute bottom-6 -right-12 w-52 h-52 md:w-80 md:h-80 opacity-[0.08] pointer-events-none z-0 animate-[spin_100s_linear_infinite_reverse]">
+        <Image src="/ornaments/ornament-cyan.svg" alt="" fill className="object-contain" />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
+
         {/* Section header */}
         <SlideUp
           inView
@@ -27,7 +37,7 @@ export default function Contact() {
         </SlideUp>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          
+
           {/* Contact info */}
           <FadeIn
             inView
@@ -119,6 +129,7 @@ export default function Contact() {
 
             {/* KKN info card */}
             <div className="rounded-xl bg-white border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] p-5">
+              <TenunAlorRibbon color="#198D8D" className="opacity-40 mb-3" />
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-kabola-teal/10 flex items-center justify-center">
                   <Globe className="w-4 h-4 text-kabola-teal" />

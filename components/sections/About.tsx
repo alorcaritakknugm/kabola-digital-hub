@@ -2,6 +2,7 @@ import { Mountain, Waves, Users, Globe, Leaf, BookOpen } from "lucide-react";
 import Image from "next/image";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
 import { FadeIn } from "@/components/ui/animations/FadeIn";
+import { TenunAlorRibbon } from "@/components/ui/ornaments/TenunAlorOrnament";
 
 const stats = [
   { value: "±4", label: "Desa / Kelurahan", icon: Globe },
@@ -50,7 +51,12 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
 export default function About() {
   return (
     <section id="tentang" className="relative section-padding overflow-hidden bg-cream dot-pattern">
-      <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+      {/* Background Ornaments from project assets */}
+      <div className="absolute top-10 right-0 w-48 h-48 md:w-72 md:h-72 opacity-[0.08] pointer-events-none z-0 animate-[spin_90s_linear_infinite]">
+        <Image src="/ornaments/ornament-cyan.svg" alt="" fill className="object-contain" />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
 
         {/* Section header */}
         <SlideUp inView yOffset={30} duration={0.7} className="text-center mb-16">
@@ -96,9 +102,9 @@ export default function About() {
                 Sepotong Surga di Timur Indonesia
               </h3>
               <p className="text-earth/65 leading-relaxed text-sm md:text-base">
-                Kecamatan Kabola adalah salah satu kecamatan di Kabupaten Alor, 
-                Provinsi Nusa Tenggara Timur. Berada di ketinggian dengan panorama 
-                alam yang dramatis, kecamatan ini mencakup wilayah daratan dan 
+                Kecamatan Kabola adalah salah satu kecamatan di Kabupaten Alor,
+                Provinsi Nusa Tenggara Timur. Berada di ketinggian dengan panorama
+                alam yang dramatis, kecamatan ini mencakup wilayah daratan dan
                 pesisir yang kaya akan keanekaragaman hayati dan budaya.
               </p>
             </div>
@@ -109,8 +115,13 @@ export default function About() {
               </p>
             </div>
 
+            {/* Tenun Ikat Ribbon Divider */}
+            <div className="py-1 opacity-40">
+              <TenunAlorRibbon color="#198D8D" />
+            </div>
+
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-2 gap-3 pt-1">
               {stats.map((stat, i) => (
                 <StatCard key={i} stat={stat} index={i} />
               ))}
@@ -137,6 +148,11 @@ export default function About() {
             </SlideUp>
           ))}
         </div>
+      </div>
+
+      {/* Tenun Ikat Alor Horizontal Ribbon Divider */}
+      <div className="mt-16 mb-4">
+        <TenunAlorRibbon color="#198D8D" className="opacity-30" />
       </div>
 
       {/* Bottom wave */}

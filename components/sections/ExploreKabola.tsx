@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Map, BookOpen, Compass, ShoppingBag, BarChart3, Store, ArrowRight } from "lucide-react";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
+import { TenunAlorRibbon } from "@/components/ui/ornaments/TenunAlorOrnament";
 
 const features = [
   {
@@ -50,6 +52,14 @@ const features = [
 export default function ExploreKabola() {
   return (
     <section id="eksplorasi" className="relative section-padding bg-surface-teal overflow-hidden">
+      {/* Background Ornaments from project assets */}
+      <div className="absolute top-12 -left-16 w-56 h-56 md:w-80 md:h-80 opacity-[0.07] pointer-events-none z-0 animate-[spin_100s_linear_infinite]">
+        <Image src="/ornaments/ornament-cyan.svg" alt="" fill className="object-contain" />
+      </div>
+      <div className="absolute bottom-10 -right-16 w-60 h-60 md:w-84 md:h-84 opacity-[0.08] pointer-events-none z-0 animate-[spin_120s_linear_infinite_reverse]">
+        <Image src="/ornaments/ornament-cyan.svg" alt="" fill className="object-contain" />
+      </div>
+
       {/* Subtle topo background */}
       <div className="absolute inset-0 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full opacity-[0.025]" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
@@ -74,6 +84,12 @@ export default function ExploreKabola() {
           <h2 className="font-title text-4xl md:text-5xl text-forest mb-4">
             Satu Pintu untuk <span className="text-gradient-teal">Segalanya</span>
           </h2>
+
+          {/* Title Accent Ribbon */}
+          <div className="w-56 md:w-80 mx-auto my-3 opacity-45">
+            <TenunAlorRibbon color="#198D8D" />
+          </div>
+
           <p className="text-earth/60 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Kabola Digital Hub menghadirkan data statistik, informasi demografi, cerita budaya, peta GIS, dan produk UMKM Kecamatan Kabola dalam satu platform.
           </p>
