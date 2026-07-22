@@ -40,8 +40,9 @@ export default {
       description: 'Pilih kategori yang paling sesuai.',
       options: {
         list: [
+          { title: 'Pangan', value: 'pangan' },
+          { title: 'Kriya', value: 'kriya' },
           { title: 'Kuliner', value: 'kuliner' },
-          { title: 'Kriya / Kerajinan', value: 'kriya' },
           { title: 'Jasa', value: 'jasa' },
           { title: 'Lainnya', value: 'lainnya' },
         ],
@@ -90,6 +91,24 @@ export default {
       title: 'Nomor WhatsApp Pemilik',
       type: 'string',
       description: 'Format: 6281234567890 (awali dengan 62, tanpa tanda + atau spasi). Contoh: 628123456789',
+    },
+    {
+      name: 'nib',
+      title: 'NIB (Nomor Induk Berusaha)',
+      type: 'string',
+      description: 'Isi nomor NIB atau status (Contoh: "1234000123456" atau "Ada"). Kosongkan jika tidak ada.',
+    },
+    {
+      name: 'pirt',
+      title: 'P-IRT (Izin Edar Pangan)',
+      type: 'string',
+      description: 'Isi nomor P-IRT atau status (Contoh: "P-IRT 2065301010012-27" atau "Ada"). Kosongkan jika tidak ada.',
+    },
+    {
+      name: 'halal',
+      title: 'Sertifikat Halal',
+      type: 'string',
+      description: 'Isi nomor Sertifikat Halal atau status (Contoh: "ID5311000123456" atau "Ada"). Kosongkan jika tidak ada.',
     },
   ],
 }

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { ArrowLeft, PhoneCall, Tag, User, MapPin } from "lucide-react";
+import { ArrowLeft, PhoneCall, Tag, User, MapPin, ShieldCheck, CheckCircle2, Award, Building2 } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -16,7 +16,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!umkm) return { title: "UMKM | Kabola Digital Hub" };
   const isNttMart = umkm.jenis === "nttMart";
   const sectionLabel = isNttMart ? "NTT Mart" : "UMKM Lokal";
-  const canonicalBase = isNttMart ? "/umkm/ntt-mart" : "/umkm";
   return {
     title: `${umkm.nama} | ${sectionLabel} Kabola · Alor NTT`,
     description: umkm.deskripsi
@@ -48,14 +47,34 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
     if (slug === 'kacang-kenari-kupas') return '/images/view-5.jpg';
     if (slug === 'ikan-kering-kayu-alor') return '/images/culture-4.jpg';
     if (kategori === 'kriya') return '/images/culture-2.jpg';
-    if (kategori === 'kuliner') return '/images/culture-1.jpg';
+    if (kategori === 'pangan' || kategori === 'kuliner') return '/images/culture-1.jpg';
     return '/images/culture-1.jpg';
+  };
+
+  const formatKategoriLabel = (kat: string) => {
+    if (!kat) return "";
+    if (kat.toLowerCase() === "pangan") return "Pangan";
+    if (kat.toLowerCase() === "kriya") return "Kriya";
+    if (kat.toLowerCase() === "kuliner") return "Pangan / Kuliner";
+    return kat.charAt(0).toUpperCase() + kat.slice(1);
+  };
+
+  const isCertified = (val?: string) => {
+    if (!val) return false;
+    const v = val.trim().toLowerCase();
+    return v !== "" && v !== "tidak" && v !== "tidak ada" && v !== "belum" && v !== "false" && v !== "no" && v !== "-";
   };
 
   const displayImage = umkm.imageUrl || getUmkmFallback(resolvedParams.slug, umkm.kategori);
 
   const backHref = umkm.jenis === 'nttMart' ? '/umkm/ntt-mart' : '/umkm';
   const backLabel = umkm.jenis === 'nttMart' ? 'Kembali ke Katalog NTT Mart' : 'Kembali ke Katalog UMKM';
+  const isNttMart = umkm.jenis === 'nttMart';
+
+  const hasNib = isCertified(umkm.nib);
+  const hasPirt = isCertified(umkm.pirt);
+  const hasHalal = isCertified(umkm.halal);
+  const hasCertifications = hasNib || hasPirt || hasHalal;
 
   return (
     <main className="min-h-screen bg-sand">
@@ -70,25 +89,53 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Column: Image Card */}
-            <div className="lg:col-span-5 bg-white rounded-3xl p-4 border border-kabola-teal/10 shadow-xl shadow-kabola-teal/5 lg:sticky lg:top-32">
-              <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-slate-50">
-                <Image src={displayImage} alt={umkm.nama} fill className="object-cover" />
-                {umkm.kategori && (
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-sm z-20">
-                    {umkm.kategori}
-                  </div>
-                )}
+            <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-32">
+              <div className="bg-white rounded-3xl p-4 border border-kabola-teal/10 shadow-xl shadow-kabola-teal/5">
+                <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-slate-50">
+                  <Image src={displayImage} alt={umkm.nama} fill className="object-cover" />
+                  {umkm.kategori && (
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-ocean-blue text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full z-20">
+                      {formatKategoriLabel(umkm.kategori)}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Right Column: Content Card */}
             <div className="lg:col-span-7 bg-white rounded-3xl p-8 md:p-12 border border-kabola-teal/10 shadow-xl shadow-kabola-teal/5">
+              {hasCertifications && (
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  {hasPirt && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-ocean-blue/10 text-ocean-blue border border-ocean-blue/25 px-3.5 py-1.5 rounded-full">
+                      <Award className="w-3.5 h-3.5 text-ocean-blue" />
+                      P-IRT
+                    </span>
+                  )}
+                  {hasHalal && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-kabola-teal/10 text-kabola-teal-dark border border-kabola-teal/25 px-3.5 py-1.5 rounded-full">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-kabola-teal-dark" />
+                      Halal
+                    </span>
+                  )}
+                  {hasNib && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-surface-teal text-kabola-teal border border-kabola-teal/30 px-3.5 py-1.5 rounded-full">
+                      <ShieldCheck className="w-3.5 h-3.5 text-kabola-teal" />
+                      NIB
+                    </span>
+                  )}
+                </div>
+              )}
+
               <h1 className="font-title text-3xl md:text-5xl text-forest mb-2">{umkm.nama}</h1>
               {umkm.namaIkm && (
-                <h2 className="text-xl font-medium text-kabola-teal mb-6">{umkm.namaIkm}</h2>
+                <div className="flex items-center gap-2 text-kabola-teal mb-6">
+                  <Building2 className="w-4 h-4" />
+                  <h2 className="text-lg font-medium tracking-wide">{umkm.namaIkm}</h2>
+                </div>
               )}
               
-              <div className="space-y-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 p-4 bg-sand/40 rounded-2xl border border-kabola-teal/5">
                 {umkm.pemilik && (
                   <div className="flex items-center gap-3 text-earth/80">
                     <div className="w-10 h-10 rounded-full bg-kabola-teal/10 flex items-center justify-center flex-shrink-0">
@@ -96,7 +143,7 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
                     </div>
                     <div>
                       <p className="text-xs text-earth/50">Pemilik Usaha</p>
-                      <p className="font-medium text-forest">{umkm.pemilik}</p>
+                      <p className="font-medium text-forest text-sm">{umkm.pemilik}</p>
                     </div>
                   </div>
                 )}
@@ -105,21 +152,23 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
                     <Tag className="w-4 h-4 text-kabola-teal" />
                   </div>
                   <div>
-                    <p className="text-xs text-earth/50">Harga</p>
-                    <p className="font-medium text-forest">{umkm.harga || "Hubungi Penjual"}</p>
+                    <p className="text-xs text-earth/50">Harga Produk</p>
+                    <p className="font-medium text-forest text-sm">{umkm.harga || "Hubungi Penjual"}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mb-10">
                 <h3 className="font-title text-xl text-forest mb-3">Deskripsi Produk</h3>
-                <div className="text-earth/70 leading-relaxed text-sm">
-                  <p>{umkm.deskripsi}</p>
+                <div className="text-earth/70 leading-relaxed text-sm whitespace-pre-line">
+                  {umkm.deskripsi || "Belum ada deskripsi khusus untuk produk ini."}
                 </div>
               </div>
 
               <div className="mt-auto pt-8 border-t border-slate-100">
-                <p className="text-xs text-earth/50 mb-3 text-center">Dukung UMKM Lokal Kabola</p>
+                <p className="text-xs text-earth/50 mb-3 text-center">
+                  {isNttMart ? "Dukung Produk Pilihan NTT Mart · Kabupaten Alor" : "Dukung UMKM Lokal Kabola"}
+                </p>
                 {umkm.kontakWa ? (
                   <a
                     href={`https://wa.me/${umkm.kontakWa}?text=Halo, saya tertarik dengan produk ${umkm.nama} dari Kabola Digital Hub.`}
