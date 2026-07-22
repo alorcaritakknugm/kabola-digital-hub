@@ -88,7 +88,7 @@ export default function StatistikView() {
                 Kecamatan Kabola
               </h2>
               <p className="text-earth/75 text-xs sm:text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-                Kecamatan Kabola merupakan salah satu kecamatan yang berada di Kabupaten Alor, Provinsi Nusa Tenggara Timur. Kecamatan Kabola terletak di sepanjang pantai utara berbukit dengan curah hujan yang sangat rendah. Dengan luas wilayah 73,01 km², kecamatan ini mempunyai wilayah administratif yang terdiri dari 5 Desa/Kelurahan, 11 Dusun, 22 Rukun Warga (RW), 45 Rukun Tetangga (RT) dengan jumlah penduduk sebanyak 8385 orang.
+                Kecamatan Kabola merupakan salah satu kecamatan yang berada di Kabupaten Alor, Provinsi Nusa Tenggara Timur. Kecamatan Kabola terletak di sepanjang pantai utara berbukit dengan curah hujan yang sangat rendah. Dengan luas wilayah <strong>73,01 km²</strong>, kecamatan ini mempunyai wilayah administratif yang terdiri dari 5 Desa/Kelurahan, 11 Dusun, 22 Rukun Warga (RW), 45 Rukun Tetangga (RT) dengan jumlah penduduk sebanyak 8385 orang.
               </p>
             </div>
 
@@ -130,7 +130,7 @@ export default function StatistikView() {
                 Kelurahan Kabola
               </h2>
               <p className="text-earth/75 text-xs sm:text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-                Kelurahan Kabola merupakan salah satu kelurahan yang berada di Kecamatan Kabola, Kabupaten Alor, Provinsi Nusa Tenggara Timur. Dengan luas wilayah sebesar 20,81 km², kelurahan ini memiliki penduduk sebanyak 4341 jiwa. Penduduk Kelurahan Kabola mayoritas beragama Kristen dan tersebar ke dalam 8 Kampung, yaitu Kampung Wolatang, Kampung Moimol, Kampung Buyungta, Kampung Tonbung, Kampung Waindoa, Kampung Poliboo, Kampung Buiko, dan Kampung Mali. Kelurahan Kabola terbagi menjadi 4 RW dan 9 RT. Saat ini, Kelurahan Kabola memiliki 4 Pendidikan Anak Usia Dini (PAUD), 4 Taman Kanak-Kanak (TK), 5 Sekolah Dasar (SD), 2 Sekolah Menengah Pertama (SMP), dan 1 Sekolah Menengah Atas (SMA).
+                Kelurahan Kabola merupakan salah satu kelurahan yang berada di Kecamatan Kabola, Kabupaten Alor, Provinsi Nusa Tenggara Timur. Dengan luas wilayah sebesar <strong>20,81 km²</strong>, kelurahan ini memiliki penduduk sebanyak <strong>4341 jiwa</strong>. Penduduk Kelurahan Kabola mayoritas beragama Kristen dan tersebar ke dalam 8 Kampung, yaitu Kampung Wolatang, Kampung Moimol, Kampung Buyungta, Kampung Tonbung, Kampung Waindoa, Kampung Poliboo, Kampung Buiko, dan Kampung Mali. Kelurahan Kabola terbagi menjadi <strong>4</strong> RW dan <strong>9</strong> RT. Saat ini, Kelurahan Kabola memiliki 4 Pendidikan Anak Usia Dini (PAUD), 4 Taman Kanak-Kanak (TK), 5 Sekolah Dasar (SD), 2 Sekolah Menengah Pertama (SMP), dan 1 Sekolah Menengah Atas (SMA).
               </p>
             </div>
 
@@ -194,7 +194,7 @@ export default function StatistikView() {
                 Desa Pante Deere
               </h2>
               <p className="text-earth/75 text-xs sm:text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-                Desa Pante Deere merupakan salah satu desa yang berada di Kecamatan Kabola, Kabupaten Alor, Provinsi Nusa Tenggara Timur. Dengan luas wilayah sebesar 7,67 km², desa ini memiliki penduduk sebanyak 893 jiwa. Desa Pante Deere terbagi menjadi 4 RW dan 8 RT. Saat ini, Desa Pante Deere memiliki 1 Taman Kanak-Kanak (TK) dan 1 Sekolah Dasar (SD).
+                Desa Pante Deere merupakan salah satu desa yang berada di Kecamatan Kabola, Kabupaten Alor, Provinsi Nusa Tenggara Timur. Dengan luas wilayah sebesar <strong>7,67 km²</strong>, desa ini memiliki penduduk sebanyak <strong>893 jiwa</strong>. Desa Pante Deere terbagi menjadi 4 RW dan 8 RT. Saat ini, Desa Pante Deere memiliki 1 Taman Kanak-Kanak (TK) dan 1 Sekolah Dasar (SD).
               </p>
             </div>
 

@@ -184,7 +184,7 @@ export default function GenderChart() {
 
       {/* Survey Text Box presisi sejajar di bagian bawah (mt-auto min-h-[76px]) */}
       <div className="mt-auto min-h-[76px] bg-sand/60 rounded-2xl p-4 border border-kabola-teal/10 text-xs text-earth leading-relaxed font-body flex items-center">
-        Proporsi penduduk di Kelurahan Kabola cenderung seimbang antara penduduk perempuan dan laki-laki. Dari 4341 jiwa, sebanyak 2206 (50,8%) merupakan penduduk perempuan sementara sebanyak 2135 jiwa (49,2%) lainnya merupakan penduduk laki-laki.
+        <p>Proporsi penduduk di Kelurahan Kabola cenderung seimbang antara penduduk perempuan dan laki-laki. Dari <strong>4341 jiwa</strong>, sebanyak <strong>2206 (50,8%)</strong> merupakan penduduk perempuan sementara sebanyak <strong>2135 (49,2%)</strong> lainnya merupakan penduduk laki-laki.</p>
       </div>
     </div>
   );

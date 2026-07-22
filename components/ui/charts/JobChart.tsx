@@ -117,11 +117,10 @@ export default function JobChart() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${
-                selectedCategory === cat
-                  ? "bg-kabola-teal text-white"
-                  : "bg-sand/60 hover:bg-sand text-earth/70 border border-kabola-teal/10"
-              }`}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedCategory === cat
+                ? "bg-kabola-teal text-white"
+                : "bg-sand/60 hover:bg-sand text-earth/70 border border-kabola-teal/10"
+                }`}
             >
               {cat}
             </button>
@@ -191,7 +190,7 @@ export default function JobChart() {
 
       {/* Description Text Box */}
       <div className="mt-4 min-h-[76px] bg-sand/60 rounded-2xl p-4 border border-kabola-teal/10 text-xs text-earth leading-relaxed font-body flex items-center">
-        Untuk mata pencaharian, umumnya warga Kelurahan Kabola bekerja sebagai petani, disusul oleh wiraswasta, honorer, nelayan, dan Pegawai Negeri Sipil (PNS).
+        <p>Untuk mata pencaharian, umumnya warga Kelurahan Kabola bekerja sebagai <strong>petani</strong>, disusul oleh wiraswasta, honorer, nelayan, dan Pegawai Negeri Sipil (PNS).</p>
       </div>
     </div>
   );

@@ -174,7 +174,7 @@ export default function PanteDeereEducationChart() {
 
       {/* Survey Text Box */}
       <div className="mt-auto min-h-[76px] bg-sand/60 rounded-2xl p-4 border border-kabola-teal/10 text-xs text-earth leading-relaxed font-body flex items-center">
-        Tingkat pendidikan penduduk di Pante Deere didominasi oleh lulusan SMA dengan proporsi mencapai 70,9%. Pada jenjang pendidikan dasar, lulusan SD mencakup 13,5% dan SMP sebesar 10,8%. Sementara itu, kelompok lulusan TK dan Diploma mencatatkan jumlah terkecil.
+        <p>Tingkat pendidikan penduduk di Pante Deere didominasi oleh lulusan <strong>SMA</strong> dengan proporsi mencapai <strong>70,9%</strong>. Pada jenjang pendidikan dasar, lulusan <strong>SD</strong> mencakup <strong>13,5%</strong> dan <strong>SMP</strong> sebesar <strong>10,8%</strong>. Sementara itu, kelompok lulusan TK dan Diploma mencatatkan jumlah terkecil.</p>
       </div>
     </div>
   );

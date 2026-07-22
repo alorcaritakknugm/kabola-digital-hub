@@ -129,7 +129,7 @@ export default function EducationChart() {
 
       {/* Survey Text Box */}
       <div className="mt-3 bg-sand/60 rounded-2xl p-3.5 sm:p-4 border border-kabola-teal/10 text-xs text-earth leading-relaxed font-body">
-        Penduduk Kabola didominasi kelompok tidak atau belum sekolah dan tidak tamat SD. Namun, pada tingkat menengah, mayoritas penduduk merupakan lulusan SMA. Sementara itu, proporsi lulusan perguruan tinggi tercatat menjadi yang paling rendah.
+        <p>Penduduk Kabola didominasi kelompok <strong>tidak atau belum sekolah</strong> dan <strong>tidak tamat SD</strong>. Namun, pada tingkat menengah, mayoritas penduduk merupakan lulusan <strong>SMA</strong>. Sementara itu, proporsi lulusan perguruan tinggi tercatat menjadi yang paling rendah.</p>
       </div>
     </div>
   );

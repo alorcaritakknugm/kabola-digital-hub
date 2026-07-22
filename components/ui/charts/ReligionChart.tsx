@@ -172,7 +172,7 @@ export default function ReligionChart() {
 
       {/* Survey Text Box presisi sejajar di bagian bawah (mt-auto min-h-[76px]) */}
       <div className="mt-auto min-h-[76px] bg-sand/60 rounded-2xl p-4 border border-kabola-teal/10 text-xs text-earth leading-relaxed font-body flex items-center">
-        Sebagian besar masyarakat Kelurahan Kabola memeluk agama Kristen (86,99%), diikuti oleh penganut agama Islam (10,74%), Katolik, dan Hindu.
+        <p>Sebagian besar masyarakat Kelurahan Kabola memeluk agama Kristen (<strong>86,99%</strong>), diikuti oleh penganut agama Islam (<strong>10,74%</strong>), Katolik, dan Hindu.</p>
       </div>
     </div>
   );
