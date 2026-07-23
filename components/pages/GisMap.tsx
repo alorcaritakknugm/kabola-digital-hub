@@ -35,6 +35,13 @@ export type MapItem = {
 const DRIVE_DOWNLOAD_LINK = "https://bit.ly/PemetaanKabolaPander";
 const ITEMS_PER_PAGE = 6;
 
+function getPaginationRange(current: number, total: number): (number | "...")[] {
+  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 2) return [1, 2, 3, "...", total];
+  if (current >= total - 1) return [1, "...", total - 2, total - 1, total];
+  return [1, "...", current, "...", total];
+}
+
 const MAP_ITEMS: MapItem[] = [
   {
     id: "batas-rt",
@@ -526,14 +533,14 @@ export default function GisMap() {
 
           {/* Search Bar matching Tourism.tsx & CeritaKabola.tsx */}
           <div className="relative w-full max-w-xl mx-auto mb-8 sm:mb-10">
-            <div className="absolute inset-y-0 left-0 pl-3.5 sm:pl-4 flex items-center pointer-events-none">
-              <Search className="h-4 w-4 sm:h-5 sm:w-5 text-kabola-teal/50" />
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-kabola-teal/50" />
             </div>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full pl-10 sm:pl-12 pr-9 sm:pr-10 py-3 sm:py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth text-xs sm:text-sm focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none"
+              className="block w-full pl-12 pr-10 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none"
               placeholder="Cari peta administrasi, kontur, jenis tanah, atau bencana..."
             />
             {searchQuery && (
@@ -551,7 +558,7 @@ export default function GisMap() {
             {paginatedMaps.length > 0 ? (
               <div>
                 <motion.div
-                  key={activeCategory + searchQuery + currentPage}
+                  key={activeCategory + currentPage}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
@@ -561,12 +568,8 @@ export default function GisMap() {
                   {paginatedMaps.map((mapItem) => {
                     const isSelected = selectedMap.id === mapItem.id;
                     return (
-                      <motion.div
+                      <div
                         key={mapItem.id}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
                         onClick={() => {
                           setSelectedMap(mapItem);
                           setIsFullscreenViewer(true);
@@ -616,7 +619,7 @@ export default function GisMap() {
                             <span>Lihat Fullscreen</span>
                           </span>
                         </div>
-                      </motion.div>
+                        </div>
                     );
                   })}
                 </motion.div>
@@ -634,18 +637,22 @@ export default function GisMap() {
                     </button>
 
                     <div className="flex items-center gap-1.5">
-                      {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
-                        <button
-                          key={page}
-                          onClick={() => handlePageChange(page)}
-                          className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${currentPage === page
-                              ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
-                              : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
-                            }`}
-                        >
-                          {page}
-                        </button>
-                      ))}
+                      {getPaginationRange(currentPage, totalPages).map((page, idx) =>
+                        page === "..." ? (
+                          <span key={`ellipsis-${idx}`} className="w-8 h-8 flex items-center justify-center text-earth/40 text-sm select-none">…</span>
+                        ) : (
+                          <button
+                            key={page}
+                            onClick={() => handlePageChange(page as number)}
+                            className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${currentPage === page
+                                ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
+                                : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
+                              }`}
+                          >
+                            {page}
+                          </button>
+                        )
+                      )}
                     </div>
 
                     <button
