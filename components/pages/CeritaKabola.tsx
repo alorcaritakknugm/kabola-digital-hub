@@ -4,10 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { Utensils, TreePine, Theater, Camera, ArrowRight, Search, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { Utensils, TreePine, Theater, Camera, ArrowRight, Search, BookOpen, ChevronLeft, ChevronRight, X } from "lucide-react";
 import Link from "next/link";
 
 const ITEMS_PER_PAGE = 6;
+
+function getPaginationRange(current: number, total: number): (number | "...")[] {
+  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 2) return [1, 2, 3, "...", total];
+  if (current >= total - 1) return [1, "...", total - 2, total - 1, total];
+  return [1, "...", current, "...", total];
+}
 
 /* ─── Tabs (4 bersih) ────────────────────────────────────────── */
 const tabs = [
@@ -299,9 +306,18 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="block w-full pl-12 pr-4 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none"
+              className="block w-full pl-12 pr-10 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none"
               placeholder="Cari cerita, judul, atau deskripsi..."
             />
+            {searchQuery && (
+              <button
+                onClick={() => { setSearchQuery(""); setCurrentPage(1); }}
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-earth/40 hover:text-earth transition-colors"
+                aria-label="Hapus pencarian"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
           </motion.div>
 
           {/* Story cards */}
@@ -384,19 +400,23 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                     </button>
 
                     <div className="flex items-center gap-1.5">
-                      {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
-                        <button
-                          key={page}
-                          onClick={() => handlePageChange(page)}
-                          className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${
-                            currentPage === page
-                              ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
-                              : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      ))}
+                      {getPaginationRange(currentPage, totalPages).map((page, idx) =>
+                        page === "..." ? (
+                          <span key={`ellipsis-${idx}`} className="w-8 h-8 flex items-center justify-center text-earth/40 text-sm select-none">…</span>
+                        ) : (
+                          <button
+                            key={page}
+                            onClick={() => handlePageChange(page as number)}
+                            className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${
+                              currentPage === page
+                                ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
+                                : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
+                            }`}
+                          >
+                            {page}
+                          </button>
+                        )
+                      )}
                     </div>
 
                     <button
