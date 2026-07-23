@@ -19,10 +19,10 @@ interface ReligionItem {
 }
 
 const religionData: ReligionItem[] = [
-  { name: "Kristen", percentage: 86.99, estimatedCount: 3776, color: "#198D8D" },
-  { name: "Islam", percentage: 10.74, estimatedCount: 466, color: "#0A3D62" },
-  { name: "Katolik", percentage: 2.12, estimatedCount: 92, color: "#2BB5B5" },
-  { name: "Hindu", percentage: 0.15, estimatedCount: 7, color: "#C9882A" },
+  { name: "Kristen", percentage: 86.98, estimatedCount: 3776, color: "#198D8D" },
+  { name: "Islam", percentage: 10.73, estimatedCount: 466, color: "#0A3D62" },
+  { name: "Katolik", percentage: 2.21, estimatedCount: 96, color: "#2BB5B5" },
+  { name: "Hindu", percentage: 0.07, estimatedCount: 3, color: "#C9882A" },
 ];
 
 export default function ReligionChart() {
@@ -39,7 +39,7 @@ export default function ReligionChart() {
             Persentase: <span className="font-bold text-kabola-teal">{data.percentage}%</span>
           </p>
           <p className="text-earth/80">
-            Estimasi: <span className="font-bold text-forest">± {data.estimatedCount} jiwa</span>
+            Jumlah: <span className="font-bold text-forest">{data.estimatedCount.toLocaleString("id-ID")} jiwa</span>
           </p>
         </div>
       );
@@ -64,7 +64,7 @@ export default function ReligionChart() {
         dominantBaseline="central"
         className="font-body font-bold text-xs pointer-events-none"
       >
-        {viewMode === "percent" ? `${item.percentage}%` : `±${item.estimatedCount}`}
+        {viewMode === "percent" ? `${item.percentage}%` : `${item.estimatedCount}`}
       </text>
     );
   };
@@ -74,30 +74,28 @@ export default function ReligionChart() {
       {/* Header Container presisi sejajar (min-h-[72px]) */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4 min-h-[72px]">
         <h3 className="font-title text-xl sm:text-2xl text-forest font-normal leading-snug">
-          Sebaran Agama Penduduk Kelurahan Kabola
+          Sebaran Penduduk Menurut Agama
         </h3>
 
         {/* Toggle View Mode */}
         <div className="flex items-center gap-1 bg-sand/60 p-1 rounded-full border border-kabola-teal/15 shrink-0 self-start">
           <button
             onClick={() => setViewMode("percent")}
-            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-              viewMode === "percent"
+            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold transition-all ${viewMode === "percent"
                 ? "bg-kabola-teal text-white"
                 : "text-earth/70 hover:text-earth"
-            }`}
+              }`}
           >
-            <Percent className="w-3 h-3" /> %
+            <Percent className="w-3 h-3" /> Persentase
           </button>
           <button
             onClick={() => setViewMode("count")}
-            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-              viewMode === "count"
+            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold transition-all ${viewMode === "count"
                 ? "bg-kabola-teal text-white"
                 : "text-earth/70 hover:text-earth"
-            }`}
+              }`}
           >
-            <Hash className="w-3 h-3" /> Jiwa
+            <Hash className="w-3 h-3" /> Jumlah
           </button>
         </div>
       </div>
@@ -142,11 +140,10 @@ export default function ReligionChart() {
               key={item.name}
               whileHover={{ y: -2 }}
               onClick={() => setActiveItem(activeItem?.name === item.name ? null : item)}
-              className={`p-3 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                activeItem?.name === item.name
+              className={`p-3 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${activeItem?.name === item.name
                   ? "bg-kabola-teal/10 border-kabola-teal"
                   : "bg-sand/40 border-kabola-teal/10 hover:border-kabola-teal/30"
-              }`}
+                }`}
               onMouseEnter={() => setActiveItem(item)}
               onMouseLeave={() => setActiveItem(null)}
             >
@@ -162,7 +159,7 @@ export default function ReligionChart() {
 
               <div className="flex items-baseline justify-between mt-1 font-body">
                 <span className="text-lg font-bold text-forest">
-                  {viewMode === "percent" ? `${item.percentage}%` : `± ${item.estimatedCount}`}
+                  {viewMode === "percent" ? `${item.percentage}%` : `${item.estimatedCount.toLocaleString("id-ID")} jiwa`}
                 </span>
               </div>
             </motion.div>
@@ -172,7 +169,7 @@ export default function ReligionChart() {
 
       {/* Survey Text Box presisi sejajar di bagian bawah (mt-auto min-h-[76px]) */}
       <div className="mt-auto min-h-[76px] bg-sand/60 rounded-2xl p-4 border border-kabola-teal/10 text-xs text-earth leading-relaxed font-body flex items-center">
-        <p>Sebagian besar masyarakat Kelurahan Kabola memeluk agama Kristen (<strong>86,99%</strong>), diikuti oleh penganut agama Islam (<strong>10,74%</strong>), Katolik, dan Hindu.</p>
+        <p>Sebagian besar masyarakat Kelurahan Kabola memeluk agama Kristen (<strong>86,98%</strong>), diikuti oleh penganut agama Islam (<strong>10,73%</strong>), Katolik (<strong>2,21%</strong>), dan Hindu (<strong>0,07%</strong>).</p>
       </div>
     </div>
   );

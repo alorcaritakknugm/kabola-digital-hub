@@ -19,11 +19,11 @@ interface PanteDeereEduItem {
 }
 
 const panteDeereEduData: PanteDeereEduItem[] = [
-  { level: "SMA", percentage: 70.9, estimatedCount: 633, color: "#198D8D" },
-  { level: "SD", percentage: 13.5, estimatedCount: 121, color: "#0A3D62" },
-  { level: "SMP", percentage: 10.8, estimatedCount: 96, color: "#165B5B" },
-  { level: "Diploma", percentage: 2.6, estimatedCount: 23, color: "#2BB5B5" },
-  { level: "TK", percentage: 2.2, estimatedCount: 20, color: "#C9882A" },
+  { level: "SMA", percentage: 70.9, estimatedCount: 415, color: "#198D8D" },
+  { level: "SD", percentage: 13.5, estimatedCount: 79, color: "#0A3D62" },
+  { level: "SMP", percentage: 10.8, estimatedCount: 63, color: "#165B5B" },
+  { level: "Diploma", percentage: 2.6, estimatedCount: 15, color: "#2BB5B5" },
+  { level: "TK", percentage: 2.2, estimatedCount: 13, color: "#C9882A" },
 ];
 
 export default function PanteDeereEducationChart() {
@@ -40,7 +40,7 @@ export default function PanteDeereEducationChart() {
             Persentase: <span className="font-bold text-kabola-teal">{data.percentage}%</span>
           </p>
           <p className="text-earth/80">
-            Estimasi: <span className="font-bold text-forest">± {data.estimatedCount} jiwa</span>
+            Jumlah: <span className="font-bold text-forest">{data.estimatedCount} jiwa</span>
           </p>
         </div>
       );
@@ -65,7 +65,7 @@ export default function PanteDeereEducationChart() {
         dominantBaseline="central"
         className="font-body font-bold text-xs pointer-events-none"
       >
-        {viewMode === "percent" ? `${item.percentage}%` : `±${item.estimatedCount}`}
+        {viewMode === "percent" ? `${item.percentage}%` : `${item.estimatedCount}`}
       </text>
     );
   };
@@ -88,7 +88,7 @@ export default function PanteDeereEducationChart() {
                   : "text-earth/70 hover:text-earth"
               }`}
             >
-              <Percent className="w-3 h-3" /> %
+              <Percent className="w-3 h-3" /> Persentase
             </button>
             <button
               onClick={() => setViewMode("count")}
@@ -98,7 +98,7 @@ export default function PanteDeereEducationChart() {
                   : "text-earth/70 hover:text-earth"
               }`}
             >
-              <Hash className="w-3 h-3" /> Jiwa
+              <Hash className="w-3 h-3" /> Jumlah
             </button>
           </div>
         </div>
@@ -164,7 +164,7 @@ export default function PanteDeereEducationChart() {
 
               <div className="flex items-baseline justify-between mt-1 font-body">
                 <span className="text-lg font-bold text-forest">
-                  {viewMode === "percent" ? `${item.percentage}%` : `± ${item.estimatedCount}`}
+                  {viewMode === "percent" ? `${item.percentage}%` : `${item.estimatedCount} jiwa`}
                 </span>
               </div>
             </motion.div>
@@ -174,7 +174,7 @@ export default function PanteDeereEducationChart() {
 
       {/* Survey Text Box */}
       <div className="mt-auto min-h-[76px] bg-sand/60 rounded-2xl p-4 border border-kabola-teal/10 text-xs text-earth leading-relaxed font-body flex items-center">
-        <p>Tingkat pendidikan penduduk di Pante Deere didominasi oleh lulusan <strong>SMA</strong> dengan proporsi mencapai <strong>70,9%</strong>. Pada jenjang pendidikan dasar, lulusan <strong>SD</strong> mencakup <strong>13,5%</strong> dan <strong>SMP</strong> sebesar <strong>10,8%</strong>. Sementara itu, kelompok lulusan TK dan Diploma mencatatkan jumlah terkecil.</p>
+        <p>Tingkat pendidikan penduduk di Pante Deere didominasi oleh lulusan <strong>SMA</strong> dengan proporsi mencapai <strong>70,9% (415 jiwa)</strong>. Pada jenjang pendidikan dasar, lulusan <strong>SD</strong> mencakup <strong>13,5% (79 jiwa)</strong> dan <strong>SMP</strong> sebesar <strong>10,8% (63 jiwa)</strong>. Sementara itu, kelompok lulusan TK dan Diploma mencatatkan jumlah terkecil.</p>
       </div>
     </div>
   );

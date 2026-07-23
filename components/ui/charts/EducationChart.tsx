@@ -19,14 +19,14 @@ interface EducationItem {
 }
 
 const rawEducationData: EducationItem[] = [
-  { level: "Tidak/Belum Sekolah", count: 1085 },
-  { level: "Tidak Tamat SD", count: 942 },
-  { level: "SD", count: 660 },
-  { level: "SMP", count: 532 },
-  { level: "SMA", count: 838 },
+  { level: "Tidak/Belum Sekolah", count: 1083 },
+  { level: "Tidak Tamat SD", count: 943 },
+  { level: "SD", count: 659 },
+  { level: "SMP", count: 531 },
+  { level: "SMA", count: 835 },
   { level: "Diploma", count: 284 },
-  { level: "S1", count: 5 },
-  { level: "S2", count: 7 },
+  { level: "S1", count: 2 },
+  { level: "S2", count: 5 },
 ];
 
 export default function EducationChart() {

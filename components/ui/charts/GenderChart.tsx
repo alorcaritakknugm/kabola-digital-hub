@@ -84,7 +84,7 @@ export default function GenderChart() {
                 : "text-earth/70 hover:text-earth"
             }`}
           >
-            <Percent className="w-3 h-3" /> %
+            <Percent className="w-3 h-3" /> Persentase
           </button>
           <button
             onClick={() => setViewMode("count")}
@@ -94,7 +94,7 @@ export default function GenderChart() {
                 : "text-earth/70 hover:text-earth"
             }`}
           >
-            <Hash className="w-3 h-3" /> Jiwa
+            <Hash className="w-3 h-3" /> Jumlah
           </button>
         </div>
       </div>
