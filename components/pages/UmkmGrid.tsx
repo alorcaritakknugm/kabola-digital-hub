@@ -1,13 +1,99 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
-import { Tag, ArrowRight, Search, ShieldCheck, CheckCircle2, Award, ChevronLeft, ChevronRight } from "lucide-react";
+import { Tag, ArrowRight, Search, ShieldCheck, CheckCircle2, Award, ChevronLeft, ChevronRight, ChevronDown, Filter, ArrowUpDown, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 const ITEMS_PER_PAGE = 6;
+
+function getPaginationRange(current: number, total: number): (number | "...")[] {
+  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 2) return [1, 2, 3, "...", total];
+  if (current >= total - 1) return [1, "...", total - 2, total - 1, total];
+  return [1, "...", current, "...", total];
+}
+
+
+function CustomDropdown({
+  label,
+  icon: Icon,
+  options,
+  value,
+  onChange,
+  className = ""
+}: {
+  label: string;
+  icon: any;
+  options: { label: string; value: string }[];
+  value: string;
+  onChange: (val: string) => void;
+  className?: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find((o) => o.value === value);
+
+  return (
+    <div className={`relative ${className}`} ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between gap-2 px-4 py-3.5 bg-white border border-kabola-teal/15 hover:border-kabola-teal/40 rounded-full text-earth text-sm font-medium transition-all shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_4px_16px_rgba(25,141,141,0.08)] outline-none"
+      >
+        <div className="flex items-center gap-2 truncate">
+          <Icon className="w-4 h-4 text-kabola-teal shrink-0" />
+          <span className="truncate">{selectedOption?.label || label}</span>
+        </div>
+        <ChevronDown className={`w-4 h-4 text-kabola-teal/60 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 6, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.96 }}
+            transition={{ duration: 0.15 }}
+            className="absolute left-0 right-0 sm:left-auto sm:right-0 mt-2 min-w-[200px] max-w-[280px] bg-white border border-kabola-teal/15 rounded-2xl shadow-xl py-2 z-50 max-h-56 overflow-y-auto scrollbar-thin scrollbar-thumb-kabola-teal/20"
+          >
+            {options.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => {
+                  onChange(opt.value);
+                  setIsOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2.5 text-xs sm:text-sm transition-colors flex items-center justify-between gap-2 ${
+                  value === opt.value
+                    ? "bg-kabola-teal/10 text-kabola-teal font-semibold"
+                    : "text-earth/80 hover:bg-kabola-teal/5 hover:text-earth"
+                }`}
+              >
+                <span className="truncate">{opt.label}</span>
+                {value === opt.value && <CheckCircle2 className="w-3.5 h-3.5 text-kabola-teal shrink-0" />}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function UmkmGrid({ 
   umkmList = [], 
@@ -18,6 +104,8 @@ export default function UmkmGrid({
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState("default");
+  const [ikmFilter, setIkmFilter] = useState("all");
   const gridRef = useRef<HTMLDivElement>(null);
 
   const isCertified = (val?: string) => {
@@ -26,19 +114,55 @@ export default function UmkmGrid({
     return v !== "" && v !== "tidak" && v !== "tidak ada" && v !== "belum" && v !== "false" && v !== "no" && v !== "-";
   };
 
-  const filteredList = umkmList.filter((item: any) => {
-    if (!searchQuery) return true;
-    const q = searchQuery.toLowerCase();
-    return (
-      item.nama?.toLowerCase().includes(q) || 
-      (item.namaIkm && item.namaIkm.toLowerCase().includes(q)) ||
-      item.kategori?.toLowerCase().includes(q) ||
-      item.pemilik?.toLowerCase().includes(q) ||
-      item.deskripsi?.toLowerCase().includes(q) ||
-      (isCertified(item.nib) && (q === "nib" || item.nib.toLowerCase().includes(q))) ||
-      (isCertified(item.pirt) && (q === "pirt" || item.pirt.toLowerCase().includes(q))) ||
-      (isCertified(item.halal) && (q === "halal" || item.halal.toLowerCase().includes(q)))
-    );
+  const parsePrice = (priceStr?: string | number): number => {
+    if (typeof priceStr === "number") return priceStr;
+    if (!priceStr) return 0;
+    const digits = priceStr.toString().replace(/[^0-9]/g, "");
+    return digits ? parseInt(digits, 10) : 0;
+  };
+
+  const uniqueIkms = Array.from(
+    new Set(umkmList.filter((item: any) => item.namaIkm).map((item: any) => item.namaIkm))
+  ).sort();
+
+  let filteredList = umkmList.filter((item: any) => {
+    // 1. Search Query Filter
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      const match = (
+        item.nama?.toLowerCase().includes(q) || 
+        (item.namaIkm && item.namaIkm.toLowerCase().includes(q)) ||
+        item.kategori?.toLowerCase().includes(q) ||
+        item.pemilik?.toLowerCase().includes(q) ||
+        item.deskripsi?.toLowerCase().includes(q) ||
+        (isCertified(item.nib) && (q === "nib" || item.nib.toLowerCase().includes(q))) ||
+        (isCertified(item.pirt) && (q === "pirt" || item.pirt.toLowerCase().includes(q))) ||
+        (isCertified(item.halal) && (q === "halal" || item.halal.toLowerCase().includes(q)))
+      );
+      if (!match) return false;
+    }
+    
+    // 2. IKM Filter (khusus NTT Mart)
+    if (isNttMart && ikmFilter !== "all") {
+      if (item.namaIkm !== ikmFilter) return false;
+    }
+
+    return true;
+  });
+
+  // 3. Sorting
+  filteredList.sort((a, b) => {
+    if (sortOrder === "az") {
+      return (a.nama || "").localeCompare(b.nama || "");
+    } else if (sortOrder === "za") {
+      return (b.nama || "").localeCompare(a.nama || "");
+    } else if (sortOrder === "price_asc") {
+      return parsePrice(a.harga) - parsePrice(b.harga);
+    } else if (sortOrder === "price_desc") {
+      return parsePrice(b.harga) - parsePrice(a.harga);
+    }
+    // "default" / Terbaru
+    return 0;
   });
 
   const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
@@ -75,27 +199,81 @@ export default function UmkmGrid({
 
   return (
     <div ref={gridRef}>
-      <div className="relative w-full max-w-xl mx-auto mb-12">
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <Search className="h-5 w-5 text-kabola-teal/50" />
+      <div className="w-full max-w-5xl mx-auto mb-12 flex flex-col md:flex-row items-center gap-3">
+        {/* Search Bar */}
+        <div className="relative flex-1 w-full">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <Search className="h-5 w-5 text-kabola-teal/50" />
+          </div>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="block w-full pl-12 pr-10 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_2px_12px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_20px_rgba(25,141,141,0.08)] outline-none text-sm md:text-base"
+            placeholder={isNttMart ? "Cari produk NTT Mart, NIB, PIRT, Halal, atau IKM..." : "Cari produk lokal, NIB, Halal, kategori..."}
+          />
+          {searchQuery && (
+            <button
+              onClick={() => { setSearchQuery(""); setCurrentPage(1); }}
+              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-earth/40 hover:text-earth transition-colors"
+              aria-label="Hapus pencarian"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="block w-full pl-12 pr-4 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_24px_rgba(25,141,141,0.08)] outline-none text-sm md:text-base"
-          placeholder={isNttMart ? "Cari produk NTT Mart, NIB, PIRT, Halal, atau nama IKM..." : "Cari produk lokal, NIB, Halal, kategori..."}
-        />
+
+        {/* Dropdowns */}
+        <div className="flex items-center gap-3 w-full md:w-auto shrink-0 justify-end">
+          {isNttMart && uniqueIkms.length > 0 && (
+            <CustomDropdown
+              label="Semua IKM"
+              icon={Filter}
+              value={ikmFilter}
+              onChange={(val) => {
+                setIkmFilter(val);
+                setCurrentPage(1);
+              }}
+              options={[
+                { label: "Semua IKM", value: "all" },
+                ...uniqueIkms.map((ikm: any) => ({ label: ikm, value: ikm }))
+              ]}
+              className="w-full md:w-[200px]"
+            />
+          )}
+
+          <CustomDropdown
+            label="Urutkan"
+            icon={ArrowUpDown}
+            value={sortOrder}
+            onChange={(val) => {
+              setSortOrder(val);
+              setCurrentPage(1);
+            }}
+            options={[
+              { label: "Terbaru", value: "default" },
+              { label: "Abjad (A-Z)", value: "az" },
+              { label: "Abjad (Z-A)", value: "za" },
+              { label: "Harga Terendah", value: "price_asc" },
+              { label: "Harga Tertinggi", value: "price_desc" },
+            ]}
+            className="w-full md:w-[170px]"
+          />
+        </div>
       </div>
 
-      <AnimatePresence mode="popLayout">
+      <AnimatePresence mode="wait">
         {paginatedList.length > 0 ? (
           <>
             <motion.div 
-              layout 
+              key={`${sortOrder}-${ikmFilter}-${currentPage}`}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
             >
               {paginatedList.map((umkm: any) => {
@@ -106,13 +284,8 @@ export default function UmkmGrid({
                 const hasCertifications = hasNib || hasPirt || hasHalal;
 
                 return (
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.2 }}
-                    key={umkm._id}
+                  <div
+                    key={umkm._id || slug || umkm.nama}
                     className="bg-white rounded-3xl overflow-hidden border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] group hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all flex flex-col h-full"
                   >
                     <Link href={`/umkm/${slug}`} className="flex flex-col h-full">
@@ -172,7 +345,7 @@ export default function UmkmGrid({
                         </div>
                       </div>
                     </Link>
-                  </motion.div>
+                  </div>
                 )
               })}
             </motion.div>
@@ -190,19 +363,23 @@ export default function UmkmGrid({
                 </button>
 
                 <div className="flex items-center gap-1.5">
-                  {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => handlePageChange(page)}
-                      className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${
-                        currentPage === page
-                          ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
-                          : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
-                      }`}
-                    >
-                      {page}
-                    </button>
-                  ))}
+                  {getPaginationRange(currentPage, totalPages).map((page, idx) =>
+                    page === "..." ? (
+                      <span key={`ellipsis-${idx}`} className="w-8 h-8 flex items-center justify-center text-earth/40 text-sm select-none">…</span>
+                    ) : (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page as number)}
+                        className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${
+                          currentPage === page
+                            ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
+                            : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    )
+                  )}
                 </div>
 
                 <button
@@ -224,13 +401,13 @@ export default function UmkmGrid({
             exit={{ opacity: 0, y: 10 }}
             className="bg-white rounded-2xl border border-kabola-teal/12 p-8 text-center max-w-3xl mx-auto shadow-sm"
           >
-            {searchQuery ? (
+            {searchQuery || (isNttMart && ikmFilter !== "all") ? (
               <>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-4">
                   Pencarian Tidak Ditemukan
                 </span>
                 <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
-                  Maaf, tidak ada {isNttMart ? "produk NTT Mart" : "produk UMKM"} yang sesuai dengan kata kunci "{searchQuery}".
+                  Maaf, tidak ada {isNttMart ? "produk NTT Mart" : "produk UMKM"} yang sesuai dengan kriteria filter.
                 </p>
               </>
             ) : (
