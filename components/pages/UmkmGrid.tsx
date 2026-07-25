@@ -5,15 +5,16 @@ import { SlideUp } from "@/components/ui/animations/SlideUp";
 import { Tag, ArrowRight, Search, ShieldCheck, CheckCircle2, Award, ChevronLeft, ChevronRight, ChevronDown, Filter, ArrowUpDown, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import { AnimatePresence, motion } from "framer-motion";
 
 const ITEMS_PER_PAGE = 6;
 
 function getPaginationRange(current: number, total: number): (number | "...")[] {
-  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
-  if (current <= 2) return [1, 2, 3, "...", total];
-  if (current >= total - 1) return [1, "...", total - 2, total - 1, total];
-  return [1, "...", current, "...", total];
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 3) return [1, 2, 3, 4, "...", total];
+  if (current >= total - 2) return [1, "...", total - 3, total - 2, total - 1, total];
+  return [1, "...", current - 1, current, current + 1, "...", total];
 }
 
 
@@ -289,20 +290,20 @@ export default function UmkmGrid({
                     className="bg-white rounded-3xl overflow-hidden border border-kabola-teal/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] group hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all flex flex-col h-full"
                   >
                     <Link href={`/umkm/${slug}`} className="flex flex-col h-full">
-                      <div className="relative h-56 w-full overflow-hidden bg-slate-100 flex-shrink-0">
-                        <Image 
-                          src={umkm.imageUrl || getUmkmFallback(slug, umkm.kategori)} 
-                          alt={umkm.nama} 
-                          fill 
-                          className="object-cover transition-transform duration-500 group-hover:scale-105" 
-                        />
+                      <ImageWithSkeleton
+                        wrapperClassName="h-56 w-full flex-shrink-0"
+                        src={umkm.imageUrl || getUmkmFallback(slug, umkm.kategori)} 
+                        alt={umkm.nama} 
+                        fill 
+                        className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                      >
                         {/* Top Left: Category Badge */}
                         {umkm.kategori && (
                           <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-ocean-blue text-[10px] font-extrabold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-md z-10 border border-white/50">
                             {formatKategoriLabel(umkm.kategori)}
                           </div>
                         )}
-                      </div>
+                      </ImageWithSkeleton>
 
                       <div className="p-6 flex flex-col flex-grow">
                         <h3 className="font-title text-xl text-forest mb-1 group-hover:text-kabola-teal transition-colors line-clamp-1">{umkm.nama}</h3>

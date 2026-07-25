@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Map,
@@ -36,10 +37,10 @@ const DRIVE_DOWNLOAD_LINK = "https://bit.ly/PemetaanKabolaPander";
 const ITEMS_PER_PAGE = 6;
 
 function getPaginationRange(current: number, total: number): (number | "...")[] {
-  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
-  if (current <= 2) return [1, 2, 3, "...", total];
-  if (current >= total - 1) return [1, "...", total - 2, total - 1, total];
-  return [1, "...", current, "...", total];
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 3) return [1, 2, 3, 4, "...", total];
+  if (current >= total - 2) return [1, "...", total - 3, total - 2, total - 1, total];
+  return [1, "...", current - 1, current, current + 1, "...", total];
 }
 
 const MAP_ITEMS: MapItem[] = [
@@ -426,7 +427,9 @@ export default function GisMap() {
                         transformOrigin: "center center",
                       }}
                     >
-                      <Image
+                      <ImageWithSkeleton
+                        wrapperClassName="w-full h-full"
+                        skeletonClassName="bg-white/10 animate-pulse"
                         src={selectedMap.image}
                         alt={selectedMap.title}
                         fill
@@ -579,14 +582,14 @@ export default function GisMap() {
                       >
                         <div>
                           {/* Image Frame */}
-                          <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-slate-100">
-                            <Image
-                              src={mapItem.image}
-                              alt={mapItem.title}
-                              fill
-                              className="object-cover transition-transform duration-700 group-hover:scale-110"
-                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            />
+                          <ImageWithSkeleton
+                            wrapperClassName="h-44 sm:h-52 w-full"
+                            src={mapItem.image}
+                            alt={mapItem.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          >
                             <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
 
                             {/* Category Badge */}
@@ -596,7 +599,7 @@ export default function GisMap() {
                                 {mapItem.categoryLabel}
                               </span>
                             </div>
-                          </div>
+                          </ImageWithSkeleton>
 
                           {/* Content */}
                           <div className="p-4 sm:p-6">
@@ -809,7 +812,9 @@ export default function GisMap() {
                           transformOrigin: "center center",
                         }}
                       >
-                        <Image
+                        <ImageWithSkeleton
+                          wrapperClassName="w-full h-full"
+                          skeletonClassName="bg-white/10 animate-pulse"
                           src={selectedMap.image}
                           alt={selectedMap.title}
                           fill

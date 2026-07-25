@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 
 import Image from "next/image";
+import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import Link from "next/link";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
 import { AnimatePresence, motion } from "framer-motion";
@@ -23,10 +24,10 @@ import {
 const ITEMS_PER_PAGE = 6;
 
 function getPaginationRange(current: number, total: number): (number | "...")[] {
-  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
-  if (current <= 2) return [1, 2, 3, "...", total];
-  if (current >= total - 1) return [1, "...", total - 2, total - 1, total];
-  return [1, "...", current, "...", total];
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 3) return [1, 2, 3, 4, "...", total];
+  if (current >= total - 2) return [1, "...", total - 3, total - 2, total - 1, total];
+  return [1, "...", current - 1, current, current + 1, "...", total];
 }
 
 export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
@@ -146,23 +147,23 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
                     >
                       <Link href={`/wisata/${slug}`} className="block h-full w-full">
                         {/* Image */}
-                        <div className="relative h-52 overflow-hidden bg-slate-100">
-                          <Image
-                             src={pkg.imageUrl || getWisataFallback(slug)}
-                             alt={pkg.nama}
-                             fill
-                             className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
-                        <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
+                        <ImageWithSkeleton
+                          wrapperClassName="h-52 w-full"
+                          src={pkg.imageUrl || getWisataFallback(slug)}
+                          alt={pkg.nama}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
 
-                        {/* Badge durasi */}
-                        <div className="absolute top-4 left-4 flex gap-2">
-                          <span className="bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 uppercase tracking-wider">
-                            <Clock className="w-3 h-3 text-kabola-teal" />
-                            {pkg.durasiWisata || "Setengah Hari"}
-                          </span>
-                        </div>
-                      </div>
+                          {/* Badge durasi */}
+                          <div className="absolute top-4 left-4 flex gap-2">
+                            <span className="bg-white/90 backdrop-blur-sm text-forest text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 uppercase tracking-wider">
+                              <Clock className="w-3 h-3 text-kabola-teal" />
+                              {pkg.durasiWisata || "Setengah Hari"}
+                            </span>
+                          </div>
+                        </ImageWithSkeleton>
 
                       {/* Content */}
                       <div className="p-6">

@@ -4,16 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import { Utensils, TreePine, Theater, Camera, ArrowRight, Search, BookOpen, ChevronLeft, ChevronRight, X } from "lucide-react";
 import Link from "next/link";
 
 const ITEMS_PER_PAGE = 6;
 
 function getPaginationRange(current: number, total: number): (number | "...")[] {
-  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
-  if (current <= 2) return [1, 2, 3, "...", total];
-  if (current >= total - 1) return [1, "...", total - 2, total - 1, total];
-  return [1, "...", current, "...", total];
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current <= 3) return [1, 2, 3, 4, "...", total];
+  if (current >= total - 2) return [1, "...", total - 3, total - 2, total - 1, total];
+  return [1, "...", current - 1, current, current + 1, "...", total];
 }
 
 /* ─── Tabs (4 bersih) ────────────────────────────────────────── */
@@ -346,13 +347,13 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                       className="group relative rounded-2xl overflow-hidden bg-white border border-kabola-teal/10 shadow-[0_4px_20px_rgba(201,136,42,0.06)] hover:shadow-[0_12px_40px_rgba(201,136,42,0.15)] transition-all duration-500 cursor-pointer"
                     >
                       <Link href={`/cerita-kabola/${story.slug || story._id}?from=${activeTab}`} className="block h-full w-full">
-                        <div className="relative h-48 overflow-hidden">
-                          <Image
-                            src={story.image}
-                            alt={story.title}
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
+                        <ImageWithSkeleton
+                          wrapperClassName="h-48 w-full"
+                          src={story.image}
+                          alt={story.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        >
                           <div className="absolute inset-0 bg-gradient-to-t from-forest/60 via-transparent to-transparent" />
                           <div className="absolute top-3 left-3">
                             <span
@@ -362,7 +363,7 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                               {story.tag}
                             </span>
                           </div>
-                        </div>
+                        </ImageWithSkeleton>
 
                         <div className="p-5">
                           <p className="text-kabola-teal text-xs font-semibold uppercase tracking-wider mb-1">
