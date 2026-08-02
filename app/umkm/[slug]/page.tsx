@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const umkm = await client.fetch(umkmBySlugQuery, { slug });
   if (!umkm) return { title: "UMKM | Kabola Digital Hub" };
   const isNttMart = umkm.jenis === "nttMart";
-  const sectionLabel = isNttMart ? "NTT Mart" : "UMKM Lokal";
+  const sectionLabel = isNttMart ? "NTT Mart by Dekranasda Alor" : "UMKM Lokal";
   return {
     title: `${umkm.nama} | ${sectionLabel} Kabola · Alor NTT`,
     description: umkm.deskripsi
@@ -68,7 +68,7 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
   const displayImage = umkm.imageUrl || getUmkmFallback(resolvedParams.slug, umkm.kategori);
 
   const backHref = umkm.jenis === 'nttMart' ? '/umkm/ntt-mart' : '/umkm';
-  const backLabel = umkm.jenis === 'nttMart' ? 'Kembali ke Katalog NTT Mart' : 'Kembali ke Katalog UMKM';
+  const backLabel = umkm.jenis === 'nttMart' ? 'Kembali ke Katalog NTT Mart by Dekranasda Alor' : 'Kembali ke Katalog UMKM';
   const isNttMart = umkm.jenis === 'nttMart';
 
   const hasNib = isCertified(umkm.nib);
@@ -167,7 +167,7 @@ export default async function UmkmDetail({ params }: { params: Promise<{ slug: s
 
               <div className="mt-auto pt-8 border-t border-slate-100">
                 <p className="text-xs text-earth/50 mb-3 text-center">
-                  {isNttMart ? "Dukung Produk Pilihan NTT Mart · Kabupaten Alor" : "Dukung UMKM Lokal Kabola"}
+                  {isNttMart ? "Dukung Produk Pilihan NTT Mart by Dekranasda Alor · Kabupaten Alor" : "Dukung UMKM Lokal Kabola"}
                 </p>
                 {umkm.kontakWa ? (
                   <a

@@ -214,7 +214,7 @@ export default function UmkmGrid({
               setCurrentPage(1);
             }}
             className="block w-full pl-12 pr-10 py-3.5 bg-white border border-kabola-teal/15 rounded-full text-earth focus:ring-2 focus:ring-kabola-teal focus:border-kabola-teal transition-all shadow-[0_2px_12px_rgba(0,0,0,0.03)] focus:shadow-[0_4px_20px_rgba(25,141,141,0.08)] outline-none text-sm md:text-base"
-            placeholder={isNttMart ? "Cari produk NTT Mart, NIB, PIRT, Halal, atau IKM..." : "Cari produk lokal, NIB, Halal, kategori..."}
+            placeholder={isNttMart ? "Cari produk NTT Mart by Dekranasda Alor, NIB, PIRT, Halal, atau IKM..." : "Cari produk lokal, NIB, Halal, kategori..."}
           />
           {searchQuery && (
             <button
@@ -408,18 +408,18 @@ export default function UmkmGrid({
                   Pencarian Tidak Ditemukan
                 </span>
                 <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
-                  Maaf, tidak ada {isNttMart ? "produk NTT Mart" : "produk UMKM"} yang sesuai dengan kriteria filter.
+                  Maaf, tidak ada {isNttMart ? "produk NTT Mart by Dekranasda Alor" : "produk UMKM"} yang sesuai dengan kriteria filter.
                 </p>
               </>
             ) : (
               <>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-kabola-teal bg-kabola-teal/10 px-3 py-1.5 rounded-full mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-kabola-teal animate-pulse" />
-                  {isNttMart ? "Segera Hadir: Produk NTT Mart" : "Segera Hadir: Foto & Desain Menyusul"}
+                  {isNttMart ? "Segera Hadir: Produk NTT Mart by Dekranasda Alor" : "Segera Hadir: Foto & Desain Menyusul"}
                 </span>
                 <p className="text-earth/60 text-sm leading-relaxed max-w-sm mx-auto">
                   {isNttMart 
-                    ? "Katalog produk NTT Mart akan segera diisi dengan dokumentasi produk pilihan." 
+                    ? "Katalog produk NTT Mart by Dekranasda Alor akan segera diisi dengan dokumentasi produk pilihan." 
                     : "Katalog produk UMKM akan diisi setelah sesi dokumentasi lapangan saat KKN berlangsung."}
                 </p>
               </>

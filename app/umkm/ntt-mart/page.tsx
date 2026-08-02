@@ -11,17 +11,17 @@ import UmkmGrid from "@/components/pages/UmkmGrid";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "NTT Mart | Produk Pilihan NTT · Kabupaten Alor",
+  title: "NTT Mart by Dekranasda Alor | Produk Pilihan NTT · Kabupaten Alor",
   description:
-    "Katalog produk NTT Mart di Kabupaten Alor, NTT. Temukan produk-produk pilihan khas Nusa Tenggara Timur yang tersedia di NTT Mart, program KKN-PPM UGM 2026.",
+    "Katalog produk NTT Mart by Dekranasda Alor di Kabupaten Alor, NTT. Temukan produk-produk pilihan khas Nusa Tenggara Timur yang tersedia di NTT Mart by Dekranasda Alor, program KKN-PPM UGM 2026.",
   keywords: [
-    "NTT Mart", "NTT Mart Alor", "produk NTT", "belanja NTT",
+    "NTT Mart", "NTT Mart by Dekranasda Alor", "NTT Mart Alor", "produk NTT", "belanja NTT",
     "toko lokal Alor", "oleh-oleh Alor", "KKN UGM NTT Mart",
   ],
   alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/umkm/ntt-mart" },
   openGraph: {
-    title: "NTT Mart | Produk Pilihan NTT",
-    description: "Produk pilihan khas NTT tersedia di NTT Mart, Kabupaten Alor.",
+    title: "NTT Mart by Dekranasda Alor | Produk Pilihan NTT",
+    description: "Produk pilihan khas NTT tersedia di NTT Mart by Dekranasda Alor, Kabupaten Alor.",
     url: "https://kaboladigitalhub.alorcarita.com/umkm/ntt-mart",
   },
 };
@@ -40,9 +40,9 @@ export default async function NttMartPage() {
               <Store className="w-8 h-8 text-kabola-teal-light" />
             </div>
             <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
-              Kabupaten Alor · NTT Mart
+              Kabupaten Alor · NTT Mart by Dekranasda Alor
             </span>
-            <h1 className="font-title text-4xl md:text-5xl text-white mb-4">Katalog Visual <span className="text-kabola-teal-light">NTT Mart</span></h1>
+            <h1 className="font-title text-4xl md:text-5xl text-white mb-4">Katalog Visual <span className="text-kabola-teal-light">NTT Mart by Dekranasda Alor</span></h1>
             <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               Wadah produk-produk unggulan pilihan khas Nusa Tenggara Timur (NTT) buatan perajin dan pelaku usaha lokal dari seluruh Kabupaten Alor.
             </p>

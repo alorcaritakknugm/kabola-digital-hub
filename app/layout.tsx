@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     "Peta GIS Alor",
     "Wisata Alor NTT",
     "UMKM Alor",
-    "NTT Mart",
+    "NTT Mart by Dekranasda Alor",
     "Kecamatan Kabola",
     "Kelurahan Kabola",
     "Desa Pante Deere",

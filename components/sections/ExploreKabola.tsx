@@ -42,10 +42,10 @@ const features = [
   },
   {
     icon: Store,
-    title: "NTT Mart",
-    desc: "Katalog produk-produk unggulan pilihan khas Nusa Tenggara Timur (NTT) buatan perajin dan UMKM lokal dari seluruh Kabupaten Alor.",
+    title: "NTT Mart by Dekranasda Alor",
+    desc: "Etalase produk-produk unggulan dan ekonomi kreatif pilihan khas Nusa Tenggara Timur di Kabupaten Alor.",
     href: "/umkm/ntt-mart",
-    cta: "Kunjungi NTT Mart",
+    cta: "Kunjungi NTT Mart by Dekranasda Alor",
   },
 ];
 

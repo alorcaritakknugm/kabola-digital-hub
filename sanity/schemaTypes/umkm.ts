@@ -57,7 +57,7 @@ export default {
       options: {
         list: [
           { title: 'UMKM Lokal', value: 'lokal' },
-          { title: 'NTT Mart', value: 'nttMart' },
+          { title: 'NTT Mart by Dekranasda Alor', value: 'nttMart' },
         ],
         layout: 'radio',
       },
