@@ -1,35 +1,35 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import StatistikView from "@/components/pages/StatistikView";
+import StatistikKesehatanView from "@/components/pages/StatistikKesehatanView";
 import { SlideUp } from "@/components/ui/animations/SlideUp";
-import { BarChart3 } from "lucide-react";
+import { HeartPulse } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Statistik Wilayah Kabola | Data Demografi & Grafik Interaktif · KKN-PPM UGM 2026",
+  title: "Statistik Kesehatan Kabola | Data CKG & Visualisasi · KKN-PPM UGM 2026",
   description:
-    "Data dan grafik statistik interaktif Kecamatan Kabola dan Kelurahan Kabola, Kabupaten Alor, NTT. Informasi lengkap jumlah penduduk, kependudukan, gender, agama, pendidikan, dan pekerjaan.",
+    "Data hasil Cek Kesehatan Gratis (CKG) masyarakat Kabola dalam bentuk visualisasi statistik. Informasi status gizi, tekanan darah, dan kondisi kesehatan masyarakat Kabola, Alor NTT.",
   keywords: [
-    "Statistik Kabola",
-    "Data Penduduk Kabola",
-    "Demografi Kelurahan Kabola",
-    "Grafik Statistik Alor",
-    "Pendidikan Kabola",
-    "Pekerjaan Penduduk Kabola",
+    "Statistik Kesehatan Kabola",
+    "Cek Kesehatan Gratis Kabola",
+    "CKG Kabola",
+    "IMT Kabola",
+    "Tekanan Darah Kabola",
+    "Kesehatan Masyarakat Alor",
     "KKN UGM Kabola 2026",
   ],
   alternates: {
-    canonical: "https://kaboladigitalhub.alorcarita.com/statistik",
+    canonical: "https://kaboladigitalhub.alorcarita.com/statistik/kesehatan",
   },
   openGraph: {
-    title: "Statistik Wilayah Kabola | Data & Grafik Demografi Interaktif",
+    title: "Statistik Kesehatan Kabola | Data CKG & Visualisasi Kesehatan",
     description:
-      "Portal statistik resmi Kecamatan Kabola dan Kelurahan Kabola, Alor NTT. Data interaktif kependudukan, gender, agama, pendidikan, dan pekerjaan.",
-    url: "https://kaboladigitalhub.alorcarita.com/statistik",
+      "Visualisasi data hasil Cek Kesehatan Gratis (CKG) masyarakat Kabola. Status gizi, tekanan darah, dan kondisi kesehatan dalam grafik interaktif.",
+    url: "https://kaboladigitalhub.alorcarita.com/statistik/kesehatan",
   },
 };
 
-export default function StatistikPage() {
+export default function StatistikKesehatanPage() {
   return (
     <main className="min-h-screen bg-sand text-navy">
       <Navbar />
@@ -49,16 +49,16 @@ export default function StatistikPage() {
         <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10 text-center">
           <SlideUp delay={0}>
             <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-6">
-              <BarChart3 className="w-8 h-8 text-kabola-teal-light" />
+              <HeartPulse className="w-8 h-8 text-kabola-teal-light" />
             </div>
             <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
-              Visualisasi Data & Demografi
+              Cek Kesehatan Gratis (CKG)
             </span>
             <h1 className="font-title text-4xl md:text-5xl text-white mb-4">
-              Statistik <span className="text-kabola-teal-light">Wilayah</span>
+              Statistik <span className="text-kabola-teal-light">Kesehatan</span>
             </h1>
             <p className="text-white/60 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              Eksplorasi data demografi, geografis, pendidikan, dan pekerjaan untuk Kecamatan Kabola, Kelurahan Kabola, serta Desa Pante Deere.
+              Data hasil pemeriksaan kesehatan gratis masyarakat Kabola disajikan dalam bentuk visualisasi statistik interaktif.
             </p>
           </SlideUp>
         </div>
@@ -73,7 +73,7 @@ export default function StatistikPage() {
       {/* Content Section */}
       <section className="py-16 md:py-24 dot-pattern relative">
         <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
-          <StatistikView />
+          <StatistikKesehatanView />
         </div>
       </section>
 

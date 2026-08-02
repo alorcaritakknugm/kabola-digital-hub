@@ -28,7 +28,13 @@ const navItems: NavItem[] = [
   },
   { label: "Cerita Kabola", href: "/cerita-kabola" },
   { label: "Peta GIS", href: "/peta" },
-  { label: "Statistik", href: "/statistik" },
+  {
+    label: "Statistik",
+    children: [
+      { label: "Statistik Wilayah", href: "/statistik" },
+      { label: "Statistik Kesehatan", href: "/statistik/kesehatan" },
+    ],
+  },
   {
     label: "Tentang",
     children: [
@@ -82,6 +88,10 @@ export default function Navbar() {
         if (c.href.includes("#")) return false;
         if (c.href === "/umkm") {
           return pathname === "/umkm" || (pathname.startsWith("/umkm/") && pathname !== "/umkm/ntt-mart");
+        }
+        // Exact-match only for routes that have sibling sub-routes (e.g. /statistik vs /statistik/kesehatan)
+        if (c.href === "/statistik") {
+          return pathname === "/statistik";
         }
         return pathname === c.href || pathname.startsWith(c.href + "/");
       });
