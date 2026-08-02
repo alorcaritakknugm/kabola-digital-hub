@@ -133,6 +133,51 @@ const MAP_ITEMS: MapItem[] = [
     image: "/images/peta-bahaya-tanah-longsor-kabola.png",
     description: "Pemetaan wilayah rawan gerakan tanah dan titik bahaya tanah longsor pada lereng-lereng curam Kabola.",
     village: "Kelurahan Kabola"
+  },
+  {
+    id: "bahaya-bencana-pantedeere",
+    title: "Peta Bahaya Bencana Multi-Risiko",
+    category: "mitigasi",
+    categoryLabel: "Mitigasi Bencana",
+    image: "/images/peta-bahaya-bencana-pantedeere.png",
+    description: "Peta integrasi komprehensif tingkat ancaman dan kerawanan multi-bencana di kawasan Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "cuaca-ekstrem-pantedeere",
+    title: "Peta Bahaya Cuaca Ekstrem",
+    category: "mitigasi",
+    categoryLabel: "Mitigasi Bencana",
+    image: "/images/peta-bahaya-cuaca-ekstrem-pantedeere.png",
+    description: "Zonasi potensi terdampak cuaca ekstrem seperti angin kencang dan hujan lebat berintensitas tinggi di Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "gelombang-abrasi-pantedeere",
+    title: "Peta Bahaya Gelombang Ekstrem & Abrasi",
+    category: "mitigasi",
+    categoryLabel: "Mitigasi Pesisir",
+    image: "/images/peta-bahaya-gelombang-ekstrem-dan-abrasi-pantedeere.png",
+    description: "Pemetaan daerah garis pantai yang rentan terhadap gempuran gelombang tinggi laut dan dampak erosi/abrasi pesisir di Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "kekeringan-pantedeere",
+    title: "Peta Bahaya Kekeringan",
+    category: "mitigasi",
+    categoryLabel: "Mitigasi Bencana",
+    image: "/images/peta-bahaya-kekeringan-pantedeere.png",
+    description: "Zonasi potensi ancaman kekeringan air bersih serta dampaknya bagi pertanian warga pada musim kemarau panjang di Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "tanah-longsor-pantedeere",
+    title: "Peta Bahaya Tanah Longsor",
+    category: "mitigasi",
+    categoryLabel: "Mitigasi Bencana",
+    image: "/images/peta-bahaya-tanah-longsor-pantedeere.png",
+    description: "Pemetaan wilayah rawan gerakan tanah dan titik bahaya tanah longsor pada lereng-lereng curam Pante Deere.",
+    village: "Desa Pante Deere"
   }
 ];
 
@@ -276,7 +321,7 @@ export default function GisMap() {
               Peta Digital Interaktif <span className="text-kabola-teal-light">Kabola</span>
             </h1>
             <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              Eksplorasi seluruh 10 peta administrasi wilayah, topografi, tutupan lahan, dan zonasi mitigasi bencana di Kecamatan Kabola.
+              Eksplorasi seluruh {MAP_ITEMS.length} peta administrasi wilayah, topografi, tutupan lahan, dan zonasi mitigasi bencana di Kecamatan Kabola.
             </p>
 
             {/* Primary Download Button */}
