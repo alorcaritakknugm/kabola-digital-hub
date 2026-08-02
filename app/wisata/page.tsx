@@ -6,19 +6,19 @@ import { client } from "@/sanity/lib/client";
 import { wisataQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "Wisata Alam Kabola | Destinasi Terbaik Alor NTT · KKN-PPM UGM 2026",
+  title: "Kegiatan Wisata Kabola | Ekowisata & Budaya Alor NTT · KKN-PPM UGM 2026",
   description:
-    "Katalog wisata tematik Kecamatan Kabola, Alor NTT yang mencakup konservasi dugong, pantai eksotis, desa tradisional, dan alam perbukitan. Reservasi via Pokdarwis. Program KKN-PPM UGM 2026.",
+    "Kegiatan wisata resmi Kecamatan Kabola, Alor NTT yang mencakup Ekowisata Bahari Jejak Laut Kabola (Dugong, Sika, Mangrove) dan Wisata Budaya Jejak Warisan Kabola (Monbang, Pakaian Kulit Kayu, Lego-Lego). Reservasi via Pengelola.",
   keywords: [
-    "wisata Alor NTT", "destinasi wisata Alor", "konservasi dugong Alor",
-    "pantai Alor", "wisata kabola", "Pokdarwis Alor", "KKN UGM wisata Alor",
-    "wisata alam NTT",
+    "kegiatan wisata Alor NTT", "Jejak Laut Kabola", "Jejak Warisan Kabola",
+    "konservasi dugong Alor", "wisata budaya Monbang", "Pokdarwis Alor",
+    "KKN UGM wisata Alor", "wisata alam Kabola",
   ],
   alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/wisata" },
   openGraph: {
-    title: "Wisata Alam Kabola | Destinasi Terbaik Alor NTT",
+    title: "Kegiatan Wisata Kabola | Ekowisata & Budaya Alor NTT",
     description:
-      "Jelajahi destinasi wisata eksotis Kecamatan Kabola seperti dugong, pantai, dan desa tradisional Alor NTT.",
+      "Jelajahi kegiatan wisata pilihan Kecamatan Kabola seperti Jejak Laut Kabola & Jejak Warisan Kabola Alor NTT.",
     url: "https://kaboladigitalhub.alorcarita.com/wisata",
   },
 };
