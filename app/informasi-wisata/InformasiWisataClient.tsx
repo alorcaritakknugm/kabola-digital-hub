@@ -231,8 +231,8 @@ export default function InformasiWisataClient({
           {/* Controls: Category Filter (TOP) -> Search & Sorting (BELOW) */}
           <div className="max-w-4xl mx-auto mb-12 space-y-8">
 
-            {/* 1. Category Filter Pills (TOP - matching Cerita Kabola) */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            {/* 1. Category Filter Pills (matching Kegiatan Wisata style) */}
+            <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-white/80 backdrop-blur-md border border-kabola-teal/15 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.03)] w-fit mx-auto">
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat;
                 return (
@@ -242,15 +242,14 @@ export default function InformasiWisataClient({
                       setSelectedCategory(cat);
                       setCurrentPage(1);
                     }}
-                    className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300 ${isActive
-                      ? "text-white"
-                      : "bg-white text-earth/70 hover:bg-kabola-teal/10 hover:text-kabola-teal border border-kabola-teal/15"
-                      }`}
+                    className={`relative px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 ${
+                      isActive ? "text-white" : "text-earth/70 hover:text-kabola-teal"
+                    }`}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="activeInformasiWisataTabPill"
-                        className="absolute inset-0 bg-kabola-teal rounded-full shadow-md shadow-kabola-teal/25"
+                        className="absolute inset-0 bg-kabola-teal rounded-full shadow-md shadow-kabola-teal/20"
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                       />
                     )}
