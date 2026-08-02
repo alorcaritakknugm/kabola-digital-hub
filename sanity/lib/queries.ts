@@ -137,3 +137,39 @@ export const ceritaKabolaBySlugQuery = groq`*[_type == "ceritaKabola" && slug.cu
   "imageUrl": gambar.asset->url,
   tag
 }`;
+
+// Query untuk mengambil semua Informasi Wisata (Artikel)
+export const informasiWisataQuery = groq`*[_type == "informasiWisata"] | order(_createdAt desc) {
+  _id,
+  judul,
+  subjudul,
+  "slug": slug.current,
+  kategori,
+  ringkasan,
+  "fotoUtama": fotoUtama.asset->url,
+  tanggalDiperbarui,
+  tags,
+  konten[]{
+    judulSection,
+    isiSection,
+    "fotoSection": fotoSection.asset->url
+  }
+}`;
+
+// Query untuk mengambil satu Informasi Wisata berdasarkan slug
+export const informasiWisataBySlugQuery = groq`*[_type == "informasiWisata" && slug.current == $slug][0] {
+  _id,
+  judul,
+  subjudul,
+  "slug": slug.current,
+  kategori,
+  ringkasan,
+  "fotoUtama": fotoUtama.asset->url,
+  tanggalDiperbarui,
+  tags,
+  konten[]{
+    judulSection,
+    isiSection,
+    "fotoSection": fotoSection.asset->url
+  }
+}`;
