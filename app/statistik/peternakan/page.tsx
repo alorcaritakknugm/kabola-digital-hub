@@ -2,6 +2,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import StatistikPeternakanView from "@/components/pages/StatistikPeternakanView";
 import type { Metadata } from "next";
+import { SlideUp } from "@/components/ui/animations/SlideUp";
+import { BarChart3 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Statistik Hewan Ternak | Kabola Digital Hub · KKN-PPM UGM 2026",
@@ -16,31 +18,48 @@ export const metadata: Metadata = {
 
 export default function StatistikPeternakanPage() {
   return (
-    <main className="min-h-screen bg-sand flex flex-col font-sans">
+    <main className="min-h-screen bg-sand text-navy">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden shrink-0">
-        <div className="absolute inset-0 bg-kabola-teal/5" />
-        <div className="absolute inset-0 bg-[url('/ornaments/ornament-cyan.svg')] opacity-10 bg-repeat bg-[length:120px]" />
-        
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 max-w-[1200px] text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-kabola-teal/10 text-kabola-teal font-medium text-xs sm:text-sm mb-4 sm:mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-kabola-teal" />
-            Data Peternakan
-          </div>
-          <h1 className="font-title text-4xl sm:text-5xl md:text-6xl text-ocean-blue leading-tight mb-4 sm:mb-6">
-            Statistik Hewan Ternak
-          </h1>
-          <p className="text-earth text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Eksplorasi data dan analisis pengelompokan wilayah Kabupaten Alor berdasarkan potensi hewan ternak.
-          </p>
+      <section className="relative bg-forest pt-32 pb-28 overflow-hidden">
+        {/* Background pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: "28px 28px",
+          }}
+        />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-kabola-teal/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10 text-center">
+          <SlideUp delay={0}>
+            <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-6">
+              <BarChart3 className="w-8 h-8 text-kabola-teal-light" />
+            </div>
+            <span className="inline-block bg-white/10 text-white/70 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-white/10">
+              Visualisasi Data Peternakan
+            </span>
+            <h1 className="font-title text-4xl md:text-5xl text-white mb-4">
+              Statistik <span className="text-kabola-teal-light">Hewan Ternak</span>
+            </h1>
+            <p className="text-white/60 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+              Eksplorasi data dan analisis pengelompokan wilayah Kabupaten Alor berdasarkan potensi hewan ternak.
+            </p>
+          </SlideUp>
+        </div>
+
+        <div className="wave-bottom pointer-events-none">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-16 md:h-20">
+            <path d="M0,40 C400,80 900,10 1440,45 L1440,80 L0,80 Z" fill="#F7F3EB" />
+          </svg>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="flex-1 py-12 md:py-20 relative z-10 -mt-8">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-[1200px]">
+      {/* Content Section */}
+      <section className="py-16 md:py-24 dot-pattern relative">
+        <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
           <StatistikPeternakanView />
         </div>
       </section>
