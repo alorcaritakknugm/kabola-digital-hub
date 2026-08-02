@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import { ArrowLeft, Tag } from "lucide-react";
+import { ArrowLeft, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -9,6 +8,8 @@ import { ceritaKabolaBySlugQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
 
 export const revalidate = 0;
+
+const SECTIONS_PER_PAGE = 2;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -35,14 +36,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function CeritaKabolaDetail({
   params,
-  searchParams
+  searchParams,
 }: {
-  params: Promise<{ slug: string }>,
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
   const fromTab = resolvedSearchParams.from || "gastronomi";
+
+  // Parse page param (1-indexed)
+  const rawPage = Number(resolvedSearchParams.page ?? 1);
 
   const cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug: resolvedParams.slug });
 
@@ -72,6 +76,26 @@ export default async function CeritaKabolaDetail({
 
   const displayImage = cerita.imageUrl || getFallbackImage(resolvedParams.slug, cerita.kategori);
 
+  // ── Pagination logic ─────────────────────────────────────────────
+  const hasKonten = cerita.konten && cerita.konten.length > 0;
+  const totalSections = hasKonten ? cerita.konten.length : 0;
+  const totalPages = hasKonten ? Math.ceil(totalSections / SECTIONS_PER_PAGE) : 1;
+  const paginated = totalPages > 1; // only paginate if more than 1 page needed
+  const currentPage = Math.min(Math.max(rawPage, 1), totalPages);
+
+  const currentSections: any[] = hasKonten
+    ? paginated
+      ? cerita.konten.slice(
+          (currentPage - 1) * SECTIONS_PER_PAGE,
+          currentPage * SECTIONS_PER_PAGE
+        )
+      : cerita.konten
+    : [];
+
+  // Build URL helper preserving from param
+  const pageUrl = (p: number) =>
+    `?from=${fromTab}&page=${p}`;
+
   return (
     <main className="min-h-screen bg-sand selection:bg-kabola-teal/20">
       <Navbar />
@@ -98,23 +122,26 @@ export default async function CeritaKabolaDetail({
             <p className="text-lg md:text-xl text-earth/60 max-w-2xl mx-auto font-medium">
               {cerita.subtitle}
             </p>
+
           </header>
 
-          {/* Featured Image */}
-          <div className="mb-12">
-            <div className="w-full rounded-3xl overflow-hidden shadow-xl shadow-kabola-teal/5 border border-kabola-teal/10 bg-slate-50">
-              <img
-                src={displayImage}
-                alt={cerita.judul}
-                className="w-full h-auto max-h-[700px] object-contain mx-auto block"
-              />
+          {/* Featured Image — only on first page */}
+          {currentPage === 1 && (
+            <div className="mb-12">
+              <div className="w-full rounded-3xl overflow-hidden shadow-xl shadow-kabola-teal/5 border border-kabola-teal/10 bg-slate-50">
+                <img
+                  src={displayImage}
+                  alt={cerita.judul}
+                  className="w-full h-auto max-h-[700px] object-contain mx-auto block"
+                />
+              </div>
+              {cerita.keteranganGambar && (
+                <p className="text-center text-xs text-earth/60 italic mt-3">
+                  Sumber: {cerita.keteranganGambar}
+                </p>
+              )}
             </div>
-            {cerita.keteranganGambar && (
-              <p className="text-center text-xs text-earth/60 italic mt-3">
-                Sumber: {cerita.keteranganGambar}
-              </p>
-            )}
-          </div>
+          )}
 
           {/* Content */}
           <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-kabola-teal/10 relative">
@@ -122,9 +149,9 @@ export default async function CeritaKabolaDetail({
               <span className="w-3 h-3 rounded-full bg-kabola-teal" />
             </div>
 
-            {cerita.konten && cerita.konten.length > 0 ? (
+            {hasKonten ? (
               <div className="space-y-10">
-                {cerita.konten.map((sec: any, idx: number) => (
+                {currentSections.map((sec: any, idx: number) => (
                   <div key={idx} className="prose prose-lg max-w-none">
                     {sec.judulSection && (
                       <h2 className="font-title text-2xl md:text-3xl text-forest mb-4 pb-2 border-b border-sand flex items-center gap-3">
@@ -160,8 +187,58 @@ export default async function CeritaKabolaDetail({
               </div>
             )}
 
+            {/* ── Pagination Nav ── */}
+            {paginated && (
+              <div className="mt-12 pt-8 border-t border-slate-100">
+                {/* Page dots */}
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <Link
+                      key={p}
+                      href={pageUrl(p)}
+                      scroll={true}
+                      className={`flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold transition-all ${
+                        p === currentPage
+                          ? "bg-kabola-teal text-white shadow-md"
+                          : "bg-sand text-earth/60 hover:bg-kabola-teal/10 hover:text-kabola-teal border border-kabola-teal/15"
+                      }`}
+                    >
+                      {p}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Prev / Next buttons */}
+                <div className="flex items-center justify-between gap-4">
+                  {currentPage > 1 ? (
+                    <Link
+                      href={pageUrl(currentPage - 1)}
+                      scroll={true}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-kabola-teal/20 text-sm font-semibold text-earth hover:border-kabola-teal hover:text-kabola-teal transition-all"
+                    >
+                      <ChevronLeft className="w-4 h-4" /> Sebelumnya
+                    </Link>
+                  ) : (
+                    <div />
+                  )}
+
+                  {currentPage < totalPages ? (
+                    <Link
+                      href={pageUrl(currentPage + 1)}
+                      scroll={true}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-kabola-teal text-white text-sm font-semibold hover:bg-kabola-teal-dark transition-all"
+                    >
+                      Berikutnya <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Share / Footer Article */}
-            <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-end gap-4">
+            <div className={`${paginated ? "mt-8" : "mt-16"} pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-end gap-4`}>
               <div className="flex items-center gap-3">
                 <span className="text-sm font-medium text-earth/60">Kategori:</span>
                 <span className="px-3 py-1 bg-slate-100 text-forest text-xs font-bold uppercase rounded-md">
