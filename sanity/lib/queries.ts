@@ -78,6 +78,9 @@ export const wisataQuery = groq`*[_type == "wisata"] | order(_createdAt desc) {
   nama,
   "slug": slug.current,
   deskripsi,
+  overview,
+  highlights,
+  namaPengelola,
   "imageUrl": foto.asset->url,
   "galleryUrls": galeri[].asset->url,
   lokasiMaps,
@@ -93,6 +96,9 @@ export const wisataBySlugQuery = groq`*[_type == "wisata" && slug.current == $sl
   nama,
   "slug": slug.current,
   deskripsi,
+  overview,
+  highlights,
+  namaPengelola,
   "imageUrl": foto.asset->url,
   "galleryUrls": galeri[].asset->url,
   lokasiMaps,
@@ -123,7 +129,14 @@ export const ceritaKabolaQuery = groq`*[_type == "ceritaKabola"] | order(_create
   kategori,
   deskripsi,
   "imageUrl": gambar.asset->url,
-  tag
+  keteranganGambar,
+  tag,
+  konten[]{
+    judulSection,
+    isiSection,
+    "fotoSection": fotoSection.asset->url,
+    keteranganFotoSection
+  }
 }`;
 
 // Query untuk mengambil satu Cerita Kabola berdasarkan slug (halaman detail)
@@ -135,7 +148,14 @@ export const ceritaKabolaBySlugQuery = groq`*[_type == "ceritaKabola" && slug.cu
   kategori,
   deskripsi,
   "imageUrl": gambar.asset->url,
-  tag
+  keteranganGambar,
+  tag,
+  konten[]{
+    judulSection,
+    isiSection,
+    "fotoSection": fotoSection.asset->url,
+    keteranganFotoSection
+  }
 }`;
 
 // Query untuk mengambil semua Informasi Wisata (Artikel)
@@ -147,12 +167,14 @@ export const informasiWisataQuery = groq`*[_type == "informasiWisata"] | order(_
   kategori,
   ringkasan,
   "fotoUtama": fotoUtama.asset->url,
+  keteranganFotoUtama,
   tanggalDiperbarui,
   tags,
   konten[]{
     judulSection,
     isiSection,
-    "fotoSection": fotoSection.asset->url
+    "fotoSection": fotoSection.asset->url,
+    keteranganFotoSection
   }
 }`;
 
@@ -165,11 +187,13 @@ export const informasiWisataBySlugQuery = groq`*[_type == "informasiWisata" && s
   kategori,
   ringkasan,
   "fotoUtama": fotoUtama.asset->url,
+  keteranganFotoUtama,
   tanggalDiperbarui,
   tags,
   konten[]{
     judulSection,
     isiSection,
-    "fotoSection": fotoSection.asset->url
+    "fotoSection": fotoSection.asset->url,
+    keteranganFotoSection
   }
 }`;

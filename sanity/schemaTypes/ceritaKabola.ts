@@ -59,10 +59,56 @@ export default {
     },
     {
       name: 'gambar',
-      title: 'Gambar Ilustrasi',
+      title: 'Gambar Utama / Header',
       type: 'image',
       description: 'Foto atau gambar yang mewakili cerita ini. Tampil sebagai header kartu. Disarankan rasio 4:3.',
       options: { hotspot: true },
+    },
+    {
+      name: 'keteranganGambar',
+      title: 'Keterangan / Sumber Gambar Utama (Opsional)',
+      type: 'string',
+      description: 'Contoh: Foto oleh Dokumentasi Sanggar Ehenghulu.',
+    },
+    {
+      name: 'konten',
+      title: 'Konten Cerita (Section, Sub-judul & Paragraf)',
+      type: 'array',
+      description: 'Tambah section/paragraf teks bebas, sub-judul, dan foto ilustrasi sesuai struktur cerita.',
+      of: [
+        {
+          type: 'object',
+          title: 'Section Cerita',
+          fields: [
+            {
+              name: 'judulSection',
+              title: 'Sub-judul Section (Opsional)',
+              type: 'string',
+              description: 'Sub-judul bagian cerita.',
+            },
+            {
+              name: 'isiSection',
+              title: 'Isi Paragraf Teks',
+              type: 'text',
+              rows: 6,
+              description: 'Teks naskah cerita.',
+              validation: (Rule: any) => Rule.required(),
+            },
+            {
+              name: 'fotoSection',
+              title: 'Foto Ilustrasi Section (Opsional)',
+              type: 'image',
+              options: { hotspot: true },
+            },
+            {
+              name: 'keteranganFotoSection',
+              title: 'Keterangan / Sumber Gambar Section (Opsional)',
+              type: 'string',
+              description: 'Contoh: Foto oleh Dokumentasi Tim KKN UGM 2026.',
+            },
+          ],
+        },
+      ],
     },
   ],
 }

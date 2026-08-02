@@ -58,6 +58,12 @@ export default {
       options: { hotspot: true },
     },
     {
+      name: 'keteranganFotoUtama',
+      title: 'Keterangan / Sumber Gambar Header (Opsional)',
+      type: 'string',
+      description: 'Contoh: Foto oleh KKN-PPM UGM 2026 / Pokdarwis Kabola.',
+    },
+    {
       name: 'tanggalDiperbarui',
       title: 'Tanggal Diperbarui / Publikasi',
       type: 'string',
@@ -92,6 +98,12 @@ export default {
               title: 'Foto Ilustrasi Section (Opsional)',
               type: 'image',
               options: { hotspot: true },
+            },
+            {
+              name: 'keteranganFotoSection',
+              title: 'Keterangan / Sumber Gambar Section (Opsional)',
+              type: 'string',
+              description: 'Contoh: Foto oleh Dokumentasi Tim KKN UGM 2026.',
             },
           ],
         },
