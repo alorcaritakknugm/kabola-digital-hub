@@ -3,7 +3,8 @@ import Image from "next/image";
 import { Mail, MapPin, ExternalLink } from "lucide-react";
 
 const exploreLinks = [
-  { label: "Wisata Kabola", href: "/wisata" },
+  { label: "Katalog Wisata", href: "/wisata" },
+  { label: "Informasi Wisata", href: "/informasi-wisata" },
   { label: "Cerita & Budaya", href: "/cerita-kabola" },
   { label: "Peta Wilayah (GIS)", href: "/peta" },
   { label: "Statistik Digital", href: "/statistik" },

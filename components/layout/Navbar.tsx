@@ -12,7 +12,13 @@ type NavItem = { label: string; href?: string; children?: Child[] };
 
 const navItems: NavItem[] = [
   { label: "Beranda", href: "/" },
-  { label: "Wisata", href: "/wisata" },
+  {
+    label: "Wisata",
+    children: [
+      { label: "Katalog Wisata", href: "/wisata" },
+      { label: "Informasi Wisata", href: "/informasi-wisata" },
+    ],
+  },
   {
     label: "UMKM",
     children: [
