@@ -33,6 +33,7 @@ const navItems: NavItem[] = [
     children: [
       { label: "Statistik Wilayah", href: "/statistik" },
       { label: "Statistik Kesehatan", href: "/statistik/kesehatan" },
+      { label: "Statistik Hewan Ternak", href: "/statistik/peternakan" },
     ],
   },
   {
