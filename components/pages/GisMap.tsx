@@ -178,6 +178,51 @@ const MAP_ITEMS: MapItem[] = [
     image: "/images/peta-bahaya-tanah-longsor-pantedeere.png",
     description: "Pemetaan wilayah rawan gerakan tanah dan titik bahaya tanah longsor pada lereng-lereng curam Pante Deere.",
     village: "Desa Pante Deere"
+  },
+  {
+    id: "jalur-evakuasi-pantedeere",
+    title: "Peta Jalur Evakuasi",
+    category: "mitigasi",
+    categoryLabel: "Mitigasi Bencana",
+    image: "/images/jalur-evakuasi-pantedeere.png",
+    description: "Pemetaan rute evakuasi yang aman dan titik kumpul (assembly point) untuk mitigasi bencana di kawasan Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "tutupan-lahan-pantedeere",
+    title: "Peta Tutupan Lahan",
+    category: "administrasi",
+    categoryLabel: "Penggunaan Lahan",
+    image: "/images/peta-tutupan-lahan-pantedeere.png",
+    description: "Distribusi penggunaan dan tutupan lahan mencakup kawasan pemukiman, kebun warga, vegetasi hutan, dan pesisir di Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "jenis-tanah-pantedeere",
+    title: "Peta Jenis Tanah",
+    category: "administrasi",
+    categoryLabel: "Geografi & Tanah",
+    image: "/images/peta-jenis-tanah-pantedeere.png",
+    description: "Klasifikasi jenis dan orde tanah serta peta persebaran sifat tanah untuk potensi pertanian dan pemukiman di Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "karhutla-pantedeere",
+    title: "Peta Bahaya Kebakaran Hutan & Lahan",
+    category: "mitigasi",
+    categoryLabel: "Mitigasi Bencana",
+    image: "/images/peta-bahaya-kebakaran-hutan-dan-lahan-pantedeere.png",
+    description: "Tingkat kerawanan Karhutla di kawasan vegetasi kering, perbukitan, dan lahan perkebunan masyarakat Pante Deere.",
+    village: "Desa Pante Deere"
+  },
+  {
+    id: "kesesuaian-lahan-hortikultura-pantedeere",
+    title: "Peta Kesesuaian Lahan Hortikultura",
+    category: "administrasi",
+    categoryLabel: "Geografi & Tanah",
+    image: "/images/peta-kesesuaian-lahan-hortikultura-pantedeere.png",
+    description: "Analisis potensi dan kesesuaian lahan untuk pengembangan komoditas pertanian dan tanaman hortikultura di Pante Deere.",
+    village: "Desa Pante Deere"
   }
 ];
 
