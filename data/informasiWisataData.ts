@@ -2,6 +2,7 @@ export interface InformasiWisataSection {
   judulSection?: string;
   isiSection: string; // Paragraf atau narasi teks
   fotoSection?: string;
+  keteranganFotoSection?: string; // Keterangan atau sumber gambar section
 }
 
 export interface InformasiWisataItem {
@@ -12,6 +13,7 @@ export interface InformasiWisataItem {
   kategori: string;
   ringkasan: string;
   fotoUtama: string;
+  keteranganFotoUtama?: string; // Keterangan atau sumber gambar header
   tanggalDiperbarui?: string;
   konten: InformasiWisataSection[];
 }

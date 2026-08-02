@@ -25,108 +25,7 @@ const tabs = [
   { id: "lensa-kabola", label: "Lensa Kabola", icon: Camera, color: "#2BB5B5" },
 ];
 
-/* ─── Fallback content ───────────────────────────────────────── */
-const fallbackContent: Record<string, { title: string; subtitle: string; desc: string; image: string; tag: string; slug?: string; _id?: string }[]> = {
-  gastronomi: [
-    {
-      title: "Jagung Bose",
-      subtitle: "Makanan Pokok Tradisional",
-      desc: "Jagung bose adalah hidangan pokok masyarakat Alor yang dibuat dari jagung yang dimasak hingga lunak dengan tambahan kacang merah. Makanan ini telah menjadi identitas kuliner Alor selama berabad-abad.",
-      image: "/images/culture-1.jpg",
-      tag: "Kuliner Tradisional",
-    },
-    {
-      title: "Se'i Ikan & Sei Daging",
-      subtitle: "Olahan Asap Khas NTT",
-      desc: "Teknik pengasapan tradisional yang menghasilkan cita rasa khas pada ikan dan daging. Proses pengolahan ini merupakan warisan leluhur yang masih dijaga masyarakat Kabola.",
-      image: "/images/culture-2.jpg",
-      tag: "Teknik Memasak",
-    },
-    {
-      title: "Tuak & Sopi",
-      subtitle: "Minuman Fermentasi Adat",
-      desc: "Minuman fermentasi dari nira lontar yang memiliki nilai adat dan sosial dalam kehidupan masyarakat Alor. Sering hadir dalam upacara adat dan pertemuan komunitas.",
-      image: "/images/culture-3.jpg",
-      tag: "Tradisi Sosial",
-    },
-  ],
-  "eko-naratif": [
-    {
-      title: "Hutan Mangrove & Nelayan Kabola",
-      subtitle: "Ekologi Pesisir",
-      desc: "Warga Kabola memiliki pengetahuan mendalam tentang ritme pasang-surut dan perubahan ekosistem mangrove yang menjadi sumber penghidupan mereka selama generasi.",
-      image: "/images/view-3.jpg",
-      tag: "Cerita Ekologi",
-    },
-    {
-      title: "Perubahan Musim & Pertanian Lokal",
-      subtitle: "Kearifan Agroekologi",
-      desc: "Petani di Kabola membaca tanda-tanda alam seperti arah angin, warna langit, dan siklus bunga sebagai panduan bertanam yang telah teruji ratusan tahun.",
-      image: "/images/view-5.jpg",
-      tag: "Pengetahuan Lokal",
-    },
-  ],
-  "tradisi-budaya": [
-    {
-      title: "Tenun Ikat Alor",
-      subtitle: "Warisan Tekstil Nusantara",
-      desc: "Setiap motif tenun ikat Alor menceritakan sejarah dan identitas suku-suku yang mendiaminya. Kabola memiliki ragam motif khas yang menjadi simbol kebanggaan lokal.",
-      image: "/images/dugong.jpg",
-      tag: "Seni Tekstil",
-    },
-    {
-      title: "Tarian & Upacara Adat",
-      subtitle: "Ekspresi Jiwa Kabola",
-      desc: "Berbagai tarian adat dan upacara ritual menjadi ekspresi identitas budaya masyarakat Kabola, seperti tari lego-lego, tari perang, dan upacara penyambutan.",
-      image: "/images/view-1.jpg",
-      tag: "Seni Pertunjukan",
-    },
-    {
-      title: "Tradisi Lisan Kabola",
-      subtitle: "Cara Pandang & Relasi Sosial",
-      desc: "Eksplorasi tradisi lisan masyarakat Kabola yang menggali cara pandang terhadap dunia, relasi sosial, serta keterhubungan antara manusia, leluhur, dan lingkungan hidup.",
-      image: "/images/view-5.jpg",
-      tag: "Tradisi Lisan",
-    },
-    {
-      title: "Moko & Motif Tradisional",
-      subtitle: "Seni Visual Kabola",
-      desc: "Eksplorasi motif-motif tradisional Alor mulai dari ukiran moko hingga ornamen tenun sebagai bahasa visual yang menyimpan kosmologi dan sejarah masyarakat Kabola.",
-      image: "/images/culture-2.jpg",
-      tag: "Seni Visual",
-    },
-    {
-      title: "Bahasa & Sastra Lisan",
-      subtitle: "Tradisi Oral Nusantara",
-      desc: "Masyarakat Kabola menyimpan kekayaan tradisi lisan seperti syair, cerita rakyat, dan peribahasa yang menjadi cerminan nilai-nilai kearifan lokal yang mendalam.",
-      image: "/images/culture-3.jpg",
-      tag: "Sastra Lisan",
-    },
-  ],
-  "lensa-kabola": [
-    {
-      title: "Wajah-Wajah Kabola",
-      subtitle: "Potret Manusia & Ceritanya",
-      desc: "Setiap wajah menyimpan cerita. Seri foto ini menangkap ekspresi, gestur, dan keseharian warga Kabola dari berbagai usia dan latar belakang.",
-      image: "/images/view-1.jpg",
-      tag: "Potret",
-    },
-    {
-      title: "Alam yang Hidup",
-      subtitle: "Lanskap & Ekosistem",
-      desc: "Dokumentasi keindahan alam Kabola dari pesisir berbatu hingga hutan tropis sebagai saksi bisu kehidupan yang berjalan di dalamnya.",
-      image: "/images/view-3.jpg",
-      tag: "Lanskap",
-    },
-    {
-      title: "Tangan yang Berkarya",
-      subtitle: "Hasil Olah Tangan Lokal",
-      desc: "Foto-foto close-up yang merayakan keahlian tangan warga Kabola dalam menenun, memasak, dan mengolah bahan alam menjadi karya bernilai.",
-      image: "/images/culture-3.jpg",
-      tag: "Kerajinan",
-    },
-  ],
-};
+
 
 /* ─── Component ─────────────────────────────────────────────── */
 export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaList?: any[] }) {
@@ -183,7 +82,7 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
       tag: item.tag || activeTab_.label,
     }));
 
-  const activeStories = (cmsItems.length > 0 ? cmsItems : fallbackContent[activeTab] ?? []).filter((item: any) => {
+  const activeStories = cmsItems.filter((item: any) => {
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
     return (
@@ -270,11 +169,10 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                     setActiveTab(tab.id);
                     setCurrentPage(1);
                   }}
-                  className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300 ${
-                    isActive
+                  className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300 ${isActive
                       ? "text-white"
                       : "bg-white text-earth/70 hover:bg-kabola-teal/10 hover:text-kabola-teal border border-kabola-teal/15"
-                  }`}
+                    }`}
                 >
                   {isActive && (
                     <motion.div
@@ -408,11 +306,10 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                           <button
                             key={page}
                             onClick={() => handlePageChange(page as number)}
-                            className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${
-                              currentPage === page
+                            className={`w-8 h-8 rounded-full text-xs font-semibold transition-all ${currentPage === page
                                 ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
                                 : "bg-white text-earth/70 hover:bg-sand border border-earth/10"
-                            }`}
+                              }`}
                           >
                             {page}
                           </button>
@@ -462,19 +359,6 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Coming soon notice */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-10 text-center"
-          >
-            <div className="inline-flex items-center gap-2 bg-kabola-teal/10 border border-kabola-teal/20 rounded-full px-5 py-2.5 text-sm text-kabola-teal">
-              <span className="w-2 h-2 rounded-full bg-kabola-teal animate-pulse" />
-              Konten lengkap akan diperbarui selama KKN berlangsung di lapangan
-            </div>
-          </motion.div>
 
         </div>
       </section>

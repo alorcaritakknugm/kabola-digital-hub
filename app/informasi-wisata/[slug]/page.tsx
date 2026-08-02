@@ -23,6 +23,7 @@ async function getArticle(slug: string) {
         kategori: sanityDoc.kategori || "Bahari",
         ringkasan: sanityDoc.ringkasan,
         fotoUtama: sanityDoc.fotoUtama || "/images/view-4.jpg",
+        keteranganFotoUtama: sanityDoc.keteranganFotoUtama,
         tanggalDiperbarui: sanityDoc.tanggalDiperbarui,
         tags: sanityDoc.tags,
         konten: sanityDoc.konten || [],
@@ -125,8 +126,13 @@ export default async function InformasiWisataDetail({
                 {item.judul}
               </h1>
               {item.subjudul && (
-                <p className="text-kabola-teal-light text-lg md:text-xl font-medium italic">
+                <p className="text-kabola-teal-light text-lg md:text-xl font-medium italic mb-2">
                   {item.subjudul}
+                </p>
+              )}
+              {item.keteranganFotoUtama && (
+                <p className="text-white/60 text-xs italic">
+                  Foto Header: {item.keteranganFotoUtama}
                 </p>
               )}
             </div>
@@ -152,13 +158,19 @@ export default async function InformasiWisataDetail({
                       {sec.isiSection}
                     </div>
                     {sec.fotoSection && (
-                      <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden my-6 border border-slate-100">
-                        <Image
-                          src={sec.fotoSection}
-                          alt={sec.judulSection || `Ilustrasi ${idx + 1}`}
-                          fill
-                          className="object-cover"
-                        />
+                      <div className="my-6">
+                        <div className="w-full rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50">
+                          <img
+                            src={sec.fotoSection}
+                            alt={sec.judulSection || `Ilustrasi ${idx + 1}`}
+                            className="w-full h-auto max-h-[650px] object-contain mx-auto block"
+                          />
+                        </div>
+                        {sec.keteranganFotoSection && (
+                          <p className="text-center text-xs text-earth/60 italic mt-2.5">
+                            Sumber: {sec.keteranganFotoSection}
+                          </p>
+                        )}
                       </div>
                     )}
                   </div>

@@ -33,10 +33,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function CeritaKabolaDetail({ 
+export default async function CeritaKabolaDetail({
   params,
   searchParams
-}: { 
+}: {
   params: Promise<{ slug: string }>,
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
@@ -64,7 +64,7 @@ export default async function CeritaKabolaDetail({
     if (slug === 'wajah-wajah-kabola') return '/images/view-1.jpg';
     if (slug === 'alam-yang-hidup') return '/images/view-3.jpg';
     if (slug === 'tangan-yang-berkarya') return '/images/culture-3.jpg';
-    
+
     if (kategori === 'lensa-kabola') return '/images/view-3.jpg';
     if (kategori === 'eko-naratif') return '/images/view-1.jpg';
     return '/images/culture-1.jpg';
@@ -75,12 +75,12 @@ export default async function CeritaKabolaDetail({
   return (
     <main className="min-h-screen bg-sand selection:bg-kabola-teal/20">
       <Navbar />
-      
+
       <article className="pt-32 pb-20 md:pt-40 md:pb-32 dot-pattern">
         <div className="container mx-auto px-4 max-w-4xl">
-          
+
           {/* Breadcrumb & Navigation */}
-          <Link 
+          <Link
             href={`/cerita-kabola?tab=${fromTab}`}
             className="inline-flex items-center gap-2 text-earth/60 hover:text-kabola-teal transition-colors mb-8 text-sm font-medium"
           >
@@ -101,15 +101,19 @@ export default async function CeritaKabolaDetail({
           </header>
 
           {/* Featured Image */}
-          <div className="relative h-[40vh] md:h-[60vh] min-h-[300px] w-full rounded-3xl overflow-hidden mb-12 shadow-xl shadow-kabola-teal/5 border border-kabola-teal/10">
-            <Image 
-              src={displayImage} 
-              alt={cerita.judul} 
-              fill 
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-forest/30 to-transparent pointer-events-none" />
+          <div className="mb-12">
+            <div className="w-full rounded-3xl overflow-hidden shadow-xl shadow-kabola-teal/5 border border-kabola-teal/10 bg-slate-50">
+              <img
+                src={displayImage}
+                alt={cerita.judul}
+                className="w-full h-auto max-h-[700px] object-contain mx-auto block"
+              />
+            </div>
+            {cerita.keteranganGambar && (
+              <p className="text-center text-xs text-earth/60 italic mt-3">
+                Sumber: {cerita.keteranganGambar}
+              </p>
+            )}
           </div>
 
           {/* Content */}
@@ -118,10 +122,44 @@ export default async function CeritaKabolaDetail({
               <span className="w-3 h-3 rounded-full bg-kabola-teal" />
             </div>
 
-            <div className="prose prose-lg md:prose-xl prose-stone max-w-none prose-headings:font-title prose-headings:text-forest prose-p:text-earth/80 prose-p:leading-relaxed prose-a:text-kabola-teal hover:prose-a:text-kabola-teal-dark first-letter:text-5xl first-letter:font-title first-letter:text-kabola-teal first-letter:float-left first-letter:mr-3 first-letter:mt-1">
-              <p>{cerita.deskripsi}</p>
-            </div>
-            
+            {cerita.konten && cerita.konten.length > 0 ? (
+              <div className="space-y-10">
+                {cerita.konten.map((sec: any, idx: number) => (
+                  <div key={idx} className="prose prose-lg max-w-none">
+                    {sec.judulSection && (
+                      <h2 className="font-title text-2xl md:text-3xl text-forest mb-4 pb-2 border-b border-sand flex items-center gap-3">
+                        <span className="w-2.5 h-7 rounded-full bg-kabola-teal inline-block" />
+                        {sec.judulSection}
+                      </h2>
+                    )}
+                    <div className="text-earth/80 leading-relaxed text-base md:text-lg space-y-4 whitespace-pre-line">
+                      {sec.isiSection}
+                    </div>
+                    {sec.fotoSection && (
+                      <div className="my-6">
+                        <div className="w-full rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50">
+                          <img
+                            src={sec.fotoSection}
+                            alt={sec.judulSection || `Ilustrasi ${idx + 1}`}
+                            className="w-full h-auto max-h-[650px] object-contain mx-auto block"
+                          />
+                        </div>
+                        {sec.keteranganFotoSection && (
+                          <p className="text-center text-xs text-earth/60 italic mt-2.5">
+                            Sumber: {sec.keteranganFotoSection}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="prose prose-lg md:prose-xl prose-stone max-w-none prose-headings:font-title prose-headings:text-forest prose-p:text-earth/80 prose-p:leading-relaxed prose-a:text-kabola-teal hover:prose-a:text-kabola-teal-dark first-letter:text-5xl first-letter:font-title first-letter:text-kabola-teal first-letter:float-left first-letter:mr-3 first-letter:mt-1 whitespace-pre-line">
+                <p>{cerita.deskripsi}</p>
+              </div>
+            )}
+
             {/* Share / Footer Article */}
             <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-end gap-4">
               <div className="flex items-center gap-3">

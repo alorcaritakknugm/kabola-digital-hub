@@ -457,10 +457,10 @@ export default function InformasiWisataClient({
               </div>
               <div>
                 <h4 className="font-title text-lg text-forest mb-1">
-                  Ingin Reservasi Paket Wisata?
+                  Ingin Reservasi Kegiatan Wisata?
                 </h4>
                 <p className="text-earth/60 text-xs md:text-sm leading-relaxed">
-                  Yuk, lihat katalog paket wisata resmi di menu Wisata.
+                  Yuk, lihat katalog kegiatan wisata resmi di menu Wisata.
                 </p>
               </div>
             </div>
@@ -468,7 +468,7 @@ export default function InformasiWisataClient({
               href="/wisata"
               className="flex-shrink-0 px-6 py-3 rounded-full bg-forest hover:bg-ocean-blue-light text-white text-xs font-bold transition-all shadow-md hover:-translate-y-0.5 whitespace-nowrap"
             >
-              Lihat Paket Wisata
+              Lihat Kegiatan Wisata
             </Link>
           </div>
 
