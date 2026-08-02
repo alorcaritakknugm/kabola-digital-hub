@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Mail, MapPin, ExternalLink } from "lucide-react";
 
 const exploreLinks = [
-  { label: "Katalog Wisata", href: "/wisata" },
+  { label: "Kegiatan Wisata", href: "/wisata" },
   { label: "Informasi Wisata", href: "/informasi-wisata" },
   { label: "Cerita & Budaya", href: "/cerita-kabola" },
   { label: "Peta Wilayah (GIS)", href: "/peta" },

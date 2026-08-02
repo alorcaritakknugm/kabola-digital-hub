@@ -166,7 +166,7 @@ export default function Hero() {
             href="/wisata"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 text-sm font-medium tracking-wide active:scale-95"
           >
-            Katalog Wisata
+            Kegiatan Wisata
           </Link>
         </motion.div>
       </motion.div>

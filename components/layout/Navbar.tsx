@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   {
     label: "Wisata",
     children: [
-      { label: "Katalog Wisata", href: "/wisata" },
+      { label: "Kegiatan Wisata", href: "/wisata" },
       { label: "Informasi Wisata", href: "/informasi-wisata" },
     ],
   },

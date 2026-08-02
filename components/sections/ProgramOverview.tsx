@@ -18,7 +18,7 @@ const programs = [
   {
     icon: Compass,
     title: "Wisata & Reservasi",
-    desc: "Katalog paket wisata tematik Kabola dengan sistem reservasi langsung ke Pokdarwis via WhatsApp.",
+    desc: "Katalog kegiatan wisata tematik Kabola dengan sistem reservasi langsung ke Pokdarwis via WhatsApp.",
     href: "/wisata",
   },
   {

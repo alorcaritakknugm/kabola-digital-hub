@@ -53,14 +53,14 @@ const services = [
   {
     id: "wisata",
     icon: Globe,
-    title: "Katalog Wisata & Reservasi",
+    title: "Kegiatan Wisata & Reservasi",
     shortTitle: "Wisata",
-    tag: "Katalog Wisata",
+    tag: "Kegiatan Wisata",
     tagColor: "bg-forest/10 text-forest",
     description:
-      "Katalog wisata tematik Kabola dengan sistem reservasi sederhana yang terhubung ke Pokdarwis. Temukan paket wisata alam, budaya, dan petualangan yang dikurasi tim Soshum.",
+      "Katalog kegiatan wisata tematik Kabola dengan sistem reservasi sederhana yang terhubung ke Pokdarwis. Temukan kegiatan wisata alam, budaya, dan petualangan yang dikurasi tim Soshum.",
     features: [
-      "Paket wisata tematik (alam, budaya, kuliner)",
+      "Kegiatan wisata tematik (alam, budaya, kuliner)",
       "Sistem reservasi via WhatsApp",
       "Profil destinasi wisata lokal",
       "Terintegrasi dengan Pokdarwis Kabola",
