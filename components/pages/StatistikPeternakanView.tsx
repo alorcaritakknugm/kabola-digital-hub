@@ -69,25 +69,23 @@ export default function StatistikPeternakanView() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {clusters.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setActiveCluster(c.id)}
-              className={`p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 border-2 ${
-                activeCluster === c.id
-                  ? `${c.color} ${c.bg} shadow-md`
-                  : "border-transparent bg-slate-50 hover:bg-slate-100"
-              }`}
-            >
-              <h4 className={`text-base sm:text-lg font-bold ${activeCluster === c.id ? "text-forest" : "text-slate-700"}`}>
+        <div className="flex flex-col items-center w-full px-1 mb-8">
+          <div className="w-full sm:w-auto overflow-x-auto scrollbar-none flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 bg-white p-1.5 rounded-2xl sm:rounded-full border border-kabola-teal/15 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+            {clusters.map((c) => (
+              <button
+                key={c.id}
+                onClick={() => setActiveCluster(c.id)}
+                className={`flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all shrink-0 ${
+                  activeCluster === c.id
+                    ? "bg-kabola-teal text-white"
+                    : "text-earth/70 hover:text-earth"
+                }`}
+              >
+                <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 {c.name}
-              </h4>
-              <p className="text-xs sm:text-sm text-earth/70 mt-1 line-clamp-2">
-                {c.anggota.length} Kecamatan terdaftar
-              </p>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
 
         <AnimatePresence mode="wait">
