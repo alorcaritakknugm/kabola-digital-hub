@@ -6,27 +6,27 @@ export const staticGastronomi = [
     subtitle: "Warisan Kuliner dari Hasil Bumi Lokal",
     kategori: "gastronomi",
     deskripsi: "Jagung titi merupakan salah satu warisan kuliner khas Alor yang lahir dari kedekatan masyarakat dengan jagung sebagai sumber pangan utama, mencerminkan kemampuan memanfaatkan hasil pertanian lokal.",
-    imageUrl: null,
-    keteranganGambar: null,
+    imageUrl: "/images/cerita/jagung-titi-1.jpg",
+    keteranganGambar: "Jagung Titi yang telah selesai dipipihkan",
     tag: "Kuliner Tradisional",
     konten: [
       {
         judulSection: "Lebih Dari Sekadar Makanan Ringan",
         isiSection: "Bagi masyarakat Alor, jagung titi bukan sekadar makanan ringan. Hidangan ini kerap hadir dalam berbagai momen kebersamaan, menyambut tamu, hingga kegiatan adat dan keagamaan. Proses pembuatannya diwariskan secara alami di dalam keluarga, di mana anak-anak terbiasa melihat dan membantu orang tua menyangrai serta menumbuk jagung.",
-        fotoSection: null,
-        keteranganFotoSection: null
+        fotoSection: "/images/cerita/jagung-titi-3.jpg",
+        keteranganFotoSection: "Warga sedang menyiapkan jagung untuk disangrai"
       },
       {
         judulSection: "Proses Meniti Jagung",
         isiSection: "Pembuatannya masih mempertahankan cara tradisional. Jagung pulut disangrai sambil terus diaduk agar matang merata, mengurangi kadar air dan menambah aroma harum. Biji jagung yang masih panas kemudian diletakkan di atas batu datar dan dipukul menggunakan batu pipih hingga menjadi lempengan tipis. Proses pemukulan inilah yang disebut 'meniti'.",
-        fotoSection: null,
-        keteranganFotoSection: null
+        fotoSection: "/images/cerita/jagung-titi-2.jpg",
+        keteranganFotoSection: "Proses menyangrai jagung di atas wajan tanah liat"
       },
       {
         judulSection: "Cita Rasa & Pelestarian",
         isiSection: "Jagung titi memiliki sensasi renyah dengan aroma khas jagung sangrai. Rasanya yang ringan membuatnya cocok dinikmati sebagai camilan atau pelengkap hidangan utama. Meskipun mulai jarang dipraktikkan oleh generasi muda, masyarakat terus menjaga keberadaannya melalui pewarisan dalam keluarga dan menjadikannya salah satu ikon kuliner daerah Alor.",
-        fotoSection: null,
-        keteranganFotoSection: null
+        fotoSection: "/images/cerita/jagung-titi-4.jpg",
+        keteranganFotoSection: "Jagung titi yang telah dipipihkan di atas anyaman daun"
       }
     ]
   },
@@ -37,8 +37,8 @@ export const staticGastronomi = [
     subtitle: "Merawat Ingatan Leluhur Melalui Kuliner",
     kategori: "gastronomi",
     deskripsi: "Kue rambut merupakan salah satu kuliner tradisional khas Nusa Tenggara Timur, termasuk Alor, yang diwariskan turun-temurun. Namanya berasal dari tampilannya yang menyerupai helaian rambut keriting masyarakat Alor.",
-    imageUrl: null,
-    keteranganGambar: null,
+    imageUrl: "/images/cerita/kue-rambut-1.jpg",
+    keteranganGambar: "Tampilan Kue Rambut dengan tekstur jaring tipis",
     tag: "Kuliner Tradisional",
     konten: [
       {
