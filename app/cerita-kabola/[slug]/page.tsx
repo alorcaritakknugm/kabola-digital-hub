@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import { client } from "@/sanity/lib/client";
 import { ceritaKabolaBySlugQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
+import { staticGastronomi } from "@/lib/data/staticGastronomi";
 
 export const revalidate = 0;
 
@@ -13,7 +14,12 @@ const SECTIONS_PER_PAGE = 2;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug });
+  let cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug });
+  
+  if (!cerita) {
+    cerita = staticGastronomi.find(item => item.slug === slug);
+  }
+
   if (!cerita) return { title: "Cerita Kabola | Kabola Digital Hub" };
   return {
     title: `${cerita.judul} | Cerita Kabola · Alor NTT`,
@@ -48,7 +54,11 @@ export default async function CeritaKabolaDetail({
   // Parse page param (1-indexed)
   const rawPage = Number(resolvedSearchParams.page ?? 1);
 
-  const cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug: resolvedParams.slug });
+  let cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug: resolvedParams.slug });
+
+  if (!cerita) {
+    cerita = staticGastronomi.find(item => item.slug === resolvedParams.slug);
+  }
 
   if (!cerita) {
     notFound();
@@ -58,6 +68,8 @@ export default async function CeritaKabolaDetail({
     if (slug === 'jagung-bose') return '/images/culture-1.jpg';
     if (slug === 'sei-ikan-sei-daging') return '/images/culture-2.jpg';
     if (slug === 'tuak-sopi') return '/images/culture-3.jpg';
+    if (slug === 'jagung-titi') return '/images/culture-1.jpg';
+    if (slug === 'kue-rambut') return '/images/culture-2.jpg';
     if (slug === 'hutan-mangrove-nelayan-kabola') return '/images/view-3.jpg';
     if (slug === 'perubahan-musim-pertanian-lokal') return '/images/view-5.jpg';
     if (slug === 'tenun-ikat-alor') return '/images/dugong.jpg';

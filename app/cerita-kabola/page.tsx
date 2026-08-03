@@ -26,8 +26,11 @@ export const metadata: Metadata = {
 
 export const revalidate = 0;
 
+import { staticGastronomi } from "@/lib/data/staticGastronomi";
+
 export default async function CeritaKabolaPage() {
-  const ceritaKabolaList = await client.fetch(ceritaKabolaQuery);
+  const sanityList = await client.fetch(ceritaKabolaQuery);
+  const ceritaKabolaList = [...sanityList, ...staticGastronomi];
 
   return (
     <main className="min-h-screen bg-sand">
