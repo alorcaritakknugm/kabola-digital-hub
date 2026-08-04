@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
+  QrCode,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -242,9 +243,8 @@ export default function InformasiWisataClient({
                       setSelectedCategory(cat);
                       setCurrentPage(1);
                     }}
-                    className={`relative px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 ${
-                      isActive ? "text-white" : "text-earth/70 hover:text-kabola-teal"
-                    }`}
+                    className={`relative px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 ${isActive ? "text-white" : "text-earth/70 hover:text-kabola-teal"
+                      }`}
                   >
                     {isActive && (
                       <motion.div
@@ -448,8 +448,31 @@ export default function InformasiWisataClient({
             )}
           </AnimatePresence>
 
+          {/* QR Code Board Integration Banner */}
+          <SlideUp
+            delay={0.2}
+            inView={true}
+            className="rounded-3xl bg-white border border-kabola-teal/12 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_4px_24px_rgba(0,0,0,0.02)] mb-6"
+          >
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-xl bg-kabola-teal/10 flex items-center justify-center text-kabola-teal">
+                  <QrCode className="w-5 h-5" />
+                </div>
+                <h4 className="font-title text-xl text-forest">Integrasi Papan Informasi Fisik (QR Code)</h4>
+              </div>
+              <p className="text-earth/60 text-sm max-w-3xl leading-relaxed">
+                Informasi wisata ini terhubung langsung dengan Papan Informasi Wisata fisik berbahan akrilik tahan cuaca yang tersebar di titik-titik lokasi Kabola. Wisatawan cukup memindai <strong className="text-forest">QR Code </strong> pada papan lokasi untuk langsung membaca informasi &amp; ulasan lengkap destinasi.
+              </p>
+            </div>
+            <div className="flex-shrink-0 w-24 h-24 bg-sand/70 rounded-2xl border border-kabola-teal/15 flex flex-col items-center justify-center shadow-inner">
+              <QrCode className="w-10 h-10 text-forest mb-1" />
+              <span className="text-[9px] font-bold tracking-widest text-kabola-teal uppercase">Scan QR</span>
+            </div>
+          </SlideUp>
+
           {/* Bottom Info Note */}
-          <div className="bg-white rounded-3xl border border-kabola-teal/10 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="bg-white rounded-3xl border border-kabola-teal/12 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-2xl bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 text-kabola-teal">
                 <Compass className="w-6 h-6" />

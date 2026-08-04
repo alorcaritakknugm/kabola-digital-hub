@@ -441,62 +441,6 @@ export default function Tourism({ wisataList = [] }: { wisataList?: any[] }) {
             )}
           </AnimatePresence>
 
-          {/* Bottom Information Banners */}
-          <div className="space-y-6 max-w-5xl mx-auto">
-
-            {/* Pokdarwis Partner Banner */}
-            <SlideUp
-              delay={0.2}
-              inView={true}
-              className="rounded-3xl bg-white border border-kabola-teal/12 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_4px_24px_rgba(0,0,0,0.02)]"
-            >
-              <div>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-xl bg-forest/8 flex items-center justify-center text-forest">
-                    <Users className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-title text-xl text-forest">Pokdarwis Kabola (Mitra Lokal)</h4>
-                </div>
-                <p className="text-earth/60 text-sm max-w-xl mt-2 leading-relaxed">
-                  Kelompok Sadar Wisata (Pokdarwis) Kabola adalah mitra pengelola lokal yang memandu seluruh kegiatan wisata di wilayah Kabola secara ramah lingkungan &amp; berkelanjutan.
-                </p>
-              </div>
-              <a
-                href="https://wa.me/6283117149096"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-full bg-forest hover:bg-ocean-blue-light text-white font-bold text-xs md:text-sm transition-all duration-300 hover:-translate-y-0.5 shadow-md shadow-forest/20 whitespace-nowrap"
-              >
-                <PhoneCall className="w-4 h-4" />
-                <span>Hubungi Pokdarwis</span>
-              </a>
-            </SlideUp>
-
-            {/* QR Code Board Integration Banner */}
-            <SlideUp
-              delay={0.3}
-              inView={true}
-              className="rounded-3xl bg-white border border-kabola-teal/12 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_4px_24px_rgba(0,0,0,0.02)]"
-            >
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-xl bg-kabola-teal/10 flex items-center justify-center text-kabola-teal">
-                    <QrCode className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-title text-xl text-forest">Integrasi Papan Informasi Fisik (QR Code)</h4>
-                </div>
-                <p className="text-earth/60 text-sm max-w-3xl leading-relaxed">
-                  Katalog kegiatan wisata ini terhubung langsung dengan Papan Informasi Wisata fisik berbahan akrilik tahan cuaca yang tersebar di titik-titik lokasi Kabola. Wisatawan cukup memindai <strong className="text-forest">QR Code</strong> pada papan lokasi untuk langsung membaca informasi &amp; menghubungi pengelola secara instan.
-                </p>
-              </div>
-              <div className="flex-shrink-0 w-24 h-24 bg-sand/70 rounded-2xl border border-kabola-teal/15 flex flex-col items-center justify-center shadow-inner">
-                <QrCode className="w-10 h-10 text-forest mb-1" />
-                <span className="text-[9px] font-bold tracking-widest text-kabola-teal uppercase">Scan QR</span>
-              </div>
-            </SlideUp>
-
-          </div>
-
         </div>
       </section>
     </>
