@@ -153,7 +153,7 @@ export default function Hero() {
           initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.1, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-none px-4 sm:px-0"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-none px-4 sm:px-0"
         >
           <a
             href="#eksplorasi"
