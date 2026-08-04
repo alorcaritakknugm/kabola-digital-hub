@@ -28,7 +28,7 @@ export const revalidate = 60;
 // Fallback statis jika data Sanity belum diisi
 const FALLBACK_JUDUL = "Kelurahan Kabola";
 const FALLBACK_KONTEN =
-  "Pusat administrasi dari Kecamatan Kabola, Kabupaten Alor. Terletak di dataran yang lebih tinggi, kelurahan ini menyuguhkan panorama perbukitan hijau yang berpadu dengan udara sejuk, memberikan pengalaman tersendiri bagi siapa saja yang berkunjung.\n\nMasyarakat Kelurahan Kabola sangat erat memegang tradisi leluhur. Mulai dari gastronomi tradisional hingga pengetahuan tentang tanaman obat (etnofarmakologi), kearifan lokal masih menjadi bagian tak terpisahkan dari denyut nadi kehidupan sehari-hari warga.";
+  "Pusat administrasi dari Kecamatan Kabola, Kabupaten Alor. Terletak di dataran yang lebih tinggi, kelurahan ini menyuguhkan panorama perbukitan hijau yang berpadu dengan udara sejuk, memberikan pengalaman tersendiri bagi siapa saja yang berkunjung.\n\nMasyarakat Kelurahan Kabola sangat erat memegang tradisi leluhur. Mulai dari gastronomi tradisional hingga kerajinan tenun ikat, kearifan lokal masih menjadi bagian tak terpisahkan dari denyut nadi kehidupan sehari-hari warga.";
 const FALLBACK_POTENSI = [
   {
     judulPotensi: "Pariwisata Terintegrasi",

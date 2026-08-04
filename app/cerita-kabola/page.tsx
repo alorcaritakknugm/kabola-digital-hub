@@ -9,10 +9,10 @@ import { ceritaKabolaQuery } from "@/sanity/lib/queries";
 export const metadata: Metadata = {
   title: "Cerita Kabola | Budaya, Tradisi & Kearifan Lokal Alor NTT",
   description:
-    "Dokumentasi budaya dan tradisi lisan Kecamatan Kabola, Alor NTT yang meliputi gastronomi otentik, tanaman obat etnofarmakologi, tenun ikat, seni budaya, dan cerita rakyat. Program KKN-PPM UGM 2026 Alor Carita.",
+    "Dokumentasi budaya dan tradisi lisan Kecamatan Kabola, Alor NTT yang meliputi gastronomi otentik, tenun ikat, seni budaya, dan cerita rakyat. Program KKN-PPM UGM 2026 Alor Carita.",
   keywords: [
     "budaya Alor NTT", "tradisi Kabola", "cerita rakyat Alor", "tenun ikat Alor",
-    "gastronomi NTT", "etnofarmakologi Alor", "kearifan lokal Alor",
+    "gastronomi NTT", "kearifan lokal Alor",
     "KKN UGM budaya Alor", "Alor Carita budaya",
   ],
   alternates: { canonical: "https://kaboladigitalhub.alorcarita.com/cerita-kabola" },
@@ -29,7 +29,15 @@ export const revalidate = 0;
 import { staticGastronomi } from "@/lib/data/staticGastronomi";
 
 export default async function CeritaKabolaPage() {
-  const sanityList = await client.fetch(ceritaKabolaQuery);
+  let sanityList: any[] = [];
+  try {
+    const res = await client.fetch(ceritaKabolaQuery);
+    if (Array.isArray(res)) {
+      sanityList = res;
+    }
+  } catch (e) {
+    console.error("Sanity fetch error ceritaKabola:", e);
+  }
   const ceritaKabolaList = [...sanityList, ...staticGastronomi];
 
   return (

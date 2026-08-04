@@ -36,11 +36,11 @@ const services = [
     tag: "Cerita Kabola",
     tagColor: "bg-kabola-teal/10 text-kabola-teal",
     description:
-      "Digitalisasi kekayaan budaya Kabola mulai dari gastronomi lokal hingga etnofarmakologi disajikan dalam tampilan interaktif yang menceritakan nilai-nilai tradisi autentik.",
+      "Digitalisasi kekayaan budaya Kabola mulai dari gastronomi lokal hingga sejarah dan cerita rakyat disajikan dalam tampilan interaktif yang menceritakan nilai-nilai tradisi autentik.",
     features: [
       "Dokumentasi budaya & tradisi Kabola",
       "Gastronomi lokal dan kuliner tradisional",
-      "Etnofarmakologi tanaman obat lokal",
+      "Kearifan lokal dan seni tradisi",
       "Display interaktif multimedia",
     ],
     gradient: "from-kabola-teal/15 via-kabola-teal/5 to-transparent",
