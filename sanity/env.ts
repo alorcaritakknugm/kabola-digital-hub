@@ -14,20 +14,8 @@ function cleanDataset(value: string | undefined, fallback: string): string {
   return cleaned || fallback
 }
 
-export const apiVersion = cleanEnvValue(
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION,
-  '2024-05-24'
-)
-
-export const dataset = cleanDataset(
-  process.env.NEXT_PUBLIC_SANITY_DATASET,
-  'production'
-)
-
-export const projectId = cleanProjectId(
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  'xsj3gs4e'
-)
-
+export const apiVersion = '2024-05-24'
+export const dataset = 'production'
+export const projectId = 'xsj3gs4e'
 export const useCdn = false
 

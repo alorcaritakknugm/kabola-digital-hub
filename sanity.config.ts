@@ -6,8 +6,8 @@ import { projectId, dataset } from './sanity/env';
 
 export default defineConfig({
   basePath: '/studio',
-  projectId: projectId || 'xsj3gs4e',
-  dataset: dataset || 'production',
+  projectId: 'xsj3gs4e',
+  dataset: 'production',
   title: 'Kabola Digital Hub Studio',
 
   plugins: [
