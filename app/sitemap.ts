@@ -10,12 +10,21 @@ export const revalidate = 3600;
 
 // Fetch all slugs for dynamic routes
 async function getAllSlugs() {
-  const [wisataList, umkmList, ceritaList] = await Promise.all([
-    client.fetch(groq`*[_type == "wisata"]{ "slug": slug.current }`),
-    client.fetch(groq`*[_type == "umkm"]{ "slug": slug.current }`),
-    client.fetch(groq`*[_type == "ceritaKabola"]{ "slug": slug.current }`),
-  ]);
-  return { wisataList, umkmList, ceritaList };
+  try {
+    const [wisataList, umkmList, ceritaList] = await Promise.all([
+      client.fetch(groq`*[_type == "wisata"]{ "slug": slug.current }`),
+      client.fetch(groq`*[_type == "umkm"]{ "slug": slug.current }`),
+      client.fetch(groq`*[_type == "ceritaKabola"]{ "slug": slug.current }`),
+    ]);
+    return {
+      wisataList: Array.isArray(wisataList) ? wisataList : [],
+      umkmList: Array.isArray(umkmList) ? umkmList : [],
+      ceritaList: Array.isArray(ceritaList) ? ceritaList : [],
+    };
+  } catch (error) {
+    console.error("Sitemap fetch error (falling back to static routes):", error);
+    return { wisataList: [], umkmList: [], ceritaList: [] };
+  }
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
