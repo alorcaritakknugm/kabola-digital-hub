@@ -9,12 +9,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kabola Digital Hub | KKN-PPM UGM 2026",
   description:
-    "Portal digital resmi KKN-PPM UGM 2026 Kecamatan Kabola, Alor NTT. Akses data statistik demografi, potensi wisata, produk UMKM lokal, cerita budaya, dan peta GIS interaktif. Program Alor Carita UGM.",
+    "Portal digital resmi KKN-PPM UGM 2026 Kecamatan Kabola, Alor NTT. Akses data statistik demografi, kesehatan (CKG), peternakan, potensi wisata, produk UMKM lokal, cerita budaya, dan peta GIS interaktif. Program Alor Carita UGM.",
   alternates: { canonical: "https://kaboladigitalhub.alorcarita.com" },
   openGraph: {
     title: "Kabola Digital Hub | KKN-PPM UGM 2026",
     description:
-      "Portal digital resmi KKN-PPM UGM 2026 Kecamatan Kabola, Alor NTT. Data statistik demografi, wisata, produk UMKM, cerita budaya, dan peta interaktif.",
+      "Portal digital resmi KKN-PPM UGM 2026 Kecamatan Kabola, Alor NTT. Data statistik demografi, kesehatan, peternakan, wisata, produk UMKM, cerita budaya, dan peta interaktif.",
     url: "https://kaboladigitalhub.alorcarita.com",
   },
 };

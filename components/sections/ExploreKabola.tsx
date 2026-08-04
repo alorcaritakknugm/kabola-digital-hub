@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Map, BookOpen, Compass, ShoppingBag, BarChart3, Store, ArrowRight } from "lucide-react";
@@ -8,28 +10,28 @@ const features = [
   {
     icon: Compass,
     title: "Wisata Kabola",
-    desc: "Jelajahi destinasi wisata alam dan budaya Kabola mulai dari tepi pantai hingga perbukitan yang memukau. Reservasi langsung ke Pokdarwis.",
+    desc: "Jelajahi destinasi wisata alam dan budaya Kabola mulai dari tepi pantai hingga perbukitan yang memukau. Informasi lengkap & reservasi Pokdarwis.",
     href: "/wisata",
     cta: "Jelajahi Wisata",
   },
   {
     icon: BookOpen,
     title: "Cerita Kabola",
-    desc: "Temukan kekayaan tradisi Kabola mulai dari gastronomi otentik, tanaman obat lokal, hingga cerita rakyat yang menghidupkan warisan leluhur.",
+    desc: "Temukan kekayaan tradisi Kabola mulai dari gastronomi otentik, kerajinan tenun ikat, hingga cerita rakyat yang menghidupkan warisan leluhur.",
     href: "/cerita-kabola",
-    cta: "Baca Cerita",
+    cta: "Baca Cerita Budaya",
   },
   {
     icon: Map,
     title: "Peta Wilayah (GIS)",
-    desc: "Orientasi wilayah Kabola melalui peta digital interaktif untuk menemukan lokasi, rute, kontur, serta informasi mitigasi bencana.",
+    desc: "Orientasi wilayah Kabola melalui album & peta digital interaktif mencakup batas administrasi RT, kontur, jenis tanah, tutupan lahan, dan mitigasi bencana.",
     href: "/peta",
     cta: "Buka Peta GIS",
   },
   {
     icon: BarChart3,
-    title: "Statistik Digital",
-    desc: "Visualisasi data kependudukan, gender, agama, tingkat pendidikan, dan mata pencaharian warga Kabola interaktif.",
+    title: "Statistik Digital Hub",
+    desc: "Visualisasi data empiris multi-domain mencakup statistik demografi wilayah, kesehatan masyarakat (CKG), dan populasi hewan ternak.",
     href: "/statistik",
     cta: "Lihat Data Statistik",
   },
@@ -43,9 +45,9 @@ const features = [
   {
     icon: Store,
     title: "NTT Mart by Dekranasda Alor",
-    desc: "Etalase produk-produk unggulan dan ekonomi kreatif pilihan khas Nusa Tenggara Timur di Kabupaten Alor.",
+    desc: "Etalase produk unggulan dan ekonomi kreatif pilihan khas Nusa Tenggara Timur di Kabupaten Alor.",
     href: "/umkm/ntt-mart",
-    cta: "Kunjungi NTT Mart by Dekranasda Alor",
+    cta: "Kunjungi NTT Mart",
   },
 ];
 
@@ -121,6 +123,7 @@ export default function ExploreKabola() {
                     {item.title}
                   </h4>
                   <p className="text-earth/55 text-sm md:text-[15px] leading-relaxed mb-6 flex-1">{item.desc}</p>
+                  
                   <span className="inline-flex items-center gap-1.5 text-kabola-teal text-[11px] md:text-xs font-bold uppercase tracking-wider transition-colors mt-auto group-hover:text-ocean-blue">
                     {item.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>

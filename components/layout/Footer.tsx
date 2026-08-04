@@ -3,12 +3,15 @@ import Image from "next/image";
 import { Mail, MapPin, ExternalLink } from "lucide-react";
 
 const exploreLinks = [
+  { label: "Statistik Wilayah", href: "/statistik" },
+  { label: "Statistik Kesehatan (CKG)", href: "/statistik/kesehatan" },
+  { label: "Statistik Hewan Ternak", href: "/statistik/peternakan" },
+  { label: "Peta Wilayah (GIS)", href: "/peta" },
   { label: "Kegiatan Wisata", href: "/wisata" },
   { label: "Informasi Wisata", href: "/informasi-wisata" },
-  { label: "Cerita & Budaya", href: "/cerita-kabola" },
-  { label: "Peta Wilayah (GIS)", href: "/peta" },
-  { label: "Statistik Digital", href: "/statistik" },
   { label: "Produk Lokal UMKM", href: "/umkm" },
+  { label: "NTT Mart Dekranasda", href: "/umkm/ntt-mart" },
+  { label: "Cerita & Budaya", href: "/cerita-kabola" },
 ];
 
 const aboutLinks = [
