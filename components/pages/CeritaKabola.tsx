@@ -157,7 +157,7 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-3 mb-10"
+            className="flex overflow-x-auto scrollbar-none justify-start sm:justify-center gap-2 sm:gap-3 py-1 mb-8 max-w-full"
           >
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -169,7 +169,7 @@ export default function CeritaKabola({ ceritaKabolaList = [] }: { ceritaKabolaLi
                     setActiveTab(tab.id);
                     setCurrentPage(1);
                   }}
-                  className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300 ${isActive
+                  className={`relative flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-colors duration-300 ${isActive
                       ? "text-white"
                       : "bg-white text-earth/70 hover:bg-kabola-teal/10 hover:text-kabola-teal border border-kabola-teal/15"
                     }`}

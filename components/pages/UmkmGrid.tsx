@@ -228,7 +228,7 @@ export default function UmkmGrid({
         </div>
 
         {/* Dropdowns */}
-        <div className="flex items-center gap-3 w-full md:w-auto shrink-0 justify-end">
+        <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full md:w-auto shrink-0 justify-end">
           {isNttMart && uniqueIkms.length > 0 && (
             <CustomDropdown
               label="Semua IKM"
