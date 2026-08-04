@@ -116,7 +116,7 @@ export default function CKGDemografisChart() {
             </div>
           </div>
           {/* Inner 2-col: pie | legend */}
-          <div className="grid grid-cols-2 items-center gap-4 flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-4 flex-1">
             {/* Pie */}
             <div className="h-52">
               <ResponsiveContainer width="100%" height="100%">

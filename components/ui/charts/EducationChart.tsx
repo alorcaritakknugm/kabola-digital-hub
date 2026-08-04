@@ -67,7 +67,7 @@ export default function EducationChart() {
   ];
 
   return (
-    <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-kabola-teal/15 w-full font-body">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border border-kabola-teal/15 w-full font-body">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
         <div>
@@ -87,15 +87,15 @@ export default function EducationChart() {
       </div>
 
       {/* Facilities Ribbon - Responsif HP Kecil */}
-      <div className="mb-5 bg-sand/40 rounded-2xl p-3 sm:p-4 border border-kabola-teal/10">
-        <span className="text-[11px] sm:text-xs font-semibold text-forest uppercase tracking-wider block mb-2">
+      <div className="mb-5 bg-sand/40 rounded-2xl p-2.5 sm:p-4 border border-kabola-teal/10">
+        <span className="text-[10px] sm:text-xs font-semibold text-forest uppercase tracking-wider block mb-2">
           Fasilitas Pendidikan di Kelurahan Kabola:
         </span>
-        <div className="grid grid-cols-5 gap-1.5 sm:gap-2 text-center">
+        <div className="grid grid-cols-5 gap-1 sm:gap-2 text-center">
           {facilities.map((fac) => (
-            <div key={fac.label} className="bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 border border-kabola-teal/15">
-              <span className="text-sm sm:text-lg font-title font-semibold text-kabola-teal block leading-tight">{fac.count}</span>
-              <span className="text-[9px] sm:text-[11px] font-semibold text-earth/70 leading-tight block mt-0.5">{fac.label}</span>
+            <div key={fac.label} className="bg-white rounded-lg sm:rounded-xl p-1 sm:p-2 border border-kabola-teal/15">
+              <span className="text-xs sm:text-lg font-title font-semibold text-kabola-teal block leading-tight">{fac.count}</span>
+              <span className="text-[8px] xs:text-[9px] sm:text-[11px] font-semibold text-earth/70 leading-tight block mt-0.5 truncate">{fac.label}</span>
             </div>
           ))}
         </div>

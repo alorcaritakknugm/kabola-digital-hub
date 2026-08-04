@@ -65,7 +65,7 @@ export default function LivestockChart() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-kabola-teal/15 flex flex-col h-full font-body">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-kabola-teal/15 flex flex-col h-full font-body">
       {/* Header */}
       <div className="mb-6 flex flex-col justify-center">
         <h3 className="font-title text-xl sm:text-2xl text-forest font-normal leading-snug">
