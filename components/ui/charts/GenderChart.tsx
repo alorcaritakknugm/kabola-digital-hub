@@ -67,9 +67,9 @@ export default function GenderChart() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-kabola-teal/15 flex flex-col justify-between h-full font-body">
-      {/* Header Container presisi sejajar (min-h-[72px]) */}
-      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4 min-h-[72px]">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-kabola-teal/15 flex flex-col justify-between h-full font-body">
+      {/* Header Container */}
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4">
         <h3 className="font-title text-xl sm:text-2xl text-forest font-normal leading-snug">
           Sebaran Penduduk Menurut Jenis Kelamin
         </h3>
