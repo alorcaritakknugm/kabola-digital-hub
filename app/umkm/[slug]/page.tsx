@@ -34,7 +34,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function UmkmDetail({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const umkm = await client.fetch(umkmBySlugQuery, { slug: resolvedParams.slug });
+  let umkm: any = null;
+  try {
+    umkm = await client.fetch(umkmBySlugQuery, { slug: resolvedParams.slug });
+  } catch (e) {
+    console.error("Sanity fetch error umkmBySlug:", e);
+  }
 
   if (!umkm) {
     notFound();

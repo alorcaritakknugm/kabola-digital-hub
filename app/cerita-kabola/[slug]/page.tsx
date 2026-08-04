@@ -54,7 +54,12 @@ export default async function CeritaKabolaDetail({
   // Parse page param (1-indexed)
   const rawPage = Number(resolvedSearchParams.page ?? 1);
 
-  let cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug: resolvedParams.slug });
+  let cerita: any = null;
+  try {
+    cerita = await client.fetch(ceritaKabolaBySlugQuery, { slug: resolvedParams.slug });
+  } catch (e) {
+    console.error("Sanity fetch error ceritaKabolaBySlug:", e);
+  }
 
   if (!cerita) {
     cerita = staticGastronomi.find(item => item.slug === resolvedParams.slug);

@@ -26,7 +26,15 @@ export const metadata: Metadata = {
 export const revalidate = 0;
 
 export default async function WisataPage() {
-  const wisataList = await client.fetch(wisataQuery);
+  let wisataList: any[] = [];
+  try {
+    const res = await client.fetch(wisataQuery);
+    if (Array.isArray(res)) {
+      wisataList = res;
+    }
+  } catch (e) {
+    console.error("Sanity fetch error wisata:", e);
+  }
 
   return (
     <main className="min-h-screen bg-sand">

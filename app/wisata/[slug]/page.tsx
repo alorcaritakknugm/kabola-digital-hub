@@ -148,7 +148,12 @@ export default async function WisataDetail({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = await params;
-  let wisata = await client.fetch(wisataBySlugQuery, { slug: resolvedParams.slug });
+  let wisata: any = null;
+  try {
+    wisata = await client.fetch(wisataBySlugQuery, { slug: resolvedParams.slug });
+  } catch (e) {
+    console.error("Sanity fetch error wisataBySlug:", e);
+  }
 
   if (!wisata && DEFAULT_PAKET_MAP[resolvedParams.slug]) {
     wisata = DEFAULT_PAKET_MAP[resolvedParams.slug];

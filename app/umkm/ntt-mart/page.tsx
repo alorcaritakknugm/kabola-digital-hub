@@ -27,7 +27,15 @@ export const metadata: Metadata = {
 };
 
 export default async function NttMartPage() {
-  const umkmList = await client.fetch(nttMartQuery);
+  let umkmList: any[] = [];
+  try {
+    const res = await client.fetch(nttMartQuery);
+    if (Array.isArray(res)) {
+      umkmList = res;
+    }
+  } catch (e) {
+    console.error("Sanity fetch error nttMart:", e);
+  }
 
   return (
     <main className="min-h-screen bg-sand">

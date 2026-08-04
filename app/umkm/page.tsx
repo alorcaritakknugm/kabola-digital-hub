@@ -27,7 +27,15 @@ export const metadata: Metadata = {
 };
 
 export default async function UmkmPage() {
-  const umkmList = await client.fetch(umkmLokalQuery);
+  let umkmList: any[] = [];
+  try {
+    const res = await client.fetch(umkmLokalQuery);
+    if (Array.isArray(res)) {
+      umkmList = res;
+    }
+  } catch (e) {
+    console.error("Sanity fetch error umkmLokal:", e);
+  }
 
   return (
     <main className="min-h-screen bg-sand">
