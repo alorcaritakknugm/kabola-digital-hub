@@ -517,16 +517,16 @@ export default function GisMap() {
                         transformOrigin: "center center",
                       }}
                     >
-                      <ImageWithSkeleton
-                        wrapperClassName="w-full h-full"
-                        skeletonClassName="bg-white/10 animate-pulse"
-                        src={selectedMap.image}
-                        alt={selectedMap.title}
-                        fill
-                        priority
-                        className="object-contain pointer-events-none drop-shadow-lg"
-                        sizes="(max-width: 1024px) 100vw, 70vw"
-                      />
+                      <div className="absolute inset-0 w-full h-full">
+                        <Image
+                          src={selectedMap.image}
+                          alt={selectedMap.title}
+                          fill
+                          priority
+                          className="object-contain pointer-events-none drop-shadow-lg"
+                          sizes="(max-width: 1024px) 100vw, 70vw"
+                        />
+                      </div>
                     </div>
 
                     {/* Top Left Floating Compass & Coordinates */}
@@ -902,16 +902,16 @@ export default function GisMap() {
                           transformOrigin: "center center",
                         }}
                       >
-                        <ImageWithSkeleton
-                          wrapperClassName="w-full h-full"
-                          skeletonClassName="bg-white/10 animate-pulse"
-                          src={selectedMap.image}
-                          alt={selectedMap.title}
-                          fill
-                          priority
-                          className="object-contain pointer-events-none drop-shadow-lg"
-                          sizes="100vw"
-                        />
+                        <div className="absolute inset-0 w-full h-full">
+                          <Image
+                            src={selectedMap.image}
+                            alt={selectedMap.title}
+                            fill
+                            priority
+                            className="object-contain pointer-events-none drop-shadow-lg"
+                            sizes="100vw"
+                          />
+                        </div>
                       </div>
 
                       {/* Compass & Coordinates in Fullscreen */}
