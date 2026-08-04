@@ -488,7 +488,7 @@ export default function InformasiWisataClient({
             </div>
             <Link
               href="/wisata"
-              className="flex-shrink-0 px-6 py-3 rounded-full bg-forest hover:bg-ocean-blue-light text-white text-xs font-bold transition-all shadow-md hover:-translate-y-0.5 whitespace-nowrap"
+              className="w-full sm:w-auto text-center flex-shrink-0 px-6 py-3 rounded-full bg-forest hover:bg-ocean-blue-light text-white text-xs font-bold transition-all shadow-md hover:-translate-y-0.5 whitespace-nowrap"
             >
               Lihat Kegiatan Wisata
             </Link>
