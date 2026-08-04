@@ -102,7 +102,7 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-kabola-teal/30 group-hover:border-kabola-teal/40 transition-all flex-shrink-0">
                   <Mail className="w-3.5 h-3.5" />
                 </div>
-                <span>alorcarita.kknugm@gmail.com</span>
+                <span className="truncate max-w-[200px] xs:max-w-none">alorcarita.kknugm@gmail.com</span>
               </a>
 
               <a href="https://wa.me/6283117149096" target="_blank" rel="noopener noreferrer"

@@ -37,13 +37,13 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
     <SlideUp
       inView
       delay={0.4 + index * 0.1}
-      className="flex flex-col items-center text-center p-6 rounded-2xl bg-white border border-kabola-teal/10 shadow-[0_2px_16px_rgba(25,141,141,0.06)] hover:shadow-[0_8px_28px_rgba(25,141,141,0.12)] hover:-translate-y-1 transition-all duration-300 group"
+      className="flex flex-col items-center text-center p-3.5 sm:p-5 md:p-6 rounded-2xl bg-white border border-kabola-teal/10 shadow-[0_2px_16px_rgba(25,141,141,0.06)] hover:shadow-[0_8px_28px_rgba(25,141,141,0.12)] hover:-translate-y-1 transition-all duration-300 group"
     >
-      <div className="w-12 h-12 rounded-xl bg-kabola-teal/10 flex items-center justify-center mb-3 group-hover:bg-kabola-teal/20 transition-colors">
-        <stat.icon className="w-6 h-6 text-kabola-teal" />
+      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-kabola-teal/10 flex items-center justify-center mb-2 sm:mb-3 group-hover:bg-kabola-teal/20 transition-colors">
+        <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-kabola-teal" />
       </div>
-      <span className="font-title text-3xl md:text-4xl text-kabola-teal font-bold">{stat.value}</span>
-      <span className="text-earth/60 text-xs md:text-sm font-medium mt-1">{stat.label}</span>
+      <span className="font-title text-xl xs:text-2xl sm:text-3xl md:text-4xl text-kabola-teal font-bold">{stat.value}</span>
+      <span className="text-earth/60 text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-medium mt-0.5 sm:mt-1">{stat.label}</span>
     </SlideUp>
   );
 }

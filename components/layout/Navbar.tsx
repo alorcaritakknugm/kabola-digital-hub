@@ -117,7 +117,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
-          <div className="relative h-9 w-28 md:h-11 md:w-36">
+          <div className="relative h-8 w-24 xs:h-9 xs:w-28 md:h-11 md:w-36">
             <Image
               src={useLight ? "/logos/logo-text-cyan.svg" : "/logos/logo-text.svg"}
               alt="Kabola Digital Hub"
@@ -228,7 +228,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className={`md:hidden absolute top-full left-0 right-0 overflow-hidden mt-2 rounded-3xl ${
+            className={`md:hidden absolute top-full left-0 right-0 max-h-[75vh] overflow-y-auto mt-2 rounded-3xl ${
               useLight
                 ? "bg-white border border-slate-100 shadow-[0_16px_40px_rgba(0,0,0,0.06)]"
                 : "bg-ocean-blue/97 border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.2)]"

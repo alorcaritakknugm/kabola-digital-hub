@@ -116,11 +116,11 @@ export default function Hero() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="flex items-center gap-2 mb-8"
+          className="flex items-center justify-center gap-2 mb-6 sm:mb-8 max-w-full"
         >
-          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-medium tracking-widest uppercase px-4 py-2 rounded-full">
-            <MapPin className="w-3 h-3 text-kabola-teal-light" />
-            Kec. Kabola · Kab. Alor · NTT
+          <span className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-[10px] xs:text-[11px] sm:text-xs font-medium tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-center">
+            <MapPin className="w-3 h-3 text-kabola-teal-light shrink-0" />
+            <span>Kec. Kabola · Kab. Alor · NTT</span>
           </span>
         </motion.div>
 
@@ -129,9 +129,9 @@ export default function Hero() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="mb-6"
+          className="mb-4 sm:mb-6"
         >
-          <h1 className="font-title text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05] tracking-wide">
+          <h1 className="font-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[1.08] sm:leading-[1.05] tracking-wide">
             Kabola
             <br />
             <span className="text-kabola-teal-light">Digital</span> Hub
@@ -143,7 +143,7 @@ export default function Hero() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-          className="text-white/70 text-sm md:text-base max-w-xl leading-relaxed mb-6"
+          className="text-white/70 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed mb-6 px-2 sm:px-0"
         >
           Pusat layanan informasi digital yang mengintegrasikan data statistik, peta interaktif GIS, produk UMKM, kekayaan budaya, dan katalog wisata Kabola.
         </motion.p>
@@ -153,18 +153,18 @@ export default function Hero() {
           initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.1, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center gap-3"
+          className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-none px-4 sm:px-0"
         >
           <a
             href="#eksplorasi"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-kabola-teal text-white hover:bg-kabola-teal-dark transition-all duration-300 text-sm font-semibold tracking-wide group hover:shadow-xl hover:shadow-kabola-teal/30 active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-kabola-teal text-white hover:bg-kabola-teal-dark transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide group hover:shadow-xl hover:shadow-kabola-teal/30 active:scale-95 text-center"
           >
             Eksplorasi Kabola
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <Link
             href="/wisata"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 text-sm font-medium tracking-wide active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 text-xs sm:text-sm font-medium tracking-wide active:scale-95 text-center"
           >
             Kegiatan Wisata
           </Link>

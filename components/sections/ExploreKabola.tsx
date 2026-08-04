@@ -110,11 +110,11 @@ export default function ExploreKabola() {
             >
               <Link
                 href={item.href}
-                className="group flex gap-5 md:gap-6 h-full bg-white rounded-2xl border border-kabola-teal/10 p-6 md:p-8 shadow-[0_2px_12px_rgba(25,141,141,0.05)] hover:shadow-[0_8px_32px_rgba(25,141,141,0.12)] hover:border-kabola-teal/25 hover:-translate-y-1 transition-all duration-300"
+                className="group flex flex-col xs:flex-row gap-4 sm:gap-6 h-full bg-white rounded-2xl border border-kabola-teal/10 p-5 sm:p-6 md:p-8 shadow-[0_2px_12px_rgba(25,141,141,0.05)] hover:shadow-[0_8px_32px_rgba(25,141,141,0.12)] hover:border-kabola-teal/25 hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-kabola-teal/20 transition-colors mt-0.5 md:mt-1">
-                  <item.icon className="w-7 h-7 text-kabola-teal" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-kabola-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-kabola-teal/20 transition-colors shrink-0">
+                  <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-kabola-teal" />
                 </div>
 
                 {/* Content */}
