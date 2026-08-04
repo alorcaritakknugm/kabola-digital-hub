@@ -10,7 +10,7 @@ const features = [
   {
     icon: Compass,
     title: "Wisata Kabola",
-    desc: "Jelajahi destinasi wisata alam dan budaya Kabola mulai dari tepi pantai hingga perbukitan yang memukau. Informasi lengkap & reservasi Pokdarwis.",
+    desc: "Jelajahi destinasi wisata alam dan budaya Kabola mulai dari tepi pantai hingga perbukitan yang memukau.",
     href: "/wisata",
     cta: "Jelajahi Wisata",
   },
@@ -30,15 +30,15 @@ const features = [
   },
   {
     icon: BarChart3,
-    title: "Statistik Digital Hub",
-    desc: "Visualisasi data empiris multi-domain mencakup statistik demografi wilayah, kesehatan masyarakat (CKG), dan populasi hewan ternak.",
+    title: "Statistik Digital",
+    desc: "Visualisasi data mencakup statistik demografi wilayah, kesehatan masyarakat (CKG), dan populasi hewan ternak.",
     href: "/statistik",
     cta: "Lihat Data Statistik",
   },
   {
     icon: ShoppingBag,
     title: "Produk Lokal UMKM",
-    desc: "Dukung UMKM Kabola. Temukan produk-produk autentik buatan warga lokal dan bantu ekonomi komunitas berkembang.",
+    desc: "Temukan produk-produk autentik buatan warga lokal dan bantu ekonomi komunitas berkembang.",
     href: "/umkm",
     cta: "Lihat Produk UMKM",
   },
@@ -123,7 +123,7 @@ export default function ExploreKabola() {
                     {item.title}
                   </h4>
                   <p className="text-earth/55 text-sm md:text-[15px] leading-relaxed mb-6 flex-1">{item.desc}</p>
-                  
+
                   <span className="inline-flex items-center gap-1.5 text-kabola-teal text-[11px] md:text-xs font-bold uppercase tracking-wider transition-colors mt-auto group-hover:text-ocean-blue">
                     {item.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>

@@ -145,7 +145,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
           className="text-white/70 text-sm md:text-base max-w-xl leading-relaxed mb-6"
         >
-          Pusat layanan informasi digital yang mengintegrasikan statistik multi-domain (demografi, kesehatan CKG, & peternakan), peta interaktif GIS, produk UMKM, kekayaan budaya, dan katalog wisata Kabola.
+          Pusat layanan informasi digital yang mengintegrasikan data statistik, peta interaktif GIS, produk UMKM, kekayaan budaya, dan katalog wisata Kabola.
         </motion.p>
 
         {/* CTA buttons */}
