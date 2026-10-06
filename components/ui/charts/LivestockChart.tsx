@@ -36,7 +36,7 @@ export default function LivestockChart() {
     if (active && payload && payload.length) {
       const value = payload[0].value;
       return (
-        <div className="bg-white text-earth px-4 py-3 rounded-xl border border-kabola-teal/20 text-xs font-body shadow-lg">
+        <div className="bg-white text-earth px-4 py-3 rounded-xl border border-kabola-teal/20 text-xs font-body shadow-xs">
           <p className="font-semibold text-forest text-sm mb-1">Tahun {label}</p>
           <p className="text-earth/80">
             Jumlah <span className="font-bold text-kabola-teal">{activeAnimal}</span>:{" "}
@@ -65,27 +65,27 @@ export default function LivestockChart() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-kabola-teal/15 flex flex-col h-full font-body">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border border-kabola-teal/15 flex flex-col h-full font-body">
       {/* Header */}
-      <div className="mb-6 flex flex-col justify-center">
-        <h3 className="font-title text-xl sm:text-2xl text-forest font-normal leading-snug">
+      <div className="mb-4 sm:mb-6 flex flex-col justify-center">
+        <h3 className="font-title text-lg sm:text-xl md:text-2xl text-forest font-normal leading-snug">
           Populasi Ternak di Kecamatan Kabola (2023-2025)
         </h3>
-        <p className="text-sm text-earth/80 mt-1">
+        <p className="text-xs sm:text-sm text-earth/80 mt-1">
           Pilih hewan ternak untuk melihat perkembangan populasinya selama tiga tahun terakhir.
         </p>
       </div>
 
       {/* Tabs / Filters */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
         {(["Sapi", "Kambing", "Babi", "Ayam"] as Animal[]).map((animal) => (
           <button
             key={animal}
             onClick={() => setActiveAnimal(animal)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
               activeAnimal === animal
-                ? "bg-kabola-teal text-white shadow-md shadow-kabola-teal/20"
-                : "bg-kabola-teal/5 text-kabola-teal hover:bg-kabola-teal/10"
+                ? "bg-kabola-teal text-white border border-kabola-teal"
+                : "bg-kabola-teal/5 text-kabola-teal hover:bg-kabola-teal/10 border border-kabola-teal/10"
             }`}
           >
             {animal}
