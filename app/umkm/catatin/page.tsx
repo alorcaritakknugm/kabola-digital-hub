@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
 };
 
-const DOWNLOAD_LINK = "https://s.id/UnduhAplikasiCatatin";
+const DOWNLOAD_LINK = "https://s.id/UnduhAplikasiCatatIn";
 
 const keyFeatures = [
   {
@@ -362,7 +362,7 @@ export default function CatatInPage() {
                   rel="noopener noreferrer"
                   className="text-kabola-teal font-medium underline"
                 >
-                  s.id/UnduhAplikasiCatatin
+                  s.id/UnduhAplikasiCatatIn
                 </a>{" "}
                 melalui browser gawai Anda.
               </p>
