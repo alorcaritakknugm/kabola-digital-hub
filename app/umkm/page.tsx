@@ -66,6 +66,32 @@ export default async function UmkmPage() {
           
           <UmkmGrid umkmList={umkmList} isNttMart={false} />
           
+          {/* Banner Promo CatatIn POS */}
+          <div className="mt-14 bg-gradient-to-br from-forest to-forest-light text-white rounded-3xl p-6 sm:p-10 border border-kabola-teal/20 shadow-lg relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-kabola-teal/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="space-y-3 text-center md:text-left max-w-xl">
+                <span className="inline-block bg-kabola-teal/20 text-kabola-teal-light text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-kabola-teal/30">
+                  Inovasi Digitalisasi UMKM
+                </span>
+                <h3 className="font-title text-2xl sm:text-3xl text-white">
+                  Kelola Kasir & Pembukuan Praktis dengan CatatIn
+                </h3>
+                <p className="text-white/75 text-sm sm:text-base leading-relaxed font-body">
+                  Aplikasi kasir (POS) dan pembukuan offline-first untuk Android & Windows. 100% tanpa kuota internet, gratis, dan menjaga kerahasiaan data usaha Anda.
+                </p>
+              </div>
+              <div className="shrink-0 flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                <Link
+                  href="/umkm/catatin"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-kabola-teal hover:bg-kabola-teal-light text-white text-sm font-semibold text-center transition-all duration-200 shadow-md hover:scale-105"
+                >
+                  Lihat Detail & Unduh
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-16 text-center">
             <Link href="/" className="inline-flex items-center gap-2 text-sm text-kabola-teal font-medium hover:text-kabola-teal-dark transition-colors">
               <ArrowRight className="w-4 h-4 rotate-180" /> Kembali ke Beranda

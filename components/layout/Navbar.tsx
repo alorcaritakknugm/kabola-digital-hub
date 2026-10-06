@@ -24,6 +24,7 @@ const navItems: NavItem[] = [
     children: [
       { label: "UMKM Lokal", href: "/umkm" },
       { label: "NTT Mart by Dekranasda Alor", href: "/umkm/ntt-mart" },
+      { label: "Aplikasi Kasir CatatIn", href: "/umkm/catatin" },
     ],
   },
   { label: "Cerita Kabola", href: "/cerita-kabola" },

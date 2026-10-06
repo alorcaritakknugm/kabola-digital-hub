@@ -11,6 +11,7 @@ const exploreLinks = [
   { label: "Informasi Wisata", href: "/informasi-wisata" },
   { label: "Produk Lokal UMKM", href: "/umkm" },
   { label: "NTT Mart Dekranasda", href: "/umkm/ntt-mart" },
+  { label: "Aplikasi Kasir CatatIn", href: "/umkm/catatin" },
   { label: "Cerita & Budaya", href: "/cerita-kabola" },
 ];
 
